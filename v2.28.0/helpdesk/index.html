@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICC Solutions Helpdesk (design preview)</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Help with ICC Solutions test tools and cards: guides, fixes and how to reach the Helpdesk.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ICC Solutions">
+<meta property="og:title" content="ICC Solutions Helpdesk (design preview)">
+<meta property="og:description" content="Help with ICC Solutions test tools and cards: guides, fixes and how to reach the Helpdesk.">
+<meta property="og:url" content="https://iccsolutionsdev.github.io/icc-website-preview/helpdesk/">
+<meta property="og:image" content="https://iccsolutionsdev.github.io/icc-website-preview/media/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The ICC Solutions logo and an ICC test card on the brand gradient">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E2A52">
+<link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32.png">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+:root{
+  --navy:#0E2A52; --aqua:#167F9E; --cyan:#62D5E8;
+  --grad:linear-gradient(125deg,var(--navy) 20%,var(--aqua));
+  --red:#C8323F; --pass:#3CCB98;
+  --viable:#EC2024; --viable-ink:#D0182A;
+  --paper:#F2F5F9; --sheet:#FFFFFF; --wash:#E4F2F7; --ink:var(--navy); --ink-2:#3A4967; --muted:#63718C; --line:#D9E1EB;
+  --on-dark-2:#C3D0E6; --on-dark-3:#93A5C5; --dark-line:rgba(195,208,230,.17);
+  --display:"Archivo","Arial Nova","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+
+  --t-hero:clamp(2.3rem,4.43vw - 1px,4rem); --t-h2:clamp(1.75rem,1rem + 1.9vw,2.65rem);
+  --t-h3:clamp(1.18rem,1.06rem + .55vw,1.55rem); --t-lead:clamp(1.06rem,1rem + .36vw,1.26rem);
+  --gut:clamp(20px,4.2vw,64px); --max:1320px; --inset:clamp(8px,1.4vw,24px);
+  --r-sheet:clamp(22px,3vw,40px); --r-panel:clamp(16px,2.2vw,28px);
+  --ease:cubic-bezier(.2,.7,.1,1); --focus:var(--aqua);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--navy);color:var(--ink);font:400 1.02rem/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+@supports (overflow:clip){body{overflow-x:clip}}
+svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;font-weight:640;letter-spacing:-.028em;line-height:1.03;margin:0;text-wrap:balance}
+p,ul,ol,dl,dd,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+p{text-wrap:pretty}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+.dark{--focus:#fff;color:#fff}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ic{width:20px;height:20px;flex:none}
+.wrap{width:min(100% - 2*var(--gut),var(--max));margin-inline:auto}
+.sec{padding-block:clamp(56px,6.4vw,96px)}
+.sec-head{display:grid;gap:18px;max-width:840px;margin-bottom:clamp(28px,3.4vw,48px)}
+.sec-head h2,.h2{font-size:var(--t-h2)}
+.sec-head p,.lead{font-size:var(--t-lead);line-height:1.5;color:var(--ink-2);max-width:60ch}
+.sec-head.row{max-width:none;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px}
+.sec-head.row>div:first-child{display:grid;gap:18px;max-width:840px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.tag{display:inline-block;justify-self:start;padding:5px 12px;border-radius:999px;font:600 .8rem/1.25 var(--body);background:var(--wash);color:var(--navy);white-space:nowrap}
+.tag.new{background:var(--red);color:#fff}
+.eyebrow{display:flex;align-items:center;gap:12px;font:600 .8rem/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow::before{content:"";flex:none;width:28px;height:3px;border-radius:2px;background:var(--aqua)}
+.dark .eyebrow{color:#fff}
+.dark .eyebrow::before{background:var(--cyan)}
+.eyebrow .tag{letter-spacing:0;text-transform:none}
+.sec-head .eyebrow{margin-bottom:-4px}
+.svc-copy .eyebrow{margin-bottom:-12px}
+.auto-copy .eyebrow,.cgrid .eyebrow{margin-bottom:-8px}
+.y30-copy .eyebrow{margin-bottom:-6px}
+
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--navy);color:#fff;font:600 1rem/1 var(--body);text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform .5s var(--ease),color .3s}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--aqua);transform:translateY(102%);transition:transform .5s var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{transform:none}
+.btn.cy{background:var(--cyan);color:var(--navy)}.btn.cy::before{background:#fff}
+.btn.gh{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,currentColor 34%,transparent)}
+.btn.gh::before{background:color-mix(in srgb,currentColor 11%,transparent)}
+.btn.my{gap:10px;padding:0 18px 0 5px;background:transparent;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.34)}
+.btn.my::before{background:rgba(255,255,255,.12)}
+.my .lock{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff}
+.my .lock .ic{width:15px;height:15px}
+.btn.sm{min-height:42px;padding:0 18px;font-size:.93rem}
+.btn .ic{width:16px;height:16px}
+.go{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink);transition:transform .5s var(--ease),background .3s,box-shadow .3s,color .3s}
+a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var(--navy);transform:rotate(-45deg)}
+
+.skip{position:fixed;left:16px;top:-80px;z-index:90;padding:10px 16px;border-radius:999px;background:#fff;color:var(--ink);font-weight:600}
+.skip:focus{top:14px}
+.hdr{position:fixed;inset:0 0 auto;z-index:50;padding:14px var(--gut) 0;pointer-events:none}
+.hdr-in{pointer-events:auto;display:flex;align-items:center;gap:18px;max-width:var(--max);height:64px;margin-inline:auto;padding:0 10px 0 20px;border-radius:999px;transition:background .45s,box-shadow .45s,max-width .7s var(--ease),height .45s var(--ease)}
+.hdr.stuck .hdr-in{max-width:1140px;height:58px;background:rgba(14,42,82,.8);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);box-shadow:0 14px 40px -14px rgba(3,10,26,.6),inset 0 0 0 1px rgba(255,255,255,.09)}
+.menu-open .hdr-in{background:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.brand{display:inline-flex;align-items:center;gap:10px;flex:none;text-decoration:none;font:700 1.16rem/1 var(--display);font-stretch:108%;letter-spacing:-.02em}
+.brand img{display:block;height:38px;width:auto;transition:height .45s var(--ease)}
+.hdr.stuck .brand img{height:33px}
+.nav{position:relative;display:flex;margin-inline:auto}
+.nav a{position:relative;z-index:1;display:inline-flex;align-items:center;height:38px;padding:0 15px;border-radius:999px;color:var(--on-dark-2);font-weight:500;font-size:.96rem;text-decoration:none;transition:color .3s}
+.nav a:hover,.nav a.on{color:#fff}
+.nav-ind{position:absolute;left:0;top:0;height:38px;width:0;border-radius:999px;background:rgba(255,255,255,.13);opacity:0;pointer-events:none;transition:transform .45s var(--ease),width .45s var(--ease),opacity .3s}
+.hdr-cta{display:flex;align-items:center;gap:8px;margin-left:auto}
+.burger{display:none;place-content:center;gap:5px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);cursor:pointer}
+.burger i{display:block;width:18px;height:2px;border-radius:2px;background:#fff;transition:transform .45s var(--ease)}
+.menu-open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:45;display:grid;align-content:center;padding:96px var(--gut) 40px;overflow:auto;background:var(--navy);visibility:hidden;clip-path:circle(0 at calc(100% - 52px) 46px);transition:clip-path .7s var(--ease),visibility 0s .7s}
+.menu-open .menu{visibility:visible;clip-path:circle(170% at calc(100% - 52px) 46px);transition:clip-path .9s var(--ease),visibility 0s}
+.menu a{display:block;padding:13px 0;border-bottom:1px solid var(--dark-line);font:640 clamp(1.7rem,7vw,2.7rem)/1.1 var(--display);font-stretch:112%;letter-spacing:-.03em;text-decoration:none;transform:translateY(26px);transition:transform .8s var(--ease)}
+.menu-open .menu a{transform:none}
+@media (max-width:1099px){.nav,.hdr-cta .gh{display:none}.burger{display:grid}}
+@media (max-width:479px){.hdr-cta .my{display:none}}
+
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--grad);padding-bottom:var(--r-sheet)}
+.hero-stage{position:relative;isolation:isolate}
+.hero-in{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;min-height:max(clamp(540px,76vh,780px),min(66vw,1080px)*.6 + 96px);padding-block:clamp(104px,13vh,140px) clamp(44px,6vh,64px);transform:translate3d(0,calc(var(--p,0)*var(--hh,800px)*.22),0);opacity:calc(1 - var(--p,0)*1.4)}
+.hero-copy{position:relative;z-index:1;display:grid;justify-items:start;gap:clamp(20px,2.4vw,30px);max-width:min(40rem,46%)}
+.hero h1{font-size:var(--t-hero);font-weight:660;line-height:.94;letter-spacing:-.04em}
+.hero h1 span{display:block}
+.hero .lead{color:var(--on-dark-2);max-width:54ch}
+.pill30{display:inline-flex;align-items:center;gap:12px;padding:6px 18px 6px 6px;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.13);color:var(--on-dark-2);font-size:.93rem;line-height:1.3;text-decoration:none;transition:background .3s,color .3s}
+.pill30:hover{background:rgba(255,255,255,.13);color:#fff}
+.pill30 b{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--cyan);color:var(--navy);font:800 .88rem/1 var(--display)}
+@keyframes stagein{from{opacity:0}}
+
+.film{position:absolute;right:0;bottom:0;z-index:0;display:block;width:min(66%,1080px);max-width:none;height:auto;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 20%,#000 31%);mask-image:linear-gradient(90deg,transparent 20%,#000 31%);animation:stagein 1.1s ease .1s both}
+.film text{font-family:var(--body)}
+.ldm{display:none}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.film :is(.reel,.actB,.vB,.vC,.b2,.selN,.ck,.ps,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop,.clk){opacity:0}
+.film .runB{opacity:.4}
+.film .cone{opacity:.3}
+.type{animation:type .5s steps(2) infinite alternate}
+@keyframes type{to{transform:translateY(-3px)}}
+.brands-w{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.18)}
+.brands{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:28px;padding-block:20px;color:#fff;font-size:.93rem;line-height:1.35}
+.brands>p{max-width:23ch}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 52s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.marq-track span{display:flex;align-items:center;gap:clamp(28px,3.4vw,52px);padding-left:clamp(28px,3.4vw,52px);font:620 clamp(1.05rem,.9rem + .6vw,1.45rem)/1 var(--display);font-stretch:112%;letter-spacing:-.015em;color:#fff;white-space:nowrap}
+.marq-track span::after{content:"";width:7px;height:7px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--cyan)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.sheet{position:relative;z-index:2;margin-top:calc(var(--r-sheet)*-1);padding-bottom:var(--inset);border-radius:var(--r-sheet);background:var(--paper);box-shadow:0 -26px 60px rgba(2,8,22,.5)}
+.panel{position:relative;isolation:isolate;overflow:hidden;margin-inline:var(--inset);border-radius:var(--r-sheet);background:var(--sheet)}
+.panel+.panel{margin-top:var(--inset)}
+.panel.ink{background:var(--navy)}
+.panel.grad{background:var(--grad);--on-dark-2:#fff;--on-dark-3:#fff}
+[id^="home-"]{scroll-margin-top:84px}
+
+.filter{display:grid;gap:14px;margin-bottom:22px}
+.filter>p:first-child{font-weight:600}
+.roles{display:flex;flex-wrap:wrap;gap:8px}
+.role{height:44px;padding:0 18px;border:0;border-radius:999px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2);font-weight:500;font-size:.95rem;cursor:pointer;transition:background .3s,color .3s,box-shadow .3s}
+.role:hover{box-shadow:inset 0 0 0 1.5px var(--aqua);color:var(--ink)}
+.role[aria-pressed="true"]{background:var(--navy);box-shadow:none;color:#fff}
+.role-note{min-height:1.6em;color:var(--muted)}
+[hidden]{display:none!important}
+.phero{position:relative;isolation:isolate;overflow:hidden;background:var(--grad);padding-bottom:var(--r-sheet);--on-dark-2:#fff}
+.phero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:center;gap:clamp(28px,5vw,80px);padding-block:clamp(112px,14vh,148px) clamp(44px,6vh,72px)}
+.phero-copy{display:grid;justify-items:start;gap:clamp(16px,2vw,24px)}
+.phero h1{font-size:clamp(2.25rem,1.1rem + 2.9vw,3.6rem);font-weight:660;line-height:.98;letter-spacing:-.04em}
+.phero .lead{color:var(--on-dark-2);max-width:48ch}
+.crumb{display:flex;gap:10px;font-size:.95rem;color:var(--on-dark-2)}
+.crumb a{color:var(--cyan);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.phero-art{border-radius:var(--r-panel);overflow:hidden;box-shadow:0 30px 70px -30px rgba(2,8,22,.8),inset 0 0 0 1px rgba(255,255,255,.12)}
+.vrow{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);align-items:center;gap:clamp(28px,5vw,80px)}
+.vrow>div{display:grid;gap:16px}
+.vid{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:var(--r-panel);background:var(--navy);box-shadow:0 24px 60px -30px rgba(11,29,63,.6)}
+.fgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+.fgrid li{padding:26px 24px 28px;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.fgrid h3{font-size:var(--t-h3);margin-bottom:10px}
+.fgrid p{color:var(--ink-2);font-size:.98rem}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start;gap:clamp(36px,6vw,104px)}
+.two>div{display:grid;justify-items:start;gap:22px}
+.btable{width:100%;border-collapse:collapse}
+.btable th,.btable td{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.14);text-align:left;font-weight:500}
+.btable th{font-size:.86rem;color:var(--on-dark-2)}
+.btable th:last-child,.btable td:last-child{text-align:right;color:var(--on-dark-2)}
+.vt,.nt b .vt{color:var(--viable-ink)}
+.nt b .vt{display:inline;margin:0;max-width:none}
+.dark .vt,.dark .nt b .vt{color:inherit}
+.vrule::before,#page[data-pg="viable-test-kit"] .phero h1::before,#page[data-pg="viable-test-kit"] .facts::before{content:"";display:block;width:36px;height:4px;border-radius:2px;background:var(--viable)}
+.vrule::before{margin-bottom:14px}
+.dgrid .vrule{position:relative}
+.dgrid .vrule::before{position:absolute;left:0;top:-13px;margin:0}
+#page[data-pg="viable-test-kit"] .phero h1::before{width:44px;height:5px;margin-bottom:clamp(14px,1.6vw,22px)}
+#page[data-pg="viable-test-kit"] .facts::before{margin:20px 0 4px}
+.reach{justify-self:end;width:min(100%,470px);padding:clamp(20px,2.4vw,30px) clamp(20px,2.6vw,34px) clamp(8px,1vw,14px);border-radius:var(--r-panel);background:rgba(14,42,82,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 30px 70px -34px rgba(2,8,22,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.reach h2{margin-bottom:clamp(12px,1.4vw,18px);font-size:var(--t-h3);letter-spacing:-.02em}
+.reach dl>div{display:grid;grid-template-columns:4.6rem minmax(0,1fr);align-items:baseline;gap:16px;padding:15px 0;border-top:1px solid rgba(255,255,255,.16)}
+.reach dt{font-size:.95rem}
+.reach dd{font-weight:600;overflow-wrap:anywhere}
+.reach a{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.5)}
+.reach a:hover{text-decoration-color:#fff}
+.ways>li{gap:16px;align-content:stretch;grid-template-rows:auto auto 1fr auto}
+.ticks.sm{gap:11px;align-content:start}
+.ticks.sm li{align-items:flex-start;gap:12px;font-size:.98rem;color:var(--ink)}
+.ticks.sm svg{width:18px;height:18px;margin-top:3px}
+.vpanel{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start;gap:clamp(22px,5vw,80px);margin-top:clamp(14px,1.6vw,24px);padding:clamp(22px,3vw,40px) clamp(22px,3vw,44px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.vpanel h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.2rem)}
+.vpanel p{margin-top:12px;max-width:36ch;color:var(--ink-2)}
+.vpanel .cases{margin-top:0}
+.two.even{grid-template-columns:repeat(2,minmax(0,1fr))}
+.two.even .ticks{margin-block:clamp(22px,2.6vw,32px)}
+.two.even .cases{margin-top:0}
+.actions.after{margin-top:clamp(24px,3vw,40px)}
+@media (max-width:959px){.reach{justify-self:stretch;width:100%}.vpanel,.two.even{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:599px){.fgrid.c4{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:419px){.reach dl>div{grid-template-columns:minmax(0,1fr);gap:3px;padding:12px 0}.reach dt{font-size:.88rem}}
+.bnote{margin-top:18px;max-width:46ch;color:var(--on-dark-2);font-size:.96rem;line-height:1.5}
+.ticks{display:grid;gap:14px;width:100%}
+.ticks li{display:flex;align-items:center;gap:14px;font-weight:500}
+.ticks svg{flex:none;width:20px;height:20px}
+@media (max-width:959px){.phero-in,.vrow,.two{grid-template-columns:minmax(0,1fr)}.fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+#page .sec{padding-block:clamp(44px,5vw,72px)}
+#page .sheet>.sec+.sec{padding-top:0}
+#page .sheet>.sec:first-child{padding-top:clamp(44px,5vw,72px)}
+#page .sec-head{margin-bottom:clamp(24px,3.4vw,44px)}
+.phero.plain .phero-in{grid-template-columns:minmax(0,1fr);padding-bottom:clamp(36px,5vh,60px)}
+.phero.plain h1{max-width:20ch}
+.phero.plain .lead{max-width:62ch}
+.phero h1:focus{outline:none}
+.body{color:var(--ink-2);max-width:64ch}
+.lk{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.facts{width:100%;padding:8px clamp(20px,2.4vw,32px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.facts div{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.facts div:last-child{border:0}
+.facts dt{color:var(--muted);font-size:.95rem}
+.facts dd{font-weight:600}
+.two>.cases,.two>.faqs,.two>.dgrid,.two>.form{align-self:start}
+.two .cases{width:100%;margin-top:6px}
+.fgrid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fgrid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fgrid.num{counter-reset:n}
+.fgrid.num li{counter-increment:n}
+.fgrid.num li::before{content:counter(n);display:grid;place-items:center;width:32px;height:32px;margin-bottom:18px;border-radius:50%;background:var(--navy);color:#fff;font:600 .9rem/1 var(--body)}
+.fgrid .big{font:660 clamp(2.2rem,1.5rem + 2.4vw,3.6rem)/1 var(--display);font-stretch:112%;letter-spacing:-.035em;color:var(--ink);margin-bottom:10px}
+.q{font:580 1.14rem/1.35 var(--display);font-stretch:106%;letter-spacing:-.016em}
+.dgrid{display:grid;gap:clamp(14px,1.6vw,24px);width:100%}
+.dgrid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dgrid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dgrid>li{display:grid;align-content:start;justify-items:start;gap:14px;padding:clamp(22px,2.6vw,34px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.dgrid h3{font-size:var(--t-h3)}
+.dgrid p{color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:7px 14px;border-radius:999px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);font-weight:500;font-size:.93rem}
+.dgrid .chips li{background:var(--paper)}
+.dark .chips li{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.bgroup{display:grid;gap:14px}
+.bgroup+.bgroup{margin-top:28px}
+.bgroup h3{font:600 .95rem/1.3 var(--body);font-stretch:100%;letter-spacing:0;color:var(--muted)}
+.dark .bgroup h3{color:var(--on-dark-2)}
+.ticks.c2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
+.callout{padding-bottom:clamp(14px,1.6vw,24px)}
+.callout .world{margin-top:0}
+.sec+.callout{margin-top:calc(clamp(44px,5vw,72px)*-.45)}
+.callout+.sec{padding-top:clamp(32px,4vw,56px)!important}
+.two>.faqs{display:block;justify-items:normal;width:100%;border-top:1px solid var(--line)}
+.faq{border-bottom:1px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:18px 0;cursor:pointer;list-style:none;font:620 1.1rem/1.35 var(--display);font-stretch:108%;letter-spacing:-.015em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font:400 1.5rem/1 var(--body);color:var(--muted)}
+.faq[open] summary::after{content:"\2212"}
+.faq div{display:grid;gap:10px;padding:0 0 22px;max-width:66ch;color:var(--ink-2)}
+.osteps{display:grid;gap:12px;counter-reset:o}
+.osteps li{counter-increment:o;display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;color:var(--ink-2)}
+.osteps li::before{content:counter(o);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);font:600 .82rem/1 var(--body);color:var(--ink)}
+.form{display:grid;gap:20px;width:100%}
+.frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.form label,.form legend{display:block;margin-bottom:8px;padding:0;font-weight:600;font-size:.96rem}
+.form input:not([type=radio]),.form select,.form textarea{display:block;width:100%;min-height:52px;padding:12px 16px;border:0;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--line);font:inherit;color:var(--ink)}
+.form textarea{min-height:150px;resize:vertical}
+.form fieldset{margin:0;padding:0;border:0;min-width:0}
+.yn{display:flex;gap:24px}
+.yn label{display:flex;align-items:center;gap:8px;margin:0;font-weight:500}
+.yn input{width:20px;height:20px;accent-color:var(--navy)}
+.fmsg{padding:16px 18px;border-radius:14px;background:var(--wash);font-weight:500}
+.nlist li[hidden]{display:none}
+@media (max-width:959px){.fgrid.c3,.dgrid.c3{grid-template-columns:repeat(2,minmax(0,1fr))}.dgrid.c2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:599px){.fgrid,.fgrid.c3,.fgrid.c2,.dgrid.c3,.ticks.c2,.frow{grid-template-columns:minmax(0,1fr)}.facts div{grid-template-columns:minmax(0,1fr);gap:4px}}
+@media (max-width:599px){.fgrid{grid-template-columns:minmax(0,1fr)}}
+.pcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px);margin-bottom:clamp(28px,3.4vw,44px)}
+.pcard{position:relative;display:flex;flex-direction:column;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;text-decoration:none;transition:box-shadow .35s}
+.pcard.off{display:none}
+.pcard:hover,.pcard:focus-visible{box-shadow:inset 0 0 0 1.5px var(--aqua),0 22px 44px -26px rgba(11,29,63,.5)}
+.pscene{display:block;aspect-ratio:16/10;background:var(--grad)}
+.pscene svg{display:block;width:100%;height:100%}
+.pscene text{font-family:var(--body)}
+.pcard .grp{margin:20px 24px 0;font-size:.86rem;color:var(--muted)}
+.pcard h3{margin:6px 24px 0;font-size:var(--t-h3);letter-spacing:-.02em}
+.pcard p{margin:10px 84px 26px 24px;color:var(--ink-2);font-size:.98rem;transition:opacity .18s}
+.pcard p.sw{opacity:0}
+.pcard .go{position:absolute;right:18px;bottom:18px;width:46px;height:46px}
+.pcard .pscene{position:relative;aspect-ratio:16/9;overflow:hidden}
+.pcard .pscene svg{position:absolute;left:0;top:50%;height:auto;transform:translateY(-50%)}
+@media (max-width:959px){.pcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:599px){
+  .pcards{grid-template-columns:minmax(0,1fr);gap:10px}
+  .pcard{display:grid;grid-template-columns:104px minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:14px;padding:12px 14px 14px 12px}
+  .pcard .pscene{grid-row:1/4;align-self:start;width:104px;aspect-ratio:16/10;border-radius:10px}
+  .pcard .grp{margin:1px 0 0;font-size:.8rem}
+  .pcard h3{margin:3px 0 0;font-size:1.06rem}
+  .pcard p{margin:6px 0 0;font-size:.92rem;line-height:1.45}
+  .pcard .go{display:none}
+  .roles{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--gut)*-1);padding:6px var(--gut);scroll-padding-inline:var(--gut);scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--gut),#000 calc(100% - var(--gut)),transparent);mask-image:linear-gradient(90deg,transparent,#000 var(--gut),#000 calc(100% - var(--gut)),transparent)}
+  .roles::-webkit-scrollbar{display:none}
+  .role{flex:none}
+}
+
+.dark .lead,.dark .sec-head p{color:var(--on-dark-2)}
+.auto{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(36px,5.5vw,96px)}
+.auto-copy{display:grid;justify-items:start;gap:22px}
+.benefits{width:100%;border-top:1px solid var(--dark-line)}
+.benefits li{display:grid;grid-template-columns:minmax(0,10.5rem) minmax(0,1fr);gap:6px 18px;padding:13px 0;border-bottom:1px solid var(--dark-line)}
+.benefits b{font-weight:600}
+.benefits span{color:var(--on-dark-2);font-size:.96rem}
+.run{display:grid;gap:22px;padding:clamp(18px,2.6vw,34px);border-radius:var(--r-panel);background:rgba(98,213,232,.06);box-shadow:inset 0 0 0 1px var(--dark-line)}
+.run-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;color:var(--on-dark-3);font-size:.95rem}
+.run-top b{font:640 clamp(1.5rem,1.1rem + 1.5vw,2.4rem)/1 var(--display);font-stretch:112%;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+.cells{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:clamp(3px,.55vw,7px)}
+.cells i{aspect-ratio:1;border-radius:24%;background:rgba(195,208,230,.11);transition:background .4s,transform .4s var(--ease),box-shadow .4s}
+.cells i.r{background:var(--cyan);transform:scale(1.2);box-shadow:0 0 16px rgba(98,213,232,.75)}
+.cells i.d{background:var(--aqua)}
+.cells i.s{background:var(--pass)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:st;font-size:.9rem;line-height:1.35;color:var(--on-dark-2)}
+.steps li{display:grid;gap:8px;align-content:start;counter-increment:st}
+.steps li::before{content:counter(st);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--k);color:var(--navy);font:700 .78rem/1 var(--body)}
+.run figcaption{font-size:.85rem;color:var(--on-dark-3)}
+
+.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start;gap:clamp(40px,6vw,104px)}
+.svc-copy{display:grid;justify-items:start;gap:26px}
+.phw{position:relative;width:100%;padding-top:54px;--ph:1}
+.puck{position:absolute;left:calc(var(--ph)*80% + 5px);top:0;width:22px}
+.puck svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 3px 5px rgba(11,29,63,.25))}
+.puck .bdg{opacity:0;transition:opacity .3s}
+.phw.cert .bdg{opacity:1}
+.phases{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;counter-reset:ph}
+.phases::before,.phases::after{content:"";position:absolute;left:0;top:15px;width:80%;height:2px;background:var(--line)}
+.phases::after{background:linear-gradient(90deg,var(--navy),var(--aqua));transform:scaleX(var(--ph));transform-origin:0 0}
+.phases li{position:relative;z-index:1;counter-increment:ph;padding:46px 10px 0 0;font-weight:600;font-size:.95rem;line-height:1.3;color:var(--muted);transition:color .3s}
+.phases li.on{color:var(--ink)}
+.phases li::before{content:counter(ph);position:absolute;left:0;top:0;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 6px var(--paper),inset 0 0 0 1.5px #B9C6D8;color:var(--muted);font-size:.82rem;transition:background .3s,color .3s,box-shadow .3s,transform .4s var(--ease)}
+.phases li.on::before{background:var(--navy);box-shadow:0 0 0 6px var(--paper);color:#fff;transform:scale(1.1)}
+.phases li.on:nth-child(4)::before{background:var(--pass);color:var(--navy)}
+.note{color:var(--muted);font-size:.96rem;max-width:60ch}
+.sub{font-size:var(--t-h3);margin-bottom:16px}
+.cases{border-top:1px solid var(--line)}
+.case{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 16px;padding:17px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.case b{font:620 1.12rem/1.3 var(--display);font-stretch:108%;letter-spacing:-.015em}
+.case span{grid-column:1;color:var(--muted);font-size:.94rem}
+.case .ic{grid-area:1/2/3/3;color:var(--muted);transition:transform .4s var(--ease),color .3s}
+.case:hover b{color:var(--aqua)}
+.case:hover .ic{color:var(--aqua);transform:translate(3px,-3px)}
+
+.qs{padding-top:0}
+.qnav{display:flex;gap:8px}
+.qnav button{display:grid;place-items:center;width:50px;height:50px;border:0;border-radius:50%;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;transition:background .3s,color .3s}
+.qnav button:hover{background:var(--navy);color:#fff}
+.qstrip{--pad:max(var(--gut),calc((100% - var(--max))/2));display:flex;gap:18px;overflow-x:auto;padding:4px var(--pad) 8px;scroll-padding-inline:var(--pad);scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab}
+.qstrip::-webkit-scrollbar{display:none}
+.qstrip.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.qcard{flex:0 0 min(400px,84%);display:grid;align-content:space-between;gap:18px;aspect-ratio:85.6/53.98;padding:clamp(20px,2.4vw,30px);border-radius:18px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);scroll-snap-align:start}
+.qcard:nth-child(3n+2){background:var(--grad);box-shadow:none;color:#fff}
+.qcard svg{width:46px}
+.qcard blockquote{font:580 clamp(1.08rem,1rem + .36vw,1.3rem)/1.3 var(--display);font-stretch:106%;letter-spacing:-.018em}
+
+.y30{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,88px)}
+.num30{width:100%;aspect-ratio:1.25}
+.y30-copy{display:grid;justify-items:start;gap:20px}
+.y30-copy p{color:var(--ink-2);max-width:58ch}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--line)}
+.stat{padding:26px 24px 0 0}
+.stat+.stat{padding-left:clamp(14px,2vw,28px);border-left:1px solid var(--line)}
+.stat dt{font:640 clamp(2rem,1.4rem + 1.9vw,3.3rem)/1 var(--display);font-stretch:112%;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.stat dd{margin-top:10px;color:var(--muted);font-size:.95rem}
+.band{padding-top:clamp(28px,3.6vw,52px)}
+.band .stats{margin-top:0;padding:clamp(20px,2.4vw,30px) clamp(20px,2.6vw,34px) clamp(22px,2.6vw,32px);border:0;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.band .stat{padding-top:0}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.pgrid li{border-bottom:1px solid var(--line)}
+.pgrid li:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
+.pgrid a{display:grid;align-content:start;gap:12px;height:100%;padding:28px clamp(14px,2vw,28px) 34px;text-decoration:none;transition:background .35s}
+.pgrid a:hover{background:var(--sheet)}
+.pgrid h3{font-size:var(--t-h3)}
+.pgrid p{color:var(--ink-2);font-size:.96rem}
+.world{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px 32px;margin-top:clamp(28px,4vw,52px);padding:clamp(22px,3vw,38px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.world h3{font-size:var(--t-h3);margin-bottom:8px}
+.world p{color:var(--ink-2);max-width:62ch}
+
+.nlist{border-top:1px solid var(--line)}
+.nrow{display:grid;grid-template-columns:9rem minmax(0,1fr) auto;align-items:center;gap:clamp(14px,3vw,44px);padding:24px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.nt b{display:block;font:620 clamp(1.15rem,1rem + .6vw,1.5rem)/1.2 var(--display);font-stretch:108%;letter-spacing:-.022em}
+.nt span{display:block;margin-top:6px;color:var(--ink-2);max-width:72ch}
+
+.cgrid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:clamp(36px,6vw,104px)}
+.cgrid>div{display:grid;justify-items:start;gap:22px}
+.cgrid address{font-style:normal;line-height:1.7;color:var(--on-dark-2)}
+.ul{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.5)}
+.ul:hover{text-decoration-color:#fff}
+.teams{border-top:1px solid rgba(255,255,255,.22)}
+.teams li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 24px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.teams h3{font-size:var(--t-h3)}
+.teams p{margin-top:4px;color:var(--on-dark-2);font-size:.95rem}
+.tc{display:grid;justify-items:end;gap:4px;font-size:.96rem}
+.tc span{font-weight:600}
+
+.foot{position:relative;z-index:2;overflow:hidden;background:var(--navy);color:var(--on-dark-2)}
+.foot-in{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px);padding-block:clamp(56px,7vw,100px) 44px}
+.foot .brand img{height:52px}
+.foot-tag{margin-top:20px;max-width:13ch;font:640 clamp(1.3rem,1.1rem + .8vw,1.85rem)/1.12 var(--display);font-stretch:112%;letter-spacing:-.025em;color:#fff}
+.foot h3{margin-bottom:14px;font:600 .92rem/1.3 var(--body);letter-spacing:0;color:#fff}
+.foot ul{display:grid;gap:10px;font-size:.95rem}
+.foot a{text-decoration:none;transition:color .25s}
+.foot ul a:hover,.foot-base a:hover{color:#fff}
+.foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:22px;border-top:1px solid var(--dark-line);font-size:.88rem}
+.giant{width:100%;height:auto;padding-inline:var(--inset)}
+.giant text{font:800 150px var(--display);font-stretch:118%;fill:none;stroke:rgba(98,213,232,.4);stroke-width:1px;vector-effect:non-scaling-stroke}
+
+.js .rise{transition:transform 1.1s var(--ease) var(--d,0s)}
+.js .rise:not(.in){transform:translateY(38px)}
+
+@media (max-width:959px){
+  .hero-in{min-height:0;padding-bottom:calc(73vw + 96px);transform:none;opacity:1}
+  .hero-copy{max-width:none}
+  .film{width:122%;bottom:68px}
+  .auto,.svc,.y30,.cgrid{grid-template-columns:minmax(0,1fr)}
+  .num30{max-width:520px}
+  .foot-in{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot-in>div:first-child{grid-column:1/-1}
+}
+@media (max-width:899px){
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pgrid li:not(:nth-child(3n+1)){border-left:0}
+  .pgrid li:nth-child(even){border-left:1px solid var(--line)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){padding-left:0;border-left:0}
+  .stat:nth-child(n+3){margin-top:26px;border-top:1px solid var(--line)}
+  .band .stat:nth-child(n+3){padding-top:22px}
+}
+@media (max-width:759px){
+  .sec-head.row,.world{grid-template-columns:minmax(0,1fr)}
+  .brands{grid-template-columns:minmax(0,1fr);gap:12px}
+  .brands>p{max-width:none}
+  .nrow{grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}
+  .nrow .tag{grid-area:1/1}
+  .nrow .nt{grid-area:2/1}
+  .nrow .go{grid-area:1/2/3/3;width:44px;height:44px}
+  .benefits li{grid-template-columns:minmax(0,1fr)}
+  .teams li{grid-template-columns:minmax(0,1fr)}
+  .tc{justify-items:start}
+}
+@media (max-width:559px){
+  .pgrid{grid-template-columns:minmax(0,1fr)}
+  .pgrid li:nth-child(even){border-left:0}
+  .phw{padding-top:0}
+  .puck{display:none}
+  .phases{grid-template-columns:minmax(0,1fr);gap:16px}
+  .phases::before,.phases::after{left:15px;top:0;width:2px;height:calc(100% - 32px)}
+  .phases::after{background:linear-gradient(var(--navy),var(--aqua));transform:scaleY(var(--ph))}
+  .phases li{padding:5px 0 5px 50px}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li{grid-template-columns:24px minmax(0,1fr);align-items:center;gap:12px}
+  .cells{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .foot-in{grid-template-columns:minmax(0,1fr)}
+}
+.still .marq-track{animation-play-state:paused}
+.rest .film{animation:none}
+.hero-ctl{position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-size:clamp(.78rem,1.05vw,.9rem);pointer-events:none}
+.hero-ctl>*{pointer-events:auto}
+.ctl{display:flex;align-items:center;gap:.8em;padding:.4em 1.3em .4em .4em;border-radius:999px;background:rgba(14,42,82,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14)}
+.motion{display:grid;place-items:center;flex:none;width:2.7em;height:2.7em;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;transition:background .25s}
+.motion:hover{background:rgba(255,255,255,.26)}
+.motion .ic{width:1.15em;height:1.15em}
+.chap{display:grid;padding-top:.25em;font:600 1em/1.2 var(--body);white-space:nowrap}
+.chap-t{display:grid}
+.chap-t b{grid-area:1/1;font-weight:600;opacity:0;transition:opacity .25s}
+.chap-t b.on{opacity:1}
+.chap-b{display:flex;gap:4px}
+.chap-b button{position:relative;flex:1;min-width:16px;height:24px;padding:0;border:0;border-radius:4px;background:none;cursor:pointer}
+.chap-b button::before,.chap-b button i{content:"";position:absolute;left:0;right:0;top:10px;height:3px;border-radius:2px;background:rgba(255,255,255,.24)}
+.chap-b button i{background:var(--cyan);transform:scaleX(var(--f,0));transform-origin:0 50%}
+.chap-b button:hover::before{background:rgba(255,255,255,.5)}
+.chap-b button:focus-visible{outline:2px solid var(--cyan);outline-offset:1px}
+@media (max-width:959px){.hero-ctl{bottom:12px;flex-direction:row;align-items:center;justify-content:flex-start;font-size:.86rem}}
+@media (max-width:699px){
+  .hero-in{padding-bottom:calc(103vw + 92px)}
+  .film{overflow:visible;-webkit-mask-image:none;mask-image:none}
+  .pnl{transform:translate(194px,-238px) scale(1.75) translate(-530px,-10px)}
+  .ldm{display:block}
+  .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-668px,-292px)}
+}
+@media (prefers-reduced-motion:reduce){
+  :root:not(.motion-ok) *,:root:not(.motion-ok) *::before,:root:not(.motion-ok) *::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  :root:not(.motion-ok) .hero-in{transform:none;opacity:1}
+  :root:not(.motion-ok) .marq-track{animation:none;flex-wrap:wrap;width:auto;row-gap:12px}
+  :root:not(.motion-ok) .marq-track [aria-hidden]{display:none}
+}
+
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.hd-name{padding-left:12px;border-left:1px solid rgba(255,255,255,.3);font:600 1.02rem/1.2 var(--body);font-stretch:100%;letter-spacing:0}
+.tag.pv{background:rgba(255,255,255,.14);color:#fff}
+.hd-hero .phero-in{padding-block:clamp(132px,18vh,188px) clamp(44px,7vh,80px)}
+.hd-hero .phero-copy{justify-items:stretch;max-width:760px}
+.hsearch{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 22px;border-radius:999px;background:#fff;color:var(--ink);box-shadow:0 24px 60px -30px rgba(2,8,22,.8)}
+.hsearch .ic{color:var(--muted)}
+.hsearch input{flex:1;min-width:0;height:48px;padding:0;border:0;background:none;font:inherit;font-size:1.08rem;color:var(--ink);outline:none}
+.hsearch input::-webkit-search-cancel-button{display:none}
+.hsearch:focus-within{outline:2px solid #fff;outline-offset:3px}
+.pops{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:.95rem}
+.pops a{padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-weight:500;text-decoration:none;transition:background .3s}
+.pops a:hover{background:rgba(255,255,255,.22)}
+.meta{font-size:.95rem}
+.tgrid h3 a{text-decoration:none}
+.tgrid h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.tl{display:grid;width:100%;border-top:1px solid var(--line)}
+.tl a{display:block;padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink-2);text-decoration:none;font-size:.98rem;line-height:1.35}
+.tl a:hover{color:var(--ink)}
+#results .nrow,.alist .nrow{grid-template-columns:minmax(0,1fr) auto}
+#results .nrow .tag{justify-self:start;margin-bottom:8px}
+.art{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);align-items:start;gap:clamp(32px,6vw,96px)}
+.prose{display:grid;gap:18px;max-width:72ch;font-size:1.05rem}
+.prose>p{color:var(--ink-2)}
+.prose h2{margin-top:14px;font-size:var(--t-h3)}
+.prose a{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.prose .osteps{gap:14px}
+.prose .osteps li{grid-template-columns:32px minmax(0,1fr);gap:14px}
+.prose .osteps li::before{width:32px;height:32px;background:var(--navy);box-shadow:none;color:#fff}
+.dots{display:grid;gap:10px;padding-left:22px;list-style:disc;color:var(--ink-2)}
+.callnote{padding:14px 18px;border-radius:14px;background:var(--wash);font-weight:500}
+.code{display:block;margin:0;padding:14px 16px;border-radius:12px;background:var(--navy);color:#fff;font:500 .9rem/1.55 ui-monospace,"Cascadia Mono",Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.kv{width:100%;border-collapse:collapse;border-top:1px solid var(--line)}
+.kv th,.kv td{padding:12px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.kv th{width:36%;padding-right:20px;font-weight:600}
+.kv td{color:var(--ink-2);overflow-wrap:anywhere}
+.fig{display:grid;gap:4px;padding:16px 18px;border-radius:14px;border:1.5px dashed #B9C6D8;color:var(--muted);font-size:.94rem}
+.fig b{font-weight:600;color:var(--ink-2)}
+.prose .cases{margin:0}
+.side{position:sticky;top:96px;display:grid;gap:18px}
+.box{display:grid;justify-items:start;gap:12px;padding:22px 24px 24px;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.box h2{font:600 1.02rem/1.3 var(--body);font-stretch:100%;letter-spacing:0}
+.box p{color:var(--ink-2);font-size:.96rem}
+.box ul{width:100%}
+.sl{display:block;padding:6px 0;color:var(--ink-2);text-decoration:none;font-size:.96rem;line-height:1.35}
+.sl:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.sl[aria-current]{color:var(--ink);font-weight:600}
+.form input[type=file]{padding:12px 16px;min-height:0}
+@media (max-width:1180px){.tag.pv{display:none}}
+@media (max-width:959px){.art{grid-template-columns:minmax(0,1fr)}.side{position:static}}
+@media (max-width:599px){.hsearch{padding-left:16px}.hsearch .btn{padding:0 18px}.kv th{width:42%}}
+.nt .tag{display:inline-block;margin:0 0 8px;color:var(--navy)}
+@media (min-width:960px){.foot-in.c3{grid-template-columns:minmax(0,1.35fr) repeat(3,minmax(0,1fr))}}
+#results[hidden]+#topics{padding-top:clamp(52px,6.4vw,96px)}
+.prose,.prose .case b,.prose .case span{overflow-wrap:anywhere}
+.prose .btn{white-space:normal;padding-block:10px;line-height:1.25;text-align:center}
+.hd-hero .phero-copy{grid-template-columns:minmax(0,1fr)}
+@media (max-width:599px){.hsearch input{font-size:1rem}.hsearch .ic{display:none}}
+.brand a{display:inline-flex;align-items:center;color:inherit;text-decoration:none}
+a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
+
+.phero.plain h1{overflow-wrap:anywhere}
+@media (max-width:599px){.phero.plain:not(.hd-hero) h1{font-size:clamp(1.75rem,7.6vw,2.5rem);line-height:1.04}}
+@media (max-width:480px){.hdr-in{gap:10px;padding:0 8px 0 14px}.brand{gap:8px}.hd-name{padding-left:9px;font-size:.95rem}.hdr-cta{gap:6px}.hdr-cta .btn.sm.cy{padding-inline:12px;font-size:.84rem}}
+@media (max-width:374px){.hdr-cta .btn.sm.cy{display:none}}
+
+:root{--gacc:var(--aqua);--gmark:var(--aqua)}
+.nav a{white-space:nowrap;padding-inline:13px}
+@media (max-width:1239px){.nav,.hdr-cta .gh{display:none}.burger{display:grid}}
+#results[hidden]+#guides{padding-top:clamp(52px,6.4vw,96px)}
+.gcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.gcard{display:grid;grid-template-columns:clamp(104px,10vw,140px) minmax(0,1fr);gap:clamp(18px,2.2vw,30px);align-items:start;padding:clamp(18px,2.2vw,28px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.gcover{display:block;border-radius:6px;overflow:hidden;box-shadow:0 14px 30px -14px rgba(14,42,82,.5),0 0 0 1px rgba(14,42,82,.08)}
+.gcover img{display:block;width:100%;height:auto}
+.motion-ok .gcover{transition:transform .5s var(--ease)}
+.motion-ok .gcard:hover .gcover{transform:translateY(-3px)}
+.gcard-t{display:grid;gap:10px;align-content:start}
+.gcard h3{font-size:var(--t-h3)}
+.gcard h3 a{text-decoration:none}
+.gcard h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.gcard p{color:var(--ink-2)}
+.gcard .gmeta{font-size:.92rem;color:var(--muted)}
+.gcard .actions{margin-top:6px;gap:10px}
+@media (max-width:1099px){.gcards{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:479px){.gcard{grid-template-columns:86px minmax(0,1fr)}.gcard .actions .btn{width:100%}}
+.gcards.one{grid-template-columns:minmax(0,1fr)}
+.gcards.one .gcard{grid-template-columns:clamp(104px,10vw,140px) minmax(0,1fr) minmax(0,1.05fr);align-items:center}
+.gcard-c .gchips a{background:var(--paper)}
+@media (max-width:1099px){.gcards.one .gcard{grid-template-columns:clamp(104px,10vw,140px) minmax(0,1fr);align-items:start}.gcard-c{grid-column:1/-1}}
+@media (max-width:479px){.gcards.one .gcard{grid-template-columns:86px minmax(0,1fr)}}
+.gpanel{display:grid;gap:18px;margin-bottom:clamp(28px,3vw,40px);padding:clamp(20px,2.4vw,30px);border-radius:var(--r-panel);background:var(--wash)}
+.gpanel-h{display:flex;gap:14px;align-items:center}
+.gpanel-h .ic{width:30px;height:30px;color:var(--gacc)}
+.gpanel-h span{display:block;margin-bottom:6px;font-size:.84rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.gpanel h2{font-size:var(--t-h3)}
+.gpanel h2 a{text-decoration:none}
+.gpanel h2 a:hover{text-decoration:underline;text-underline-offset:4px}
+.gchips{display:flex;flex-wrap:wrap;gap:8px}
+.gchips a{display:inline-flex;align-items:center;gap:9px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);font-size:.95rem;font-weight:500;line-height:1.25;text-decoration:none;color:var(--ink)}
+.gchips a:hover{box-shadow:inset 0 0 0 1.5px var(--navy)}
+.gchips a span{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:var(--gacc);color:#fff;font-size:.8rem;font-weight:600}
+@media (min-width:960px){.art.gart{grid-template-columns:minmax(0,1fr) minmax(0,300px)}}
+.prose.gdoc{max-width:84ch;gap:0}
+.gsec{display:grid;gap:18px;padding-block:clamp(34px,4vw,54px);border-top:1px solid var(--line)}
+.gsec:first-of-type{border-top:0;padding-top:0}
+.gsec>h2{display:flex;align-items:center;gap:14px;margin:0;font-size:clamp(1.45rem,1.1rem + 1.2vw,2rem);scroll-margin-top:100px}
+.gsec>h2:focus{outline:none}
+.gn{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font:600 1rem/1 var(--body);font-stretch:100%;letter-spacing:0}
+.glead{font-size:var(--t-lead);line-height:1.5;color:var(--ink-2)}
+.gdoc h3{margin-top:12px;font-size:1.24rem}
+.gdoc p,.gdoc li{color:var(--ink-2)}
+.gdoc b{color:var(--ink);font-weight:600}
+.gdoc code{padding:1px 6px;border-radius:6px;background:var(--wash);color:var(--ink);font:500 .88em/1.45 ui-monospace,"Cascadia Mono",Consolas,monospace;overflow-wrap:anywhere}
+.gdoc .dots{gap:8px}
+.gdoc h4{margin:0}
+.ggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
+.ggrid.one{grid-template-columns:minmax(0,1fr);gap:12px}
+.ggrid li{display:grid;gap:4px;align-content:start}
+.ggrid.tick li{grid-template-columns:22px minmax(0,1fr);gap:12px}
+.ggrid.tick svg{width:22px;height:22px;margin-top:2px}
+.ggrid li>div>b{display:block;margin-bottom:3px}
+.ggrid:not(.tick) li{padding:18px 20px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line)}
+.gflow{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:12px;counter-reset:f}
+.gflow li{display:grid;align-content:start;gap:6px;padding:18px 16px;border-radius:14px;background:var(--wash);counter-increment:f}
+.gflow li::before{content:counter(f);display:grid;place-items:center;width:28px;height:28px;margin-bottom:6px;border-radius:50%;background:var(--gacc);color:#fff;font:600 .85rem/1 var(--body)}
+.gflow b{line-height:1.3}
+.gflow p{font-size:.94rem;line-height:1.45}
+.gflow.big li{gap:10px;padding:22px 20px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.gflow.big b{font-size:1.1rem}
+.gpair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.gpair>div{display:grid;gap:8px;align-content:start;padding:18px 20px 6px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line),inset 0 3px 0 var(--navy)}
+.gpair>div+div{box-shadow:inset 0 0 0 1px var(--line),inset 0 3px 0 var(--gmark)}
+.gpair h4{font:600 1.06rem/1.3 var(--body)}
+.gpair .kv{border-top:0}
+.gpair .kv th{width:24%;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.gpair .kv tr:last-child th,.gpair .kv tr:last-child td{border-bottom:0}
+.gbox{display:grid;gap:12px;padding:clamp(18px,2vw,26px);border-radius:16px;background:var(--wash)}
+.gbox h4{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font:600 1.06rem/1.3 var(--body);color:var(--ink)}
+.newtag{padding:3px 10px;border-radius:999px;background:var(--gacc);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.02em}
+.gbox.dark{background:var(--navy)}
+.gbox.dark h4,.gbox.dark b,.gbox.dark a{color:#fff}
+.gbox.dark p,.gbox.dark li{color:var(--on-dark-2)}
+.gbox.dark .osteps li::before{background:#fff;color:var(--navy)}
+.gbox.dark code{background:rgba(255,255,255,.13);color:#fff}
+.gbox.dark .kv{border-top-color:var(--dark-line)}
+.gbox.dark .kv th,.gbox.dark .kv td{border-bottom-color:var(--dark-line)}
+.gbox.dark .kv th{color:var(--on-dark-2);font-weight:500}
+.gbox.dark .kv td{color:#fff;font-weight:600}
+.gtbl{width:100%;border-collapse:collapse;font-size:.98rem}
+.gtbl thead th{padding:0 18px 10px 0;border-bottom:1.5px solid var(--navy);font:600 .78rem/1.3 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);text-align:left}
+.gtbl tbody th,.gtbl td{padding:14px 18px 14px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.gtbl tbody th{width:38%;font-weight:600;color:var(--ink)}
+.gtbl td{color:var(--ink-2);overflow-wrap:anywhere}
+.gpool{display:grid;gap:12px;padding:18px 20px;border-radius:14px;background:var(--wash)}
+.gpool-r{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.gpool-l{margin-right:6px;font-weight:600;color:var(--ink)}
+.gpool .chip{padding:5px 13px;border-radius:999px;background:var(--navy);color:#fff;font-size:.86rem;font-weight:600}
+.gpool .chip.free{background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--pass)}
+.gpics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.gpics li{display:grid;gap:6px;align-content:start;overflow:hidden;padding-bottom:20px;border-radius:16px;box-shadow:inset 0 0 0 1px var(--line)}
+.gpics-i{display:grid;place-items:center;margin-bottom:10px;padding:8px 12px;background:var(--wash)}
+.gpics .gfig{justify-items:center}
+.gpics .gfig img{border-radius:0;box-shadow:none;background:none}
+.gpics h4,.gpics p{padding-inline:20px}
+.gpics h4{font:600 1.08rem/1.3 var(--body)}
+.gcontact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.gcontact li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:18px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line)}
+.gcontact .ic{width:40px;height:40px;padding:9px;border-radius:50%;background:var(--wash);color:var(--navy)}
+.gcontact h4{margin-bottom:2px;font:600 1.02rem/1.3 var(--body)}
+.gcontact a{font-weight:600;overflow-wrap:anywhere}
+.gcontact p{margin-top:4px;font-size:.95rem}
+.gss{display:grid;counter-reset:o}
+.gss>li{counter-increment:o;display:grid;grid-template-columns:32px minmax(0,1fr) minmax(0,1.15fr);gap:14px 22px;align-items:start;padding:22px 0;border-top:1px solid var(--line)}
+.gss>li:first-child{border-top:0;padding-top:4px}
+.gss>li::before{content:counter(o);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font:600 .85rem/1 var(--body)}
+.gss-t{display:grid;gap:10px}
+.gss-i{display:grid;gap:10px;justify-items:start}
+.gss>li.wide{grid-template-columns:32px minmax(0,1fr)}
+.gss>li.wide .gss-i{grid-column:1/-1}
+.gfig{display:grid;gap:8px;justify-items:start;max-width:100%}
+.gfig a{display:block;max-width:100%;border-radius:8px}
+.gfig img{display:block;max-width:100%;height:auto;border-radius:8px;background:#fff;box-shadow:0 0 0 1px var(--line),0 12px 26px -18px rgba(14,42,82,.55)}
+.gfig figcaption{font-size:.9rem;line-height:1.45;color:var(--muted)}
+.gmedia{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:22px 30px;align-items:start}
+.gmedia-t{display:grid;gap:14px}
+.gtoc h2{margin-bottom:6px;font:600 1.02rem/1.3 var(--body);font-stretch:100%;letter-spacing:0}
+.gtoc ol{display:grid}
+.gtoc a.sl{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;align-items:baseline}
+.gtoc a span{font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.gtoc a[aria-current] span{color:var(--gacc)}
+.gtoc-box{gap:14px}
+.gtoc-box .gtoc{width:100%}
+.gtoc-m{display:none}
+.prose .gnext{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;margin-top:clamp(28px,3vw,40px);padding:20px 24px;border-radius:var(--r-panel);background:var(--grad);color:#fff;text-decoration:none}
+.gnext span{font-size:.84rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.gnext b{grid-column:1;color:#fff;font:640 clamp(1.15rem,1rem + .6vw,1.45rem)/1.2 var(--display);font-stretch:112%;letter-spacing:-.02em}
+.gnext .ic{grid-column:2;grid-row:1/3;width:24px;height:24px}
+.gnext:hover b{text-decoration:underline;text-underline-offset:4px}
+@media (max-width:959px){
+  .gtoc-m{display:block;margin-bottom:clamp(26px,4vw,40px);padding:18px 20px;border-radius:16px;background:var(--wash)}
+  .gtoc-s{display:none}
+  .gsec:first-of-type{padding-top:0}}
+@media (max-width:759px){
+  .gflow{grid-template-columns:repeat(2,minmax(0,1fr))}.gflow.big{grid-template-columns:minmax(0,1fr)}
+  .gss>li{grid-template-columns:32px minmax(0,1fr)}.gss-i{grid-column:2/-1}.gss>li.wide .gss-i{grid-column:1/-1}
+  .gmedia,.ggrid,.gpair,.gpics,.gcontact{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:599px){
+  .gtbl thead{display:none}
+  .gtbl,.gtbl tbody,.gtbl tr,.gtbl tbody th,.gtbl td{display:block;width:auto}
+  .gtbl tr{padding:14px 0;border-bottom:1px solid var(--line)}
+  .gtbl tbody th,.gtbl td{padding:0;border:0}
+  .gtbl tbody th{margin-bottom:6px}}
+@media (max-width:419px){.gflow{grid-template-columns:minmax(0,1fr)}}
+@media print{.hdr,.menu,.side,.gtoc-m,.foot,.panel,.gnext{display:none}.sheet{background:#fff}}
+
+.pvtag{position:fixed;left:12px;bottom:12px;z-index:96;padding:7px 13px;border-radius:999px;background:rgba(14,42,82,.94);color:#fff;font:600 .78rem/1.2 "Instrument Sans","Segoe UI",system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 22px -10px rgba(2,8,22,.7),inset 0 0 0 1px rgba(255,255,255,.24)}
+.pvtag:hover{background:#0E2A52;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:599px){.pvtag{left:8px;bottom:8px;padding:6px 11px}.pvx{display:none}}
+@media print{.pvtag{display:none}}
+</style>
+</head>
+<body>
+<a class="pvtag" href="https://helpdesk.iccsolutions.com/hc/en-us" rel="noopener" title="This is a design preview. Open the live helpdesk." aria-label="Design preview, not the live helpdesk. Open the live helpdesk.">Design preview<span class="pvx">, not the live helpdesk</span></a>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr dark" id="hdr">
+  <div class="hdr-in">
+    <span class="brand"><a data-site aria-label="ICC Solutions website, home page"><img src="media/logo-white.png" alt="ICC Solutions" width="355" height="230"></a><a class="hd-name" href="#home" aria-label="Helpdesk home">Helpdesk</a></span>
+    <nav class="nav" id="nav" aria-label="Topics">
+      <i class="nav-ind" aria-hidden="true"></i>
+      <a href="#t-start">Set up</a>
+      <a href="#t-licence">Licences</a>
+      <a href="#t-tmat">ICCSimTMat</a>
+      <a href="#t-brands">Brand suites</a>
+      <a href="#t-cards">Cards</a>
+      <a href="#t-support">Support</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="btn sm gh" data-site>Main website</a>
+      <a class="btn sm gh" href="https://helpdesk.iccsolutions.com/hc/en-us/signin" target="_blank" rel="noopener">Sign in</a>
+      <a class="btn sm cy" href="#new">Raise a ticket</a>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<nav class="menu dark" id="menu" aria-label="Menu">
+  <a href="#home">Helpdesk home</a>
+  <a href="#t-start">Getting started</a>
+  <a href="#t-licence">Licences and activation</a>
+  <a href="#t-tmat">Using ICCSimTMat</a>
+  <a href="#t-brands">Brand test suites</a>
+  <a href="#t-cards">Cards and readers</a>
+  <a href="#t-ctc">ICCSimCTC</a>
+  <a href="#t-support">Working with the Helpdesk</a>
+  <a href="#g-getting-started">Getting started guide</a>
+  <a href="#new">Raise a ticket</a>
+  <a href="https://helpdesk.iccsolutions.com/hc/en-us/signin" target="_blank" rel="noopener">Sign in</a>
+  <a data-site>Main website</a>
+</nav>
+<main id="main"><div id="page"></div></main>
+<footer class="foot dark" id="foot"></footer>
+<script>
+(()=>{
+'use strict';
+const D=document,R=D.documentElement,$=(s,r=D)=>r.querySelector(s),$$=(s,r=D)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('motion-ok');
+
+const HD='https://helpdesk.iccsolutions.com/hc/en-us',WEB='https://www.iccsolutions.com';
+const SITE='../';
+const VHD='../viable-helpdesk/';
+const TOPICS=[
+  ['start','Getting started','Installing your tool, what your PC needs, and where your downloads are.'],
+  ['licence','Licences and activation','Logging in with online licensing, offline licences, moving to another PC, and older tools with a USB key or activation code.'],
+  ['tmat','Using ICCSimTMat','The tool’s windows and menus, running tests, logs and results.'],
+  ['brands','Brand test suites','Notes for Mastercard, Discover, EMV Level 2, DNA and the online TSE tools.'],
+  ['cards','Cards and readers','Card readers and their drivers, test cards, replacements and card packs.'],
+  ['ctc','ICCSimCTC','The card test controller for chip card application testing.'],
+  ['support','Working with the Helpdesk','Raising a ticket, sending logs, remote support and renewing maintenance.']
+];
+const RAW=String.raw;
+const G='media/guides/',GS='#g-getting-started';
+const MYICC='https://my.iccsolutions.com/',REMOTE='https://iccsolutions.beyondtrustcloud.com/',TEL='tel:+441925629001';
+const HELD=[];
+const ARTICLES=[
+{s:'install',t:'Installing your tool',tp:'start',u:'2026-11',id:'360020141920',b:[
+  ['Go to your MyICC page at my.iccsolutions.com.','Sign in with the details the ICC Solutions Admin team gave you.','Download the software you have bought.','Extract the install file from the zip or zips you downloaded, then double-click the .exe file.','Follow the on-screen instructions until the install finishes.','Open the tool. Current versions of ICCSimTMat ask you to log in with your Online Licence account.'],
+  {n:'Older versions that use a USB licence key also need the config file that goes with the key: download it from MyICC with the software.'},
+  {f:'Five screenshots: the MyICC download page and the installer’s screens'},
+  'The [['+GS+'|getting started guide]] takes you through the whole set-up, from your logins to the card reader.',
+  {x:['Open MyICC','https://my.iccsolutions.com/']}]},
+{s:'system-requirements',t:'What your PC needs',tp:'start',u:'2026-11',id:'206642009',pop:1,b:[
+  'The recommended system for ICC Solutions tools:',
+  {kv:[['Operating system','Windows 10 or Windows 11'],['Processor','1.6 GHz or faster, 2-core'],['Memory','4 GB RAM (2 GB for 32-bit)'],['Hard disk','250 MB of available space'],['.NET','Some features may also need .NET 3.5, or 4.6 and higher, installed'],['WebView2','The Microsoft Edge WebView2 Runtime, which the login of tools with online licensing uses'],['Internet','HTTPS access to `toollauncherapi.azurewebsites.net`, for online licensing. A PC without internet can use an offline licence.']]},
+  'The [['+GS+'-2|getting started guide]] has more, including what to ask your IT team for.',
+  {n:'Windows XP has not been supported since 30 September 2015.'}]},
+{s:'password',t:'Resetting your MyICC password',tp:'start',u:'2026-11',id:'360001000700',b:[
+  'MyICC is where you download tools, patches and config files. To reset or change its password:',
+  ['Raise a ticket with the Helpdesk asking for a password reset. Give your Customer ID.','The Helpdesk sends you a unique link. It begins https://identities.iccsolutions.com/account.','The link opens a page where you type a new password twice, then choose Reset.','Go back to MyICC and sign in with the new password.'],
+  {f:'Screenshot: the page where you enter the new password'},
+  'The password you use to log in to ICCSimTMat, your Online Licence account’s, is reset the same way. If several people share a login, a reset changes it for all of them, so each person should have their own.',
+  'If you still can’t sign in, [[ticket|raise a ticket]].']},
+{s:'reader-drivers',t:'Card reader drivers',tp:'start',also:'cards',u:'2016-01',id:'206643039',b:[
+  'Open the card reader driver page and select your reader. The driver then installs.',
+  {x:['Card reader drivers',WEB+'/dualinterface/']}]},
+{s:'plug-and-play',t:'Windows tries to install a driver when I place a card on the reader',tp:'start',also:'cards',u:'2022-07',id:'207332135',b:[
+  'Windows has automatic Plug and Play for smart cards. It conflicts with the tool by trying to install a driver for the physical card, and it can overwrite the logs on your cards. To turn it off:',
+  ['Open the Start menu, type gpedit.msc and press Enter. (Or open Run and enter gpedit.msc.)','Under Computer Configuration, choose Administrative Templates.','Choose Windows Components, then Smart Card.','Disable every setting in this folder: double-click the first setting, select Disabled, choose Next Setting, and repeat until all are disabled. Setting them to Not Configured does not fix the problem.','Restart the PC.','Run your test again.'],
+  {d:[['Disable_Smartcard_Plug_and_Play_for_Windows.pdf','773 KB']]}]},
+{s:'software-list',t:'Listing the software installed on your PC',tp:'start',also:'support',u:'2017-10',id:'206328584',b:[
+  'The Helpdesk may ask what is installed on your PC. To list it:',
+  ['Press Start, type PowerShell and press Enter.','Paste the command below and press Enter. The list of installed programs appears.','To save the list as a file, run the same command with > and a file path on the end, as in the second example.'],
+  {c:RAW`Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize`},
+  {c:RAW`Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize > c:\users\yourname\desktop\installedprograms.txt`},
+  {f:'Screenshot: what the saved text file looks like'}]},
+
+{s:'activation-loop',t:'The activation screen keeps coming back',tp:'licence',u:'2026-11',id:'206641819',b:[
+  'This is for tools activated with a lock code and an activation code, such as ICCSimDEV and ICCSimCTC. Current versions of ICCSimTMat use online licensing instead: see [['+GS+'-5|logging in]] in the getting started guide.',
+  'If you try to activate the tool and the activation screen simply returns, check three things:',
+  {u:['The date, time and year on the PC are correct.','The tool is installed in the default location. If you changed the location, uninstall the tool and install it again in the default location.','The tool is running as Administrator. See [[run-as-admin|running the tool as Administrator]].']},
+  'If it still happens, [[ticket|raise a ticket]].']},
+{s:'run-as-admin',t:'Running the tool as Administrator',tp:'licence',also:'ctc',u:'2026-11',id:'206612049',b:[
+  'Tools activated with a lock code, such as ICCSimDEV and ICCSimCTC, need to run as Administrator to activate a licence or to revoke one.',
+  ['Right-click the tool’s shortcut on your desktop and choose Properties.','On the Compatibility tab, under Settings, tick “Run this program as an administrator”.','Choose Apply, then run the tool as normal.'],
+  {n:'Don’t do this for tools that use online licensing, such as current versions of ICCSimTMat. Open them normally: their login can fail when they run as Administrator.'},
+  {f:'Two screenshots: the shortcut’s Properties window and the Compatibility tab'}]},
+{s:'move-licence',t:'Moving a licence to another PC',tp:'licence',u:'2026-11',id:'360020723639',b:[
+  'How you move a licence depends on how your tool is licensed:',
+  {kv:[['Online licensing','Current versions of ICCSimTMat. The licence isn’t tied to a PC: install the tool on the new PC and log in with your Online Licence account.'],['An offline licence','Install the tool on the new PC and ask the Helpdesk for an offline licence for it.'],['A USB licence key','Older versions. Plug the key into the new PC. The config file must be on the new PC too. Nothing else is needed.'],['A lock code','Tools activated with a lock code, such as ICCSimDEV and ICCSimCTC. Release the licence from the old PC first, as below.']]},
+  {h:'Releasing a licence activated with a lock code'},
+  ['On the PC where the tool is installed and activated, open the Help menu and choose “Move License to New PC”. The Move Licence window opens.','Email the lock code to support@iccsolutions.com. If the PC has an email program, the button writes the email for you. Otherwise copy the code into an email yourself.','The Helpdesk replies with a revoke code. Paste it into the box and choose Next.','Send the PC moving code to the support team. The button writes this email for you as well.','The support team replies to confirm that the licence has been removed.','Install the tool on the new PC and request a licence.'],
+  {n:'Send every code as text, not as a screenshot, so that it arrives accurately.'},
+  {f:'Five screenshots: each step of the Move Licence window'},
+  'No access to the old PC? See [[no-old-pc|I can’t get to the PC the licence is on]].']},
+{s:'no-old-pc',t:'I can’t get to the PC the licence is on',tp:'licence',u:'2026-11',id:'115001631004',pop:1,b:[
+  'With online licensing there’s nothing to release: install the tool on the new PC and log in. For a licence activated with a lock code:',
+  ['[[ticket|Raise a ticket]] and tell the support team that you cannot reach the PC.','They send you a document to sign.','Sign it and send it back.','Once the support team has it, they revoke the old licence for you.']]},
+{s:'usb-key',t:'USB licence keys (older versions)',tp:'licence',u:'2026-11',id:'207504845',b:[
+  'Older versions of ICCSimTMat kept your licence on an ICC USB licence key. With the key plugged into the PC you want to use, you can open all your installed ICCSimTMat suites from a single program.',
+  'Current versions use online licensing instead: each person logs in with their own Online Licence account, with no key or config file. That’s why a new version asks you to log in. See [['+GS+'-5|logging in]] in the getting started guide.',
+  {d:[['Licence_Key_Diagram.pdf','142 KB'],['USB_Licence_Keys_Datasheet.pdf','73 KB']]},
+  'If the tool can’t see your key, install the [[sentinel-driver|Sentinel driver]].']},
+{s:'sentinel-driver',t:'Drivers for the Sentinel USB licence key',tp:'licence',u:'2026-11',id:'207398465',b:[
+  'For older versions that use a USB licence key: if the tool can’t see the key, install the Sentinel driver. The installer is attached to the current article. It is compatible with Windows 10.',
+  {d:[['Sentinel_System_Driver_Installer_7.5.9.exe','2,865 KB']]}]},
+
+{s:'user-guide',t:'The ICCSimTMat user guide',tp:'tmat',u:'2021-03',id:'206698749',pop:1,b:[
+  'The user guide is online. Its pages:',
+  {u:['[[main-window|The main window]]','[[common-tasks|Common Tasks]]','[[project-panel|The Project panel]]','[[test-report|The Test Report tab]]','[[button-bar|The button bar]]','[[menus|Menu commands]]','[[commands|Command reference]]','[[glossary|Glossary of terms]]']}]},
+{s:'main-window',t:'The main window',tp:'tmat',u:'2021-03',id:'360020360640',b:[
+  'The main window has four tab panels: Project, Test Report, Testing and Analysis.',
+  'At the foot of the window a summary bar shows the open project’s name, the active test plan, the current script, and a summary of the project statistics.',
+  {f:'Two screenshots: the main window and its summary bar'}]},
+{s:'common-tasks',t:'Common Tasks',tp:'tmat',u:'2021-03',id:'360020360480',b:[
+  'The Common Tasks screen gives quick access to your previous projects and to creating a new one. It is available from the main screen.',
+  {f:'Screenshot: the Common Tasks screen'}]},
+{s:'project-panel',t:'The Project panel',tp:'tmat',u:'2021-03',id:'360020401939',b:[
+  'The Project panel shows the overall project summary. While you are creating a new project, a set of buttons appears at the top right and the ICS categories can be selected.',
+  'It has three main areas:',
+  {u:['An information section with the main details of the project.','The test summary: how many tests are selected, run, passed, failed and marked for further investigation.','The test configuration panel, showing the functional areas selected for testing.']},
+  {f:'Screenshot: the Project panel'}]},
+{s:'test-report',t:'The Test Report tab',tp:'tmat',u:'2021-03',id:'360020360720',b:[
+  'This panel is where you choose the tests to run. It also shows the status of every test that has been run, by colour:',
+  {kv:[['Green','Pass'],['Red','Fail'],['Yellow','Investigate'],['White','Untested']]},
+  'To run one test, select it with a left click and choose Run Tests. To run several, either:',
+  {u:['tick the boxes on the left for the tests you want and choose Run Checked Tests, or','highlight the tests with Ctrl + left click and choose Run Tests.']},
+  'The quick filters on the toolbar filter the test list. Right-click and choose Select All to select every test that has not yet been performed.',
+  {f:'Screenshot: the Test Report tab'}]},
+{s:'button-bar',t:'The button bar',tp:'tmat',u:'2021-03',id:'360020401859',b:[
+  {h:'Project controls'},'Three buttons that match the New Project, Open Project and Close Project menu options.',
+  {h:'Running tests'},'Highlight a test or tests in the Test Report panel and Run Tests lights up as ready. Click it to run them. Run Checked Tests runs the tests you have ticked.',
+  {h:'Viewing logs'},'When tests with logs are selected, the View Logs buttons are enabled: first, previous, next and last. The central View Logs button opens the log window for the current test in the selection. If no test is active, it shows the log of the first selected test.',
+  {h:'Analysis'},'When a test with a log is selected, Analyse analyses the highlighted log. Analyse Highlighted re-analyses every highlighted log when more than one is selected.',
+  {h:'Tools and options'},'Calc is a conversion calculator: to and from hexadecimal, ASCII, decimal and binary.',
+  {f:'Six screenshots: each group of buttons'}]},
+{s:'menus',t:'Menu commands',tp:'tmat',u:'2021-03',id:'360020360580',b:[
+  {h:'File menu'},
+  {kv:[['New Project','Starts a new test project.'],['Open Project','Opens an existing project.'],['Close Project','Closes the current project.'],['Recent Project','Lists recent projects.'],['Exit','Closes ICCSimTMat.']]},
+  {h:'Tools menu'},
+  {kv:[['Manual Testing: Upload Log','Uploads the log file from the ICCSim card again, without downloading and re-running the full script.'],['Manual Testing: Check Card Version','Shows the version of the applet on the ICCSim card.'],['Manual Testing: Select Mandatory Device','Lists every connected card reader so you can choose which to use.'],
+    ['Synchronise Logs with Project','Makes the project files match the log files in the log directory. Most useful after a log is deleted: the evidence for its pass or fail status has gone, and the project should show that.'],
+    ['Answer “Test Suite” Questions During Test Cycle','When ticked, ICCSimTMat checks the test log and answers every question it can against the pass criteria. Some questions need your own observation.'],
+    ['Resolve Investigates during Test Cycle','When ticked, ICCSimTMat tries to resolve any M-TIP questions that need user investigation.'],
+    ['Display Log Overwrite Warning during Test Cycle','Turns off the prompt that asks before overwriting the log of a test you have already run.'],
+    ['Import Host Log Data','Imports the host log to answer host log questions.'],['Import IccSolHost Log Data','Imports the ICC Solutions host log to answer host log questions.'],
+    ['Export “Test Suite”','Exports the test results to a new or existing Excel file.'],
+    ['Prepare “Test Suite” Results for CCRT XML Submission','Opens the CCRT form, where you complete the fields and prepare the results for submission.'],
+    ['Restart Test Server','Restarts the server inside the TMat tool. This can help if scripts will not load to cards.'],
+    ['Validate Checksums','Checks that the logs in the project have not been tampered with.'],
+    ['Card Load Utility','Starts the Card Load Utility. See [[applet|updating the applet on a card]].']]},
+  {n:'This is the Tools menu as the ADVT suite shows it. Other suites may differ.'},
+  {h:'Help menu'},
+  {kv:[['About','Shows the tool’s version number and contact details.'],['View License Agreement','Shows the licence agreement.'],['Move License to New PC','See [[move-licence|moving a licence to another PC]].']]},
+  {f:'Three screenshots: the File, Tools and Help menus'}]},
+{s:'fallback-test',t:'A test case says there is no script, or is a fallback test',tp:'tmat',u:'2016-03',id:'207150179',b:[
+  'A fallback test needs no script. It uses only the magnetic stripe data on the back of the card.',
+  ['Run the test. A text box with a blue box tells you which card to use.','Follow the instructions in Transaction Details at the bottom of the screen (the yellow box). While the test runs, a prompt at the top flashes yellow and blue.','When you have run the test, place the card back on the reader and press Back to complete the test and answer the observation questions.'],
+  {f:'Six screenshots: the card prompt, Transaction Details and the flashing prompt'}]},
+{s:'applet',t:'Updating the applet on a card by hand',tp:'tmat',also:'cards',u:'2016-01',id:'207335375',b:[
+  ['Place the card on the reader. With the tool open on a project, choose Tools, then Card Load Utility.','Step 1 of the window shows the applet that is on the card now. Step 2 lists the applets you can load: the tool shows the ones that go with the suite you are using.','Click the applet you want in Step 2. This prepares it but does not load it yet. The status at the bottom right shows Ready.','Choose Update. It takes about 10 seconds.','When it finishes, the status at the bottom left reads “Operation completed successfully” and the top left shows the card’s current version.','Close the window and carry on testing.'],
+  {f:'Three screenshots: the Card Load Utility before, during and after an update'}]},
+{s:'host-logs',t:'Importing host logs',tp:'tmat',u:'2016-11',id:'206612019',b:[
+  'Choose Tools, then Import Host Log Data. The [[menus|menu commands]] page describes both host log imports.',
+  {f:'Screenshot: Import Host Log Data on the Tools menu'}]},
+{s:'send-a-log',t:'Sending a log to the Helpdesk from TMat',tp:'tmat',also:'support',u:'2022-03',id:'115000603370',b:[
+  'To look into a problem we need the log from the card, sent through the tool.',
+  {h:'To report a failed test as a new ticket'},
+  ['Open the Analysis tab.','Choose Mail to Support. This raises a new ticket with the log attached.'],
+  {h:'To add a log to a ticket you already have'},
+  ['Open the Analysis tab and choose To Log. The folder where logs are stored opens.','Attach the .log file to your reply on the ticket.'],
+  'You can also go to the log folder yourself:',
+  {c:RAW`C:\ICCSim50\termlogs\[suite and version name]`},
+  'Newer suites keep their logs here:',
+  {c:RAW`C:\Users\[username]\Documents\ICC Solutions Limited\ICCSimTMat\termlogs`},
+  {f:'Two screenshots: the Analysis tab with Mail to Support and To Log marked'}]},
+{s:'contact-not-contactless',t:'Analysis fails on the command 00A404000E32',tp:'tmat',u:'2020-03',id:'360012518199',b:[
+  'If the analysis of a test fails because of the command 00A404000E32=- in the card log, the test expected a contact transaction using the chip, and it was completed by contactless instead.',
+  'Run the test again and make sure you do not complete it by contactless.']},
+{s:'hostlogprocessor',t:'Error: could not load HostLogProcessor.dll',tp:'tmat',u:'2017-10',id:'206642959',b:[
+  'When you run a test you may see: “Unhandled exception has occurred in a component in your application… Could not load file or assembly ‘HostLogProcessor.dll’ or one of its dependencies. The specified module could not be found.”',
+  'Install the Microsoft Visual C++ 2013 and 2015 runtimes. That should solve it.',
+  {x:['Visual C++ 2013 runtime (Microsoft)','https://www.microsoft.com/en-gb/download/details.aspx?id=40784']},
+  {x:['Visual C++ 2015 runtime (Microsoft)','https://www.microsoft.com/en-us/download/details.aspx?id=53840']}]},
+{s:'tcpip',t:'TCP/IP signals in the EMV suite',tp:'tmat',u:'2019-02',id:'115000000724',b:[
+  'ICCSimTMat’s EMV suite can send three signals over TCP/IP, so that a test device can follow a test as it runs:',
+  {kv:[['DOWNLOAD_END','ICCSimTMat has finished downloading the script onto the card.'],['PERFORM_TXN_START','ICCSimTMat is waiting for the user to perform the transaction.'],['PERFORM_TXN_END','ICCSimTMat has uploaded the log and is processing it.']]},
+  'The last signal gives the terminal the most time to prepare for the next transaction: it can load its next configuration while ICCSimTMat processes and analyses the current test.',
+  {h:'Turning it on'},
+  'Place a file named TCPIPComms.txt in this folder:',
+  {c:RAW`C:\iccsim50\TMat EMV\ICCSimTMatBase`},
+  'The file has one line: the IP address and port of the TCP/IP connection on your test device, written <IP>:<port>. The IP is in the form AA.BB.CC.DD and the port is a four-digit number.',
+  {h:'What is sent'},
+  {kv:[['When a script is selected','STX:<Test Name>:TEST:[<Test Case>:<Test Name>]:ETX'],['When the script has downloaded','STX:<Test Name>:DOWNLOAD_END:ETX'],['While TMat waits for the log','STX:<Test Name>:PERFORM_TXN_START:ETX'],['When the log has been uploaded','STX:<Test Name>:PERFORM_TXN_END:ETX']]},
+  {n:'The < and > marks are not sent. They only bracket the part that varies. The connection is made once, when TMat starts: if it is lost, restart TMat.'},
+  'These signals are normally used with the card in the ICCSimSC Smart Connector, which is for contact terminals only. To automate whole test campaigns, see AutoAPI.',
+  {x:['AutoAPI on the ICC Solutions website',SITE+'#auto-api']}]},
+{s:'commands',t:'Command reference',tp:'tmat',u:'2021-03',id:'360020724099',b:[
+  'Two reference tables: the special ICCSimTMat commands, and the standard command abbreviations.',
+  {f:'Table: Special ICCSimTMat Commands'},{f:'Table: Standard Command Abbreviations'}]},
+{s:'glossary',t:'Glossary of terms',tp:'tmat',u:'2021-03',id:'360020723999',b:[
+  {kv:[['ARPC','Authorisation Response Cryptogram'],['ARQC','Authorisation Request Cryptogram'],['ATR','Answer To Reset'],['CCD','Common Core Definitions'],['CDOL','Card Risk Management Data Object List'],['CLA','Class byte of the command message to the ICC'],['COM','Communications port on the computer'],['DDOL','Dynamic Data Authentication Data Object List'],['DES','Data Encryption Standard'],['Device','The hardware being tested. The same as terminal.'],['DLL','Dynamic Link Library'],['EMV','Europay International, Mastercard International and Visa combined ICC standards'],['GP','Global Platform'],['ICC','Integrated Circuit Card'],['INS','Instruction byte of the command message to the ICC'],['Lc','Exact length of the data sent by the TAL in the command message'],['Le','Maximum length of the data the TAL expects in response to the command'],['MAC','Message Authentication Cryptogram'],['PAN','Primary Account Number'],['PC','Personal Computer'],['PDOL','Processing Options Data Object List'],['P1','Parameter 1 of the command message to the ICC'],['P2','Parameter 2 of the command message to the ICC'],['RSA','Rivest, Shamir, Adleman algorithm for cryptography'],['SDA','Static Data Authentication'],['SW1','Status Word One'],['SW2','Status Word Two'],['TAL','Terminal Application Layer'],['Terminal','The hardware being tested. Used for any payment device that accepts chip cards.'],['TLV','Tag, Length, Value'],['VSDC','Visa Smart Debit Credit']]}]},
+
+{s:'mtip-us-maestro',t:'Mastercard MTIP12_USM_12_01 and MTIP31_USM_01_01',tp:'brands',u:'2017-10',id:'206907430',b:[
+  'If the Mastercard suite has several AIDs and your terminal is set up to prefer Common US Debit, you may fail these two tests.',
+  {f:'Extract from the Mastercard specification'},
+  'Your terminal cannot presume that Common US Debit can be selected when other AIDs are present on the card. Update the application in the device so that it can select other AIDs where needed.']},
+{s:'tse-lists',t:'Using Mastercard TSE test lists in TMat',tp:'brands',u:'2016-01',id:'206647059',b:[
+  'Import a .tsez package into TMat. The attached guide shows how.',
+  {d:[['How_To_Use_MasterCard_TSE_within_TMat.pdf','430 KB']]}]},
+{s:'niv-tests',t:'Mastercard NIV: finding the tests you need to run',tp:'brands',u:'2016-01',id:'207335705',b:[
+  'For NIV, Mastercard should have sent you its main CITR document. You may also have an Acquirer ATM document and an Acquirer POS document.',
+  'Mastercard tells testers which table of tests to run, for example table 650001 from a named document. The tests have different names in the tool, so search the tool for the table number to see the tests you need.']},
+{s:'niv-pins',t:'Mastercard NIV Subset 3 PINs',tp:'brands',u:'2018-04',id:'360000600810',lock:1,b:[
+  'Each Subset 3 card (the MCC, MSI, CIR and DMC series) has its own PIN, to enter if the terminal asks for one.',
+  'Cards numbered 118 in each series are fallback cards: the terminal should fall back to magnetic stripe when one is used.']},
+{s:'dpas-l3',t:'Discover D-PAS L3 TMat',tp:'brands',u:'2021-05',id:'360021553380',pop:1,b:[
+  'The D-PAS L3 TMat was released in May 2021. It brings Discover, Diners and Pulse together in one tool.',
+  'When you open the tool you see the Common Tasks screen. From there you can:',
+  {u:['create a new project,','modify an existing TSE project (you are asked to open a .prj project file), or','open a project.']},
+  {h:'Starting a new project'},
+  'Choose New Project. You can import a TSE (test selection engine) file, or create a new one by choosing Next at the bottom right.',
+  'If you choose Next, complete the forms on each page about the terminal you are going to test. As you go:',
+  {kv:[['Save As','Saves the TSE file.'],['Test Reference','Opens the test plan file.'],['Test Session Contents','Gives a quick look at the tests your current selections need.'],['Cancel','Returns to the Common Tasks screen.']]},
+  {f:'Four screenshots: Common Tasks, New Project and the TSE forms with their buttons numbered'}]},
+{s:'emv-l2-issuer-scripts',t:'EMV Level 2: tests 2CA.111 to 2CA.114, 2CO.034.02 and 2CO.034.03 are missing',tp:'brands',u:'2016-05',id:'208468885',b:[
+  'These tests depend on the length of the issuer script, and the tool caters for a set of issuer script lengths.',
+  'If yours is different, ask support@iccsolutions.com for your variant of the affected tests: 2CA.111 to 2CA.114, 2CO.034.02 and 2CO.034.03.']},
+{s:'dna',t:'Debit Network Alliance (DNA) documentation',tp:'brands',u:'2016-04',id:'208278575',b:[
+  'The Debit Network Alliance is made up of 10 leading US debit networks.',
+  'For DNA it does not matter whether a transaction tries to go online. All the pass criteria are checked before the online transmission, so a decline does not matter. DNA has no host simulator, and the tests are designed not to depend on what happens online: the terminal can handle the decline, or decline or approve offline.',
+  {d:[['DNA_AID_Terminal_Specifications_73014.pdf','29 KB'],['Guidelines-for-POS-Acquirers__1_.pdf','1,751 KB']]}]},
+{s:'tse-online',t:'TSE Online',tp:'brands',u:'2026-07',id:'15316677419548',b:[
+  'ICC Solutions hosts the TSE tools in the cloud for all payment association brands.',
+  {x:['Open TSE Online','https://tseonline.iccsolutions.com/']},
+  {d:[['ICC Solutions TSE Online user guide (PDF)','403 KB']]}]},
+{s:'bin-ranges',t:'Can the BIN ranges be changed?',tp:'brands',u:'2016-01',id:'207335765',b:[
+  'No. The card profiles are given to us by Visa and Mastercard, so we cannot change the cards.']},
+
+{s:'no-pcsc',t:'Error: “no PC/SC smart card devices attached”',tp:'cards',u:'2017-10',id:'115001631164',b:[
+  'If the reader shows in Device Manager but the tool reports that no PC/SC smart card devices are attached:',
+  ['Check that you have the correct drivers. See [[reader-drivers|card reader drivers]].','In the tool, choose Tools, then Manual Testing, then Select Mandatory Device.','Highlight and select the reader you want. With an Omnikey 5421, for example, you choose between 5x21 0 (the contact reader, where you insert the card) and 5x21-CL 0 (the contactless reader, where you place the card on top). The contactless reader is recommended.'],
+  {f:'Two screenshots: Select Mandatory Device and the list of readers'},
+  'If the reader still does not work, [[ticket|raise a ticket]].']},
+{s:'swipe-fails',t:'The magnetic stripe swipe of an ICC card keeps failing',tp:'cards',u:'2016-02',id:'207575665',b:[
+  'First check whether the terminal is the cause. Most ICC cards are dual interface, and some terminals appear to read the chip before the swipe has finished. Ask your terminal vendor: it may be a known issue.',
+  'If the terminal is not the cause and you believe the card or the ICC tool is, [[ticket|raise a ticket]].']},
+{s:'card-life',t:'How long do ICC Solutions cards last?',tp:'cards',u:'2017-10',id:'206642909',b:[
+  'Our card supplier advises that card life depends on the type and make of reader:',
+  {kv:[['A reader where the chip is inserted','Tested to 10,000 cycles'],['A contactless reader','Tested to 100,000 cycles']]}]},
+{s:'broken-card',t:'My card is broken',tp:'cards',u:'2017-10',id:'115001634630',b:[
+  'Cards are not included in your Support and Maintenance package. If a card is broken or defective, contact info@iccsolutions.com to buy a replacement.',
+  'See [[order-cards|ordering new or replacement cards]].']},
+{s:'order-cards',t:'Ordering new or replacement cards',tp:'cards',u:'2016-01',id:'206643969',b:[
+  'Contact info@iccsolutions.com for a quote. The team takes you through buying new or replacement cards:',
+  ['A link to an order form is sent for you to fill in and submit.','Payment is needed in advance, by card payment link or wire transfer.','Once payment has been received, the cards are despatched within 5 to 10 working days.','An email with tracking details follows, so you can track your order.'],
+  {x:['Placing an order, on the ICC Solutions website',SITE+'#useful-information']}]},
+{s:'training-packs',t:'Training card packs: AG00 Contactless and AH00 Extended',tp:'cards',u:'2025-10',id:'360018748940',b:[
+  'Merchant training cards and the US and Canadian Chip Confidence Card Packs simulate real-life contact and contactless transactions: for confidence testing on terminals and POS, for checking terminal configuration, and for staff training.',
+  'The contents of each pack are in its data sheet:',
+  {d:[['AG00 Contactless RCTP Pack (PDF)','101 KB'],['AH00 Extended RCTP Pack (PDF)','132 KB']]}]},
+{s:'gd-data-sheet',t:'G&D card data sheet',tp:'cards',u:'2017-10',id:'115000290764',b:[
+  'G&D smart cards and SIM cards comply with all the relevant standards, including the voltage range defined in ISO 7816-3: ID-1 cards support 5 V, and SIM cards 1.8 V, 3 V and 5 V.',
+  {d:[['401_Datasheet.pdf','112 KB']]}]},
+
+{s:'ctc-window',t:'The card test controller window does not open',tp:'ctc',u:'2016-04',id:'206612059',b:[
+  'This is usually one of two things.',
+  {h:'The tool did not close properly last time'},
+  'Open Task Manager, right-click the Card Test Controller application (or the Developer application) and choose Maximise.',
+  {h:'A config file is corrupted'},
+  'If that does not work, open this folder and delete any ICC Solutions folders in it:',
+  {c:RAW`C:\Users\[user]\AppData\Local`},
+  'Then run the tool. You may need to repeat the first fix.']},
+{s:'mp65',t:'ICCSimCT (MP65) shows “Failed to connect to remote host”',tp:'ctc',u:'2016-04',id:'207305155',b:[
+  'To connect CT to the MP65, the file ICCSimCT_MP65.con needs the right connection details. Three lines matter:',
+  {kv:[['TCP Address','The IP address of the MP65 device.'],['TCP Port','Almost certainly 10779, the MP65’s default port.'],['CommsMode','SOCKET']]},
+  {h:'Finding the MP65’s IP address'},
+  'Connect the MP65 directly to your workstation and use the MPManager software that came with it. Over USB:',
+  ['Open the USB tab.','Choose Connect. The Information button becomes active.','Choose Information. A window shows the device’s details. Copy the IP address listed.'],
+  'If the address were 192.168.0.140, for example, the three lines would read:',
+  {c:'TCP Address:192.168.0.140\nTCP Port:10779\nCommsMode=SOCKET'},
+  {n:'From CTC v2.11, TCP Address and TCP Port are set under Test Plan, Properties, Misc. The .con file is overwritten with CTC’s settings when a script is run.'},
+  {d:[['mp65ip.jpg (the MPManager Information window)','89 KB']]}]},
+
+{s:'ticket',t:'Raising a ticket, and what to include',tp:'support',new:1,pop:1,b:[
+  'Email support@iccsolutions.com or use the request form. For VIABLE, email viable@iccsolutions.com or use the VIABLE helpdesk.',
+  'A ticket is answered faster when it has:',
+  {u:['Your Customer ID.','The tool and suite you are using, and its version. Help, then About, shows the version number.','What you did and what happened, with the exact wording of any error.','For a failed test, the log. See [[send-a-log|sending a log from TMat]].','Any codes (lock codes, moving codes) as text, not as screenshots.']},
+  {x:['Raise a ticket','#new']}]},
+{s:'remote-support',t:'Remote support sessions',tp:'support',new:1,b:[
+  'A Technical Support engineer can connect to your PC to help with a query. The remote support portal works through a firewall without a VPN, all traffic is encrypted, and calls are logged and recorded for an audit trail.',
+  {x:['Open the remote support portal','https://iccsolutions.beyondtrustcloud.com/']}]},
+{s:'renew',t:'Renewing support and maintenance',tp:'support',new:1,b:[
+  ['The Admin team sends you a quote.','Once payment or a purchase order has been received, your support is renewed.','The Admin team emails you a certificate.'],
+  'To start, email admin@iccsolutions.com.',
+  {x:['Annual maintenance, on the ICC Solutions website',WEB+'/annual-maintenance']}]},
+{s:'contact',t:'Contact details',tp:'support',u:'2026-03',id:'360020694740',b:[
+  {kv:[['Technical support','support@iccsolutions.com'],['VIABLE support','viable@iccsolutions.com'],['Telephone','+44 1925 629001 (option 2 for the Helpdesk)'],['Address','ICC Solutions Limited, The Causeway, Warrington, WA4 6PS, United Kingdom'],['Website','www.iccsolutions.com']]}]}
+];
+
+const HELP=[['globe','Helpdesk','helpdesk.iccsolutions.com','#home','Search the articles, or [[#new|raise a ticket]].'],
+  ['mail','Email','support@iccsolutions.com','mailto:support@iccsolutions.com','A member of the Helpdesk team will reply as soon as possible.'],
+  ['phone','Phone','+44 1925 629001',TEL,'Choose option 2 for the Helpdesk.'],
+  ['screen','Remote help','iccsolutions.beyondtrustcloud.com',REMOTE,'A support engineer can connect to your PC to help.']];
+const GUIDES=[
+{s:'getting-started',t:'Getting started with ICCSimTMat',k:'Getting started',d:'Your logins, your PC and card reader, online and offline licences, and what to do when something goes wrong.',
+ pdf:G+'ICCSimTMat-Getting-Started-Guide.pdf',kb:594,pages:13,u:'2026-11',cover:G+'cover-getting-started.jpg',tp:'start',
+ next:['Next: using the tool','The ICCSimTMat user guide','#a-user-guide'],sec:[
+ {t:'What you get',l:'When you buy ICCSimTMat, ICC Solutions sets you up with a MyICC account for your downloads, and Online Licence accounts for the people who run tests.',b:[
+  {h:'Sent to you by email'},
+  {u:['**Your MyICC account.** The ICC Solutions Admin team emails you how to sign in to MyICC at [['+MYICC+'|my.iccsolutions.com]]. That’s where you download ICCSimTMat, its updates and the user guides.',
+   '**Online Licence invitations.** Each person who runs tests gets an email with a link to create the username and password they use to log in to ICCSimTMat ([['+GS+'-3|section 3]]).']},
+  {h:'Sent to you in the post, if you’ve ordered them'},
+  {u:['**ICC test cards**, in a pack for each brand suite. For each test, the **Card Requirements** column in ICCSimTMat shows which card to use.',
+   '**A dual interface card reader**: an HID OMNIKEY reader that connects to your PC by USB. It reads a card placed on top of it (contactless) or inserted into it (contact). See [['+GS+'-6|section 6]].']},
+  {box:{t:'No USB licence key',k:'new',b:[
+   'Current versions of ICCSimTMat use online licensing: each person logs in with their own Online Licence account, so there’s no USB licence key or config file to install.',
+   '**Used ICCSimTMat with a USB key before?** Newer versions ask you to log in instead of looking for the key. See [[usb-key|USB licence keys]].']}},
+  {h:'How a test runs'},
+  {flow:[['Card on the reader','ICCSimTMat loads the test’s script onto the card.'],['Card to the terminal','Run the transaction the test asks for on the terminal you’re testing.'],
+   ['Card back on the reader','ICCSimTMat reads the card’s log and analyses it.'],['Answer the questions','Answer what the log can’t show, such as what the terminal displayed.']]},
+  'The user guide for each suite is on your MyICC download page, with the Online Licensing guide. The main pages of the ICCSimTMat user guide are on this helpdesk too: see [[user-guide|the ICCSimTMat user guide]].']},
+ {t:'Your PC',l:'Check these before you install ICCSimTMat. Some of them may need your IT team.',b:[
+  {grid:[['Windows 10 or Windows 11','ICC’s tools run on Windows only. On a Mac, run Windows in Parallels or VMware. You’ll need a free USB port for the card reader.'],
+   ['.NET and WebView2','ICCSimTMat needs Microsoft .NET, and the Microsoft Edge WebView2 Runtime for its login. If a message asks you to install or update .NET, use the link in the message.'],
+   ['Internet access to online licensing','Your firewall must allow `toollauncherapi.azurewebsites.net`, which ICCSimTMat uses when you log in. It’s HTTPS. No internet on the testing PC? See [['+GS+'-5|section 5]].'],
+   ['The right date and time','Set the PC’s date, time and time zone correctly. Logging in fails if the clock is wrong.'],
+   ['Documents not synced or scanned','ICCSimTMat keeps its files and logs in `Documents\\ICC Solutions Limited\\ICCSimTMat`. If OneDrive syncs your Documents folder, or security software scans it, ask IT to exclude that folder.'],
+   ['The reader on the testing PC itself','Card readers don’t work over Remote Desktop, so plug the reader into the PC that runs ICCSimTMat.']],tick:1},
+  {h:'The recommended PC'},
+  {kv:[['Windows','Windows 10 or Windows 11'],['Processor','1.6 GHz or faster, 2 cores'],['Memory','4 GB (2 GB on 32-bit Windows)'],['Disk space','250 MB free']]},
+  {box:{t:'For your IT team',k:'info',b:[{grid:[['','Allow HTTPS access to `toollauncherapi.azurewebsites.net` for online licensing.'],
+   ['','Install Microsoft .NET and the Microsoft Edge WebView2 Runtime.'],
+   ['','Exclude `Documents\\ICC Solutions Limited` from OneDrive syncing and from security scanning, and allow the ICC Solutions tools in Windows Defender, Smart App Control and any application control policy.'],
+   ['','Keep the Windows Smart Card service running, and set the Group Policy Smart Card settings to Disabled ([['+GS+'-6|section 6]]).'],
+   ['','Let users install ICCSimTMat, but run it as a normal user: the login can fail with **Run as administrator**.']],tick:1,one:1}]}}]},
+ {t:'Your logins',l:'You use two accounts with ICC Solutions, each for its own job. Your company’s MyICC admin decides who has them.',b:[
+  {pair:[{t:'MyICC account',kv:[['Where','[['+MYICC+'|my.iccsolutions.com]]'],['For','Downloading ICCSimTMat, its updates and the user guides. Your MyICC admin also adds and removes users here.'],['Who','Your company’s MyICC login, or your own if your MyICC admin has given you access.']]},
+   {t:'Online Licence account',kv:[['Where','The ICCSimTMat login screen'],['For','Logging in to ICCSimTMat and using a licence.'],['Who','One for each person, created from an email invitation.']]}]},
+  {n:'**Testing for Fiserv?** Your T3Cert account is Fiserv’s, not ICC’s. If it’s locked, contact Fiserv.'},
+  {h:'Add or remove a user'},
+  'Your company’s licences are managed by your MyICC admin: the main account on your company’s MyICC, shown with a star on the Licensing page.',
+  ['Log in to MyICC at [['+MYICC+'|my.iccsolutions.com]] with your MyICC admin account.','Click **Licensing** on the right of the page.',
+   'To add a user, click **+**, enter their email address and click **Email**. They’ll get an email with a link to create their username and password.',
+   'To remove a user, click the delete icon next to their account. A deleted account can’t be recovered.'],
+  {u:['**One account per person.** Don’t share a login: a shared login can leave a licence held by someone else’s session, and a password reset changes it for everyone who uses it.',
+   '**Usernames can’t be changed.** To change one, your MyICC admin deletes the user and adds them again.',
+   '**Users who also download.** Your MyICC admin can give them access to the MyICC download page from Licensing, as an admin too if needed.',
+   '**No one has MyICC admin access?** [[#new|Raise a ticket]] and we’ll help you set it up.']},
+  {h:'Forgotten a password?'},
+  '[[#new|Raise a ticket]] and we’ll send you a link to reset it. The link begins `https://identities.iccsolutions.com/account`. See [[password|resetting your password]].']},
+ {t:'Install and update ICCSimTMat',l:'Download ICCSimTMat from MyICC and install it. A new version installs the same way, over the one you have.',b:[
+  {h:'Download and install'},
+  ['Log in to MyICC at [['+MYICC+'|my.iccsolutions.com]] and download the suite you’ve bought.',
+   'Extract the files from the zip you downloaded, then run the installer (.exe) and follow it through to the end. If the zip won’t open, download it again.',
+   'Open ICCSimTMat from its desktop shortcut and log in ([['+GS+'-5|section 5]]).'],
+  {box:{t:'Files missing after installing?',k:'info',b:['Security software can block or remove the tool’s files while it installs. Ask IT to allow the ICC Solutions tools, then install again.']}},
+  {h:'Updating to a new version'},
+  {u:['**Run the new installer.** It upgrades the version you have, so you don’t need to uninstall first. Uninstall only if the upgrade fails.',
+   '**Check you have the latest version** before you raise a ticket: many problems are fixed in a later one. **Help › About** shows the version you have.',
+   '**Need an older version?** [[#new|Raise a ticket]] and we’ll add it to your MyICC page.',
+   '**Downloads marked as expired** on MyICC are older versions that are no longer supported, or part of a rental that has ended.']}]},
+ {t:'Log in and use your licence',l:'Each person logs in with their own Online Licence account. A licence is in use for as long as ICCSimTMat is open.',b:[
+  ['Open ICCSimTMat from its desktop shortcut. Open it normally: don’t choose **Run as administrator**, because the login can fail that way.',
+   'Log in with your **Online Licence** username and password, and choose a licence. ICCSimTMat opens.',
+   'Choose the contactless reader: in the **Tools** menu, open **Manual Testing › Select Mandatory Reader**, highlight the **CL** (contactless) reader and click **Select**. Do this each time you open ICCSimTMat.',
+   'When you’ve finished, close ICCSimTMat so the licence is free for someone else.'],
+  {pool:{l:'Your company’s licences',s:['In use','In use','Free'],t:'A licence is in use while someone has ICCSimTMat open. When they’re all in use, the next person sees “No available license” until someone closes ICCSimTMat.'}},
+  {h:'“No available license”'},
+  'All your licences are in use, or one is still held by a session that didn’t close properly: after a crash, a lost network connection, or ICCSimTMat being ended in Task Manager.',
+  ['Close ICCSimTMat on any other PC where it’s open.','If that doesn’t free a licence, [[#new|raise a ticket]] with your Online Licence username, and we’ll release the licence.',
+   'Open ICCSimTMat again. It can take a minute for the licence to show as free.'],
+  {h:'Testing without internet'},
+  'If the testing PC can’t connect to the internet, for example in a lab on a closed network, ICCSimTMat can use an offline licence instead.',
+  {flow:[['The offline PC','ICCSimTMat shows a unique user ID'],['The Helpdesk','sends you an offline licence file (.SOR)'],['The offline PC','import the .SOR file into ICCSimTMat']]},
+  ['[[#new|Raise a ticket]] asking for an offline licence, and say which suites it’s for: each suite needs its own.',
+   'Install ICCSimTMat on the PC and open it. On the **Request Offline Access** screen it shows a **unique user ID**. Send the ID to the Helpdesk.',
+   'We’ll send you an offline licence file (.SOR). Copy it to the PC, open ICCSimTMat, browse for the file and import it.'],
+  {box:{t:'Keep that PC offline',k:'dark',b:['If the PC connects to the internet, it loses the offline licence and you’ll need to import the .SOR file again. Changing the PC’s date or time can also stop the licence working: if it does, ask us for a new one.']}}]},
+ {t:'Your card reader',l:'Plug the reader into the testing PC, check that Windows can see it, and stop Windows from interfering with the test cards.',b:[
+  ['Plug the reader into a free USB port on the PC that runs ICCSimTMat. If the PC is online, Windows installs the driver automatically.',
+   'Open **Device Manager** and look under **Smart card readers**. You should see the HID OMNIKEY reader listed twice: once for contact and once for contactless.',
+   'If you see a standard Microsoft reader instead, install the HID OMNIKEY driver from Windows Update, the HID website or the [[reader-drivers|card reader driver page]], then check again.',
+   'In ICCSimTMat, choose the contactless reader in **Tools › Manual Testing › Select Mandatory Reader** ([['+GS+'-5|section 5]]). Load scripts and read logs with the card **on top of** the reader, even for contact tests. Insert the card only into the terminal.'],
+  {box:{t:'Stop Windows interfering with the test cards',k:'dark',b:[
+   'When you put a card on the reader, Windows can try to install a driver for the card itself. This can stop tests running and can overwrite the log on the card. To turn it off (you may need your IT team):',
+   ['Press **Start**, type `gpedit.msc` and press **Enter**.','Go to **Computer Configuration › Administrative Templates › Windows Components › Smart Card**.','Set **every** setting in that folder to **Disabled**. Not Configured isn’t enough.','Restart the PC.']]}},
+  {h:'Looking after the cards'},
+  {u:['Keep the card flat and still on the reader until ICCSimTMat has finished with it.',
+   'A card that stops working, or won’t take a script, may need replacing: see [[broken-card|my card is broken]] and [[card-life|how long the cards last]].',
+   'To order more cards, see [[order-cards|ordering new or replacement cards]].']}]},
+ {t:'Moving to a new PC',l:'What you do depends on how your tool is licensed.',b:[
+  {tbl:{head:['Your tool uses','To move it to a new PC'],rows:[
+   ['Online licensing: current versions of ICCSimTMat','Nothing to move. Install ICCSimTMat on the new PC and log in with your Online Licence account.'],
+   ['An offline licence','Install ICCSimTMat on the new PC and ask us for an offline licence for its unique user ID ([['+GS+'-5|section 5]]).'],
+   ['A licence activated with a lock code: ICCSimDEV, ICCSimCTC and some older suites','Release the licence from the old PC first, with **Help › Move License to New PC**, then activate the tool on the new PC. See [[move-licence|moving a licence to another PC]].'],
+   ['A USB licence key: older versions','Plug the key into the new PC, with the config file that goes with it. Newer versions use online licensing instead: see [[usb-key|USB licence keys]].']]}},
+  'Can’t get to the old PC? See [[no-old-pc|I can’t get to the PC the licence is on]].',
+  {n:'Send any codes as text, not as a screenshot, so that they arrive accurately.'}]},
+ {t:'When something goes wrong',l:'The messages we see most often and what to do about them, then what to send us if you still need help.',b:[
+  {h:'Logging in and licences'},
+  {tbl:{head:['What you see','What to do'],rows:[
+   ['“No available license”','All your licences are in use, or one is still held after a crash. Close ICCSimTMat on the other PCs. If that doesn’t free one, [[#new|raise a ticket]] and we’ll release it ([['+GS+'-5|section 5]]).'],
+   ['“Identity Server Unavailable”, or the login won’t load','Your network is probably blocking online licensing. Ask IT to allow `toollauncherapi.azurewebsites.net`, then restart ICCSimTMat. If it was working before, there may be a problem at our end: [[#new|raise a ticket]].'],
+   ['“Config File Missing” when ICCSimTMat starts','Install the Microsoft Edge WebView2 Runtime, and check that `toollauncherapi.azurewebsites.net` isn’t blocked.'],
+   ['The login screen keeps coming back, or won’t go any further','Close ICCSimTMat and delete the folder `C:\\Users\\<your Windows username>\\AppData\\Local\\ICC_Solutions_Limited\\webview2`. Then open ICCSimTMat and log in again.'],
+   ['The login fails although the username and password are right','Open ICCSimTMat normally, not with Run as administrator, and check the PC’s date, time and time zone.'],
+   ['“OnlineLicensing: Release Licenses Bad Status Code - Unauthorized”','In Windows, open **Settings › Time & language › Language & region** and change **Regional format** to **United Kingdom**. Then try again.'],
+   ['ICCSimTMat asks for a USB key or a config file','That’s an older version: install the latest from MyICC and log in with your Online Licence account. If the latest version asks, a file may be missing from your `Documents\\ICC Solutions Limited\\ICCSimTMat` folder, for example when the tool was installed under another Windows account: [[#new|raise a ticket]].']]}},
+  {h:'Installing and opening ICCSimTMat'},
+  {tbl:{head:['What you see','What to do'],rows:[
+   ['“An Application Control policy has blocked this file”','Windows security is blocking the tool. Check Windows Defender and Smart App Control, and ask IT to allow the ICC Solutions tools.'],
+   ['“You must install or update .NET to run this application”','Install .NET from the link in the message, then open ICCSimTMat again.'],
+   ['“An unhandled exception has occurred in a component”','Set the Windows display scale to 100%, in **Settings › System › Display**, and try again.'],
+   ['Files are missing after installing','Security software may have removed them. Ask IT to allow the ICC Solutions tools, then install again.'],
+   ['The MyICC page won’t finish loading','Try another browser, or a private (incognito) window. If it still won’t load, check with your IT team.']]}},
+  {h:'The reader and the cards'},
+  {tbl:{head:['What you see','What to do'],rows:[
+   ['The reader isn’t found','Check that the Windows Smart Card service is running and isn’t turned off by a company policy, that security software isn’t blocking the reader, and that you’re not using Remote Desktop. Wait until ICCSimTMat has fully loaded before you use its menus.'],
+   ['“No PC/SC smart card devices attached”','Check the reader’s driver ([['+GS+'-6|section 6]]), then choose the reader in **Tools › Manual Testing › Select Mandatory Reader**. See [[no-pcsc|no PC/SC smart card devices attached]].'],
+   ['Errors loading a script onto the card, or reading its log','Choose the contactless (CL) reader in Select Mandatory Reader, and keep the card on top of the reader. If it still fails, something else may be using the card, such as Windows Hello for Business.'],
+   ['“Failed to power on smartcard” errors','Keep the card flat and still on the reader until ICCSimTMat has finished with it, and update the HID OMNIKEY driver through Windows Update. If it keeps happening, the card may need replacing: [[#new|raise a ticket]].']]}},
+  {h:'What to send us'},
+  'A ticket is answered faster when it has everything we need the first time:',
+  {grid:[['','Your Customer ID.'],['','The suite you’re using and its version, from **Help › About**.'],['','What you did and what happened, with a screenshot of the message.'],
+   ['','For a failed test, its log: choose **Mail to Support** on the **Analysis** tab, or attach the log from `Documents\\ICC Solutions Limited\\ICCSimTMat\\termlogs`.'],
+   ['','For a tool error, `CardLogFile.txt` and `TMatCardLogFile.txt` from `Documents\\ICC Solutions Limited\\ICCSimTMat\\SystemLogs`.'],
+   ['','Any codes as text, not as screenshots.']],tick:1,one:1},
+  'Raise each new problem as a new ticket or email. A reply to an old ticket is added to that ticket, even with a new subject.',
+  {cards:HELP},
+  {box:{t:'Quick reference',k:'dark',b:[{kv:[['Download ICCSimTMat, manage users','[['+MYICC+'|my.iccsolutions.com]]'],['Log in to ICCSimTMat','Your Online Licence account'],
+   ['Allow through your firewall','`toollauncherapi.azurewebsites.net` (HTTPS)'],['Choose the reader','Tools › Manual Testing › Select Mandatory Reader: CL'],
+   ['Your files and logs','`Documents\\ICC Solutions Limited\\ICCSimTMat`'],['No internet on the testing PC','Ask us for an offline licence ([['+GS+'-5|section 5]])']]}]}}]}]}];
+
+
+const BY={},TOPIC={};ARTICLES.forEach(a=>BY[a.s]=a);TOPICS.forEach(t=>TOPIC[t[0]]=t);
+const inTopic=t=>ARTICLES.filter(a=>a.tp===t||a.also===t);
+const X=u=>/^(https?:|mailto:)/.test(u)?`href="${u}" target="_blank" rel="noopener"`:`href="${u}"`,LNK=u=>u[0]==='#'?`href="${u}"`:X(u);
+const I={arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',ext:'<path d="M7 17 17 7M9 7h8v8"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',down:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',screen:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+  book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h7"/>'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const OKI=`<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#3CCB98"/><path d="M5.6 10.2l3 3 5.8-6.4" fill="none" stroke="#0E2A52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const when=u=>MONTHS[+u.slice(5)-1]+' '+u.slice(0,4);
+const hrefOf=t=>t[0]==='#'?`href="${t}"`:/^(https?:|mailto:|tel:)/.test(t)?X(t):`href="#a-${t}"`;
+const tx=s=>esc(s).replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g,(m,g,w)=>`<a ${hrefOf(g)}>${w}</a>`).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/`([^`]+)`/g,'<code>$1</code>');
+const plain=s=>s.replace(/\[\[[^|\]]+\|([^\]]+)\]\]/g,'$1').replace(/\*\*|`/g,'');
+const bw=bs=>bs.map(x=>typeof x==='string'?x:Array.isArray(x)?bw(x):x.u?bw(x.u):x.ol?bw(x.ol):x.kv?x.kv.flat().join(' '):x.h||x.n||x.c||''
+  ||(x.tbl?[...x.tbl.head,...x.tbl.rows.flat()].join(' '):x.grid?x.grid.flat().join(' '):x.flow?x.flow.flat().join(' '):x.pair?x.pair.map(p=>p.t+' '+p.kv.flat().join(' ')).join(' ')
+  :x.box?x.box.t+' '+bw(x.box.b):x.ss?x.ss.map(s=>bw([].concat(s.t))).join(' '):x.media?bw(x.media.b):x.pics?x.pics.map(p=>p.t+' '+p.d).join(' '):x.pool?x.pool.t:x.cards?x.cards.map(r=>r.slice(1).join(' ')).join(' '):'')).map(plain).join(' ');
+const words=a=>bw(a.b);
+const first=a=>{const p=a.b.find(x=>typeof x==='string')||(a.b.find(Array.isArray)||[''])[0]||'';const t=plain(p);return t.length>150?t.slice(0,t.lastIndexOf(' ',148))+'…':t};
+
+const SLASH='<span aria-hidden="true">/</span>';
+const pageHead=(crumbs,h1,lead,extra='')=>`
+<section class="phero dark plain" aria-labelledby="pg-h"><div class="wrap phero-in"><div class="phero-copy">
+  <nav class="crumb" aria-label="Breadcrumb">${[['Helpdesk','#home'],...crumbs].map(c=>Array.isArray(c)?`<a href="${c[1]}">${c[0]}</a>`:`<span>${c}</span>`).join(SLASH)}</nav>
+  <h1 id="pg-h">${h1}</h1>${lead?`<p class="lead">${lead}</p>`:''}${extra}
+</div></div></section>`;
+const row=(a,tag)=>`<li><a class="nrow" href="#a-${a.s}"><span class="nt">${tag?`<span class="tag">${TOPIC[a.tp][1]}</span>`:''}<b>${esc(a.t)}</b><span>${esc(first(a))}</span></span><span class="go">${ic('arrow')}</span></a></li>`;
+const TEAMS=[['Helpdesk','Help with the tools and cards you have bought','Option 2','support@iccsolutions.com'],['VIABLE support','Help with the Worldpay VIABLE test kit','','viable@iccsolutions.com'],['Admin team','Orders, payments, delivery and annual maintenance','Option 3','admin@iccsolutions.com'],['Sales team','New tools, cards and quotes','Option 1','sales@iccsolutions.com']];
+const contact=()=>`
+<section class="panel grad dark" aria-labelledby="c-h"><div class="wrap sec cgrid">
+  <div><h2 class="h2" id="c-h">Talk to the Helpdesk</h2>
+    <p class="lead">Call <a class="ul" href="tel:+441925629001">+44 1925 629001</a> and choose the team you need, or email them directly.</p>
+    <div class="actions"><a class="btn cy" href="#new">Raise a ticket</a><a class="btn gh" href="#a-remote-support">Remote support</a></div></div>
+  <ul class="teams">${TEAMS.map(([t,d,o,e])=>`<li><div><h3>${t}</h3><p>${d}</p></div><div class="tc">${o?`<span>${o}</span>`:''}<a class="ul" href="mailto:${e}">${e}</a></div></li>`).join('')}</ul>
+</div></section>`;
+const INCLUDE=['Your Customer ID','The tool and suite, and its version (Help, then About)','What you did and what happened, with the exact wording of any error','For a failed test, the log from the Analysis tab','Any codes as text, not as screenshots'];
+
+const GBY={};GUIDES.forEach(g=>GBY[g.s]=g);
+const gid=(g,n)=>`#g-${g.s}${n?'-'+n:''}`;
+const pdfOn=g=>g.kb>0&&!HELD.includes(g.pdf);
+const size=kb=>kb<1000?kb+' KB':(kb/1024).toFixed(1)+' MB';
+const pdfBtn=(g,cls)=>pdfOn(g)?`<a class="${cls}" href="${g.pdf}" target="_blank" rel="noopener">${ic('down')}PDF, ${g.pages} pages, ${size(g.kb)}</a>`:'';
+const pic=(p,link=1)=>{const img=`<img src="${G}${p.f}" alt="${esc(p.a)}" width="${Math.round(p.w/2)}" height="${Math.round(p.h/2)}" loading="lazy" decoding="async">`;
+  return `<figure class="gfig">${link?`<a href="${G}${p.f}" target="_blank" rel="noopener" title="Open the picture full size">${img}</a>`:img}${p.c?`<figcaption>${tx(p.c)}</figcaption>`:''}</figure>`};
+const steps=(xs,from=1)=>`<ol class="osteps"${from>1?` style="counter-reset:o ${from-1}"`:''}>${xs.map(i=>`<li><span>${tx(i)}</span></li>`).join('')}</ol>`;
+const GB=x=>typeof x==='string'?`<p>${tx(x)}</p>`:Array.isArray(x)?steps(x)
+  :x.h?`<h3>${esc(x.h)}</h3>`
+  :x.ol?steps(x.ol,x.from)
+  :x.tbl?`<table class="gtbl"><thead><tr>${x.tbl.head.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${x.tbl.rows.map(([k,...v])=>`<tr><th scope="row">${tx(k)}</th>${v.map(c=>`<td>${tx(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+  :x.grid?`<ul class="ggrid${x.tick?' tick':''}${x.one?' one':''}">${x.grid.map(([t,d])=>`<li>${x.tick?OKI:''}<div>${t?`<b>${esc(t)}</b>`:''}<p>${tx(d)}</p></div></li>`).join('')}</ul>`
+  :x.flow?`<ol class="gflow${x.stages?' big':''}" style="--n:${x.flow.length}">${x.flow.map(([t,...ps])=>`<li><b>${tx(t)}</b>${ps.map(p=>`<p>${tx(p)}</p>`).join('')}</li>`).join('')}</ol>`
+  :x.pair?`<div class="gpair">${x.pair.map(p=>`<div><h4>${esc(p.t)}</h4><table class="kv"><tbody>${p.kv.map(([k,v])=>`<tr><th scope="row">${esc(k)}</th><td>${tx(v)}</td></tr>`).join('')}</tbody></table></div>`).join('')}</div>`
+  :x.box?`<aside class="gbox ${x.box.k||'info'}${x.box.k==='dark'?' dark':''}"><h4>${x.box.k==='new'?'<span class="newtag">New</span>':''}${esc(x.box.t)}</h4>${x.box.b.map(GB).join('')}</aside>`
+  :x.ss?`<ol class="gss"${x.from>1?` style="counter-reset:o ${x.from-1}"`:''}>${x.ss.map(s=>`<li${s.wide?' class="wide"':''}><div class="gss-t">${[].concat(s.t).map(GB).join('')}</div><div class="gss-i">${[].concat(s.i).map(p=>pic(p)).join('')}</div></li>`).join('')}</ol>`
+  :x.media?`<div class="gmedia"><div class="gmedia-t">${x.media.b.map(GB).join('')}</div>${pic(x.media.i)}</div>`
+  :x.pics?`<ul class="gpics">${x.pics.map(p=>`<li><div class="gpics-i">${pic(p.i,0)}</div><h4>${esc(p.t)}</h4><p>${tx(p.d)}</p></li>`).join('')}</ul>`
+  :x.pool?`<div class="gpool"><div class="gpool-r"><span class="gpool-l">${esc(x.pool.l)}</span>${x.pool.s.map(s=>`<span class="chip${/free/i.test(s)?' free':''}">${esc(s)}</span>`).join('')}</div><p>${tx(x.pool.t)}</p></div>`
+  :x.cards?`<ul class="gcontact">${x.cards.map(([i,t,w,u,d])=>`<li>${ic(i)}<div><h4>${t}</h4><a ${LNK(u)}>${w}</a><p>${tx(d)}</p></div></li>`).join('')}</ul>`
+  :BODY(x);
+const TOPIC_GUIDE={start:['getting-started',[1,2,3,4,6]],licence:['getting-started',[3,5,7]],cards:['getting-started',[6]],support:['getting-started',[8]]};
+const chips=(g,ns)=>`<ol class="gchips">${ns.map(n=>`<li><a href="${gid(g,n)}"><span>${n}</span>${esc(g.sec[n-1].t)}</a></li>`).join('')}</ol>`;
+const guidePanel=s=>{const tg=TOPIC_GUIDE[s];if(!tg)return '';const g=GBY[tg[0]];
+  return `<div class="gpanel"><div class="gpanel-h">${ic('book')}<div><span>From the guide</span><h2><a href="${gid(g)}">${esc(g.t)}</a></h2></div></div>${chips(g,tg[1])}</div>`};
+const guideCard=g=>`<li class="gcard"><a class="gcover" href="${gid(g)}" tabindex="-1" aria-hidden="true"><img src="${g.cover}" alt="" width="240" height="340" loading="lazy" decoding="async"></a>
+  <div class="gcard-t"><h3><a href="${gid(g)}">${esc(g.t)}</a></h3><p>${esc(g.d)}</p><p class="gmeta">${g.sec.length} sections · Updated ${when(g.u)}</p>
+  <div class="actions"><a class="btn sm" href="${gid(g)}">Read the guide</a>${pdfBtn(g,'btn sm gh')}</div></div>
+  ${GUIDES.length===1?`<nav class="gcard-c" aria-label="Sections of the guide">${chips(g,g.sec.map((x,i)=>i+1))}</nav>`:''}</li>`;
+const guideView=s=>{const g=GBY[s],toc=cls=>`<nav class="gtoc ${cls}" aria-label="In this guide"><h2>In this guide</h2><ol>${g.sec.map((x,i)=>`<li><a class="sl" data-n="${i+1}" href="${gid(g,i+1)}"><span>${i+1}</span>${esc(x.t)}</a></li>`).join('')}</ol></nav>`;
+  const other=GUIDES.find(o=>o!==g),nx=g.next||(other&&[g.after===other.s?'Read this first':'Next guide',other.t,gid(other)]);
+  return pageHead(['Guides'],esc(g.t),esc(g.d),`<p class="meta">${g.sec.length} sections · Updated ${when(g.u)}</p>${pdfOn(g)?`<div class="actions">${pdfBtn(g,'btn cy')}</div>`:''}`)+`
+<div class="sheet"><section class="sec"><div class="wrap art gart">
+  <article class="prose gdoc">${toc('gtoc-m')}
+    ${g.sec.map((x,i)=>`<section class="gsec" id="gs-${i+1}" aria-labelledby="gs-${i+1}-h"><h2 id="gs-${i+1}-h"><span class="gn">${i+1}</span>${tx(x.t)}</h2>${x.l?`<p class="glead">${tx(x.l)}</p>`:''}${x.b.map(GB).join('')}</section>`).join('')}
+    ${nx?`<a class="gnext" href="${nx[2]}"><span>${nx[0]}</span><b>${esc(nx[1])}</b>${ic('arrow')}</a>`:''}
+  </article>
+  <aside class="side">
+    <div class="box gtoc-box">${toc('gtoc-s')}${pdfOn(g)?`<p>The whole guide as a PDF, to print or keep offline.</p>${pdfBtn(g,'btn sm gh')}`:''}</div>
+    <div class="box"><h2>Still stuck?</h2><p>Send us the details and, for a failed test, the log.</p><a class="btn sm" href="#new">Raise a ticket</a><a class="sl" href="#a-send-a-log">How to send a log</a></div>
+  </aside>
+</div></section>${contact()}</div>`};
+
+const POP=ARTICLES.filter(a=>a.pop);
+const home=()=>`
+<section class="phero dark plain hd-hero" aria-labelledby="pg-h"><div class="wrap phero-in"><div class="phero-copy">
+  <h1 id="pg-h">How can we help?</h1>
+  <form class="hsearch" id="sf" role="search"><label class="vh" for="q">Search the helpdesk</label>${ic('search')}<input id="q" type="search" placeholder="Search for an error, a menu or a task" autocomplete="off" spellcheck="false"><button class="btn cy" type="submit">Search</button></form>
+  <p class="pops"><span>Often needed</span>${POP.map(a=>`<a href="#a-${a.s}">${esc(a.t)}</a>`).join('')}</p>
+</div></div></section>
+<div class="sheet">
+  <section class="sec" id="results" hidden><div class="wrap"><div class="sec-head"><h2 id="r-h" tabindex="-1">Search results</h2><p id="r-n" aria-live="polite"></p></div><ul class="nlist" id="r-l"></ul><div class="actions" style="margin-top:28px"><button class="btn gh" type="button" id="r-x">Clear the search</button><a class="btn" href="#new">Raise a ticket</a></div></div></section>
+  <section class="sec" id="guides"><div class="wrap">
+    <div class="sec-head"><h2>Start with the guide</h2><p>A step-by-step guide to setting up ICCSimTMat: your logins, your PC and card reader, your licence, and what to do when something goes wrong. Read it here${GUIDES.some(pdfOn)?', or download it to print or keep offline':''}.</p></div>
+    <ul class="gcards${GUIDES.length===1?' one':''}">${GUIDES.map(guideCard).join('')}</ul>
+  </div></section>
+  <section class="sec" id="topics"><div class="wrap">
+    <div class="sec-head"><h2>Browse by topic</h2><p>${ARTICLES.length} guides and fixes for ICC Solutions tools and cards.</p></div>
+    <ul class="dgrid c3 tgrid">${TOPICS.map(([s,n,d])=>{const as=inTopic(s);return `<li><h3><a href="#t-${s}">${n}</a></h3><p>${d}</p><div class="tl">${as.slice(0,4).map(a=>`<a href="#a-${a.s}">${esc(a.t)}</a>`).join('')}</div><a class="btn sm gh" href="#t-${s}">All ${as.length} articles</a></li>`}).join('')}
+      <li><h3><a href="#g-getting-started-8">Troubleshooting</a></h3><p>The messages we see most often, from logging in to the card reader, and what to do about them.</p><div class="tl"><a href="#g-getting-started-8">Logging in and licences</a><a href="#g-getting-started-8">Installing and opening the tool</a><a href="#g-getting-started-8">The reader and the cards</a><a href="#g-getting-started-5">Testing without internet</a></div><a class="btn sm gh" href="#g-getting-started-8">Open troubleshooting</a></li>
+      <li><h3>Other products</h3><p>VIABLE has its own helpdesk. Articles for ICCSimTMat for Fiserv and ICCSimDEV are shown once you sign in.</p><div class="actions"><a class="btn sm gh" ${X(VHD)}>VIABLE helpdesk</a><a class="btn sm gh" ${X(HD+'/signin')}>Sign in</a></div></li></ul>
+  </div></section>
+  <section class="sec"><div class="wrap two">
+    <div><h2 class="h2">Before you raise a ticket</h2><p class="lead">Five things that let us answer the first time, without writing back for more.</p><div class="actions"><a class="btn" href="#new">Raise a ticket</a><a class="btn gh" href="#a-send-a-log">How to send a log</a></div></div>
+    <ul class="ticks">${INCLUDE.map(x=>`<li>${OKI}${x}</li>`).join('')}</ul>
+  </div></section>
+  <section class="callout"><div class="wrap"><div class="world"><div><h3>Downloads, patches and config files</h3><p>Your software is on your MyICC page. Sign in with the details the Admin team gave you.</p></div><a class="btn" ${X('https://my.iccsolutions.com/')}>Open MyICC</a></div></div></section>
+  ${contact()}
+</div>`;
+const topic=s=>{const [,n,d]=TOPIC[s],as=inTopic(s);return pageHead([n],n,d)+`
+<div class="sheet"><section class="sec"><div class="wrap">${guidePanel(s)}<ul class="nlist alist">${as.map(a=>row(a)).join('')}</ul></div></section>${contact()}</div>`};
+const BODY=x=>typeof x==='string'?`<p>${tx(x)}</p>`:Array.isArray(x)?`<ol class="osteps">${x.map(i=>`<li><span>${tx(i)}</span></li>`).join('')}</ol>`
+  :x.u?`<ul class="dots">${x.u.map(i=>`<li>${tx(i)}</li>`).join('')}</ul>`
+  :x.h?`<h2>${esc(x.h)}</h2>`
+  :x.n?`<p class="callnote">${tx(x.n)}</p>`
+  :x.c?`<pre class="code">${esc(x.c)}</pre>`
+  :x.kv?`<table class="kv"><tbody>${x.kv.map(([k,v])=>`<tr><th scope="row">${esc(k)}</th><td>${tx(v)}</td></tr>`).join('')}</tbody></table>`
+  :x.f?`<p class="fig"><b>${esc(x.f)}</b>Shown in the current article. It will carry over once checked for card numbers.</p>`
+  :x.x?`<p><a class="btn sm" ${LNK(x.x[1])}>${esc(x.x[0])}</a></p>`:'';
+const article=s=>{const a=BY[s],[ts,tn]=TOPIC[a.tp],sib=inTopic(ts),src=a.id?`${HD}/articles/${a.id}`:'';
+  const files=a.b.filter(x=>x.d).flatMap(x=>x.d);
+  return pageHead([[tn,'#t-'+ts]],esc(a.t),'',a.u?`<p class="meta">Updated ${when(a.u)}</p>`:'')+`
+<div class="sheet"><section class="sec"><div class="wrap art">
+  <article class="prose">${a.b.filter(x=>!x.d).map(BODY).join('')}
+    ${files.length?`<h2>Downloads</h2><ul class="cases">${files.map(([f,z])=>`<li><a class="case" ${X(src)}><b>${esc(f)}</b><span>${z}, attached to the current article</span>${ic('down')}</a></li>`).join('')}</ul>`:''}
+    ${a.lock?`<div class="world" style="margin-top:8px"><div><h3>The PIN list is for signed-in customers</h3><p>Sign in to the helpdesk to see the PIN for each card.</p></div><a class="btn" ${X(HD+'/signin')}>Sign in</a></div>`:''}
+  </article>
+  <aside class="side">
+    <div class="box"><h2>Still stuck?</h2><p>Send us the details and, for a failed test, the log.</p><a class="btn sm" href="#new">Raise a ticket</a>${s==='send-a-log'?'':`<a class="sl" href="#a-send-a-log">How to send a log</a>`}</div>
+    <nav class="box" aria-label="${tn}"><h2>${tn}</h2><ul>${sib.map(x=>`<li><a class="sl" href="#a-${x.s}"${x.s===s?' aria-current="page"':''}>${esc(x.t)}</a></li>`).join('')}</ul></nav>
+  </aside>
+</div></section>${contact()}</div>`};
+const PRODUCTS=['ICCSimTMat','ICCSimTMat for Fiserv','ICCSimCTC','ICCSimDEV','Test cards','Something else'];
+const request=()=>pageHead(['Raise a ticket'],'Raise a ticket','Tell us what happened and we will reply by email. For VIABLE, use the VIABLE helpdesk instead.',`<div class="actions"><a class="btn gh" ${X(VHD)}>VIABLE helpdesk</a></div>`)+`
+<div class="sheet"><section class="sec"><div class="wrap two">
+  <div><h2 class="h2">What helps us help you</h2><ul class="ticks">${INCLUDE.map(x=>`<li>${OKI}${x}</li>`).join('')}</ul><p class="note">Reporting a failed test? TMat can raise the ticket for you with the log attached: <a class="lk" href="#a-send-a-log">Mail to Support, on the Analysis tab</a>.</p></div>
+  <form class="form" id="rq">
+    <div class="frow"><div><label for="r-e">Your email</label><input id="r-e" name="email" type="email" autocomplete="email" required></div><div><label for="r-c">Customer ID</label><input id="r-c" name="customer" type="text" required></div></div>
+    <div class="frow"><div><label for="r-p">Product</label><select id="r-p" name="product" required><option value="">Choose a product</option>${PRODUCTS.map(p=>`<option>${p}</option>`).join('')}</select></div><div><label for="r-v">Suite and version</label><input id="r-v" name="version" type="text" required></div></div>
+    <div><label for="r-s">Subject</label><input id="r-s" name="subject" type="text" required></div>
+    <div><label for="r-d">What happened</label><textarea id="r-d" name="detail" required></textarea></div>
+    <div><label for="r-f">Log or screenshot (optional)</label><input id="r-f" name="file" type="file"></div>
+    <div class="actions"><button class="btn" type="submit">Send to the Helpdesk</button></div>
+    <p class="fmsg" id="rq-msg" role="status" hidden></p>
+  </form>
+</div></section>${contact()}</div>`;
+
+const norm=s=>s.toLowerCase().replace(/licens/g,'licenc').replace(/([iy])z(e|a|i)/g,'$1s$2').replace(/labeled/g,'labelled').replace(/canceled/g,'cancelled');
+const SHORT=[['american express','amex axp'],['mastercard','mc'],['get processing options','gpo'],['generate ac','genac gac'],['client id','customer id cid'],['card reader','cardreader']];
+const more=s=>SHORT.filter(([l])=>s.includes(l)).map(([,k])=>k).join(' ');
+const SECS=GUIDES.flatMap(g=>g.sec.map((x,i)=>({g,n:i+1,x})));
+const ix=(it,t,all)=>[it,norm(t+' '+more(t)),norm(all+' '+more(all))];
+const INDEX=[...ARTICLES.map(a=>ix(a,a.t.toLowerCase(),(a.t+' '+TOPIC[a.tp][1]+' '+words(a)).toLowerCase())),
+  ...SECS.map(s=>ix(s,(plain(s.x.t)+' '+s.g.t).toLowerCase(),(plain(s.x.t)+' '+s.g.t+' '+(s.x.l||'')+' '+bw(s.x.b)).toLowerCase()))];
+const secRow=s=>`<li><a class="nrow" href="${gid(s.g,s.n)}"><span class="nt"><span class="tag">${esc(s.g.k)} guide</span><b>${esc(plain(s.x.t))}</b><span>Section ${s.n}${s.x.l?'. '+esc(plain(s.x.l)):''}</span></span><span class="go">${ic('arrow')}</span></a></li>`;
+function search(q){
+  const ws=norm(q).split(/\s+/).filter(Boolean),res=$('#results'),tops=$('#topics'),gds=$('#guides');if(!res)return;
+  if(!ws.length){res.hidden=true;tops.hidden=false;gds.hidden=false;return}
+  const ph=ws.join(' '),score=([,t,all])=>(ws.every(w=>t.includes(w))?2:0)+(ws.length>1&&all.includes(ph)?1:0);
+  const hits=INDEX.filter(([,,all])=>ws.every(w=>all.includes(w))).sort((x,y)=>score(y)-score(x)).map(h=>h[0]);
+  res.hidden=false;tops.hidden=true;gds.hidden=true;
+  $('#r-n').textContent=hits.length?`${hits.length} ${hits.length===1?'result matches':'results match'} “${q.trim()}”.`:`Nothing matches “${q.trim()}”. Try the exact wording of the error, or fewer words. If it is not here, raise a ticket.`;
+  $('#r-l').innerHTML=hits.map(h=>h.g?secRow(h):row(h,1)).join('');
+}
+
+const page=$('#page'),nav=$('#nav'),ind=$('.nav-ind',nav),links=$$('a',nav),hdr=$('#hdr');
+let act=null,spyIO=null;
+const spy=()=>{if(spyIO)spyIO.disconnect();const ls=$$('.gtoc a',page);if(!ls.length)return;
+  spyIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const n=e.target.id.slice(3);ls.forEach(a=>a.dataset.n===n?a.setAttribute('aria-current','location'):a.removeAttribute('aria-current'))}}),{rootMargin:'-18% 0px -72% 0px'});
+  $$('.gsec',page).forEach(s=>spyIO.observe(s))};
+const goSec=n=>{const h=$(`#gs-${n}-h`,page);if(!h){scrollTo(0,0);return}h.tabIndex=-1;h.scrollIntoView({block:'start'});h.focus({preventScroll:true})};
+const moveInd=a=>{if(!a){ind.style.opacity=0;return}ind.style.opacity=1;ind.style.width=a.offsetWidth+'px';ind.style.transform=`translateX(${a.offsetLeft}px)`};
+nav.addEventListener('pointerover',e=>{const a=e.target.closest('a');if(a)moveInd(a)});
+nav.addEventListener('pointerleave',()=>moveInd(act));
+function route(){
+  const h=location.hash.slice(1),kind=h.slice(0,2),slug=h.slice(2);let html,title,lit='',view='',sec=0;
+  const gm=kind==='g-'&&/^(.+?)(?:-(\d+))?$/.exec(slug),gg=gm&&GBY[gm[1]];
+  if(gg){sec=+gm[2]||0;if(sec>gg.sec.length)sec=0;if(page.dataset.v==='g-'+gg.s){goSec(sec);return}}
+  if(gg){html=guideView(gg.s);title=gg.t;lit=gg.tp;view='g-'+gg.s}
+  else if(kind==='t-'&&TOPIC[slug]){html=topic(slug);title=TOPIC[slug][1];lit=slug}
+  else if(kind==='a-'&&BY[slug]){html=article(slug);title=BY[slug].t;lit=BY[slug].tp}
+  else if(h==='new'){html=request();title='Raise a ticket'}
+  else{html=home();title=''}
+  page.innerHTML=html;page.dataset.v=view;D.title=(title?title+' | ':'')+'ICC Solutions Helpdesk';scrollTo(0,0);spy();
+  act=links.find(a=>a.getAttribute('href')==='#t-'+lit)||null;links.forEach(a=>a.classList.toggle('on',a===act));moveInd(act);
+  const q=$('#q');
+  if(q){q.addEventListener('input',()=>search(q.value));$('#sf').addEventListener('submit',e=>{e.preventDefault();search(q.value);if(q.value.trim())$('#r-h').focus()});$('#r-x').addEventListener('click',()=>{q.value='';search('');q.focus()})}
+  const rq=$('#rq');
+  if(rq)rq.addEventListener('submit',e=>{e.preventDefault();const m=$('#rq-msg');m.hidden=false;m.innerHTML=`This is a design preview, so nothing has been sent. To reach the Helpdesk now, email <a href="mailto:support@iccsolutions.com">support@iccsolutions.com</a> or use the <a ${X(HD+'/requests/new')}>current request form</a>.`});
+  if(sec)goSec(sec);else if(h&&h!=='home'){const h1=$('h1',page);h1.tabIndex=-1;h1.focus({preventScroll:true})}
+}
+addEventListener('hashchange',route);
+
+$$('[data-site]').forEach(a=>{a.setAttribute('href',SITE);if(/^https?:/.test(SITE)){a.target='_blank';a.rel='noopener'}});
+const burger=$('#burger'),menu=$('#menu');
+const setMenu=o=>{R.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu');menu.inert=!o};
+setMenu(false);
+burger.addEventListener('click',()=>setMenu(!R.classList.contains('menu-open')));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+D.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;setMenu(false);
+  if(a.getAttribute('href')===location.hash&&location.hash.startsWith('#g-')){e.preventDefault();route();return}
+  if(a.classList.contains('skip')){e.preventDefault();const h1=$('h1',page);h1.tabIndex=-1;h1.focus();h1.scrollIntoView()}});
+addEventListener('scroll',()=>hdr.classList.toggle('stuck',scrollY>30),{passive:true});
+addEventListener('resize',()=>moveInd(act));
+const FOOT=[['Topics',TOPICS.map(([s,n])=>[n,'#t-'+s])],
+  ['Support',[['Getting started guide','#g-getting-started'],['Raise a ticket','#new'],['Sending a log','#a-send-a-log'],['Remote support','#a-remote-support'],['Renewing maintenance','#a-renew'],['Contact details','#a-contact']]],
+  ['ICC Solutions',[['Main website',SITE],['MyICC','https://my.iccsolutions.com/'],['VIABLE helpdesk',VHD],['TSE Online','https://tseonline.iccsolutions.com/'],['Privacy policy',WEB+'/privacy-policy']]]];
+$('#foot').innerHTML=`
+<div class="wrap foot-in c3">
+  <div><a class="brand" href="#home"><img src="media/logo-white.png" alt="ICC Solutions" width="355" height="230"></a><p class="foot-tag">Reliable testing. Conclusive results.</p></div>
+  ${FOOT.map(([h,ls])=>`<div><h3>${h}</h3><ul>${ls.map(([t,u])=>`<li><a ${LNK(u)}>${t}</a></li>`).join('')}</ul></div>`).join('')}
+</div>
+<div class="wrap foot-base"><span>© 2026 ICC Solutions Ltd</span><span>Design preview of helpdesk.iccsolutions.com</span></div>
+<svg class="giant" viewBox="0 0 1000 146" aria-hidden="true"><text x="2" y="122" textLength="996" lengthAdjust="spacingAndGlyphs">ICC Solutions</text></svg>`;
+route();
+})();
+</script>
+</body>
+</html>

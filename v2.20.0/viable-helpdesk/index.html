@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VIABLE Helpdesk (design preview)</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Help with the Worldpay VIABLE test kit: setting up, running tests, certification and how to reach VIABLE support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+:root{
+  --navy:#0E2A52; --aqua:#167F9E; --cyan:#62D5E8;
+  --grad:linear-gradient(125deg,var(--navy) 20%,var(--aqua));
+  --red:#C8323F; --pass:#3CCB98;
+  --viable:#EC2024; --viable-ink:#D0182A;
+  --paper:#F2F5F9; --sheet:#FFFFFF; --wash:#E4F2F7; --ink:var(--navy); --ink-2:#3A4967; --muted:#63718C; --line:#D9E1EB;
+  --on-dark-2:#C3D0E6; --on-dark-3:#93A5C5; --dark-line:rgba(195,208,230,.17);
+  --display:"Archivo","Arial Nova","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+
+  --t-hero:clamp(2.55rem,1rem + 5vw,5.5rem); --t-h2:clamp(1.9rem,1.15rem + 2.6vw,3.4rem);
+  --t-h3:clamp(1.18rem,1.06rem + .55vw,1.55rem); --t-lead:clamp(1.06rem,1rem + .36vw,1.26rem);
+  --gut:clamp(20px,4.2vw,64px); --max:1320px; --inset:clamp(8px,1.4vw,24px);
+  --r-sheet:clamp(22px,3vw,40px); --r-panel:clamp(16px,2.2vw,28px);
+  --ease:cubic-bezier(.2,.7,.1,1); --focus:var(--aqua);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--navy);color:var(--ink);font:400 1.02rem/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+@supports (overflow:clip){body{overflow-x:clip}}
+svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);font-stretch:112%;font-weight:640;letter-spacing:-.028em;line-height:1.03;margin:0;text-wrap:balance}
+p,ul,ol,dl,dd,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+p{text-wrap:pretty}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+.dark{--focus:#fff;color:#fff}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ic{width:20px;height:20px;flex:none}
+.wrap{width:min(100% - 2*var(--gut),var(--max));margin-inline:auto}
+.sec{padding-block:clamp(72px,9vw,136px)}
+.sec-head{display:grid;gap:18px;max-width:840px;margin-bottom:clamp(32px,4.6vw,60px)}
+.sec-head h2,.h2{font-size:var(--t-h2)}
+.sec-head p,.lead{font-size:var(--t-lead);line-height:1.5;color:var(--ink-2);max-width:60ch}
+.sec-head.row{max-width:none;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px}
+.sec-head.row>div:first-child{display:grid;gap:18px;max-width:840px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.tag{display:inline-block;justify-self:start;padding:5px 12px;border-radius:999px;font:600 .8rem/1.25 var(--body);background:var(--wash);color:var(--navy);white-space:nowrap}
+.tag.new{background:var(--red);color:#fff}
+
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--navy);color:#fff;font:600 1rem/1 var(--body);text-decoration:none;white-space:nowrap;cursor:pointer;transition:transform .5s var(--ease),color .3s}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--aqua);transform:translateY(102%);transition:transform .5s var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{transform:none}
+.btn.cy{background:var(--cyan);color:var(--navy)}.btn.cy::before{background:#fff}
+.btn.gh{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,currentColor 34%,transparent)}
+.btn.gh::before{background:color-mix(in srgb,currentColor 11%,transparent)}
+.btn.red{background:var(--red)}.btn.red::before{background:#A32430}
+.btn.sm{min-height:42px;padding:0 18px;font-size:.93rem}
+.btn .ic{width:16px;height:16px}
+.go{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink);transition:transform .5s var(--ease),background .3s,box-shadow .3s,color .3s}
+a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var(--navy);transform:rotate(-45deg)}
+
+.skip{position:fixed;left:16px;top:-80px;z-index:90;padding:10px 16px;border-radius:999px;background:#fff;color:var(--ink);font-weight:600}
+.skip:focus{top:14px}
+.hdr{position:fixed;inset:0 0 auto;z-index:50;padding:14px var(--gut) 0;pointer-events:none}
+.hdr-in{pointer-events:auto;display:flex;align-items:center;gap:18px;max-width:var(--max);height:64px;margin-inline:auto;padding:0 10px 0 20px;border-radius:999px;transition:background .45s,box-shadow .45s,max-width .7s var(--ease),height .45s var(--ease)}
+.hdr.stuck .hdr-in{max-width:1140px;height:58px;background:rgba(14,42,82,.8);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);box-shadow:0 14px 40px -14px rgba(3,10,26,.6),inset 0 0 0 1px rgba(255,255,255,.09)}
+.menu-open .hdr-in{background:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.brand{display:inline-flex;align-items:center;gap:10px;flex:none;text-decoration:none;font:700 1.16rem/1 var(--display);font-stretch:108%;letter-spacing:-.02em}
+.brand img{display:block;height:38px;width:auto;transition:height .45s var(--ease)}
+.hdr.stuck .brand img{height:33px}
+.nav{position:relative;display:flex;margin-inline:auto}
+.nav a{position:relative;z-index:1;display:inline-flex;align-items:center;height:38px;padding:0 15px;border-radius:999px;color:var(--on-dark-2);font-weight:500;font-size:.96rem;text-decoration:none;transition:color .3s}
+.nav a:hover,.nav a.on{color:#fff}
+.nav-ind{position:absolute;left:0;top:0;height:38px;width:0;border-radius:999px;background:rgba(255,255,255,.13);opacity:0;pointer-events:none;transition:transform .45s var(--ease),width .45s var(--ease),opacity .3s}
+.hdr-cta{display:flex;align-items:center;gap:8px;margin-left:auto}
+.burger{display:none;place-content:center;gap:5px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);cursor:pointer}
+.burger i{display:block;width:18px;height:2px;border-radius:2px;background:#fff;transition:transform .45s var(--ease)}
+.menu-open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:45;display:grid;align-content:center;padding:96px var(--gut) 40px;overflow:auto;background:var(--navy);visibility:hidden;clip-path:circle(0 at calc(100% - 52px) 46px);transition:clip-path .7s var(--ease),visibility 0s .7s}
+.menu-open .menu{visibility:visible;clip-path:circle(170% at calc(100% - 52px) 46px);transition:clip-path .9s var(--ease),visibility 0s}
+.menu a{display:block;padding:13px 0;border-bottom:1px solid var(--dark-line);font:640 clamp(1.7rem,7vw,2.7rem)/1.1 var(--display);font-stretch:112%;letter-spacing:-.03em;text-decoration:none;transform:translateY(26px);transition:transform .8s var(--ease)}
+.menu-open .menu a{transform:none}
+@media (max-width:1099px){.nav,.hdr-cta .gh{display:none}.burger{display:grid}}
+@media (max-width:479px){.hdr-cta .red{display:none}}
+
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--grad);padding-bottom:var(--r-sheet)}
+.hero-stage{position:relative;isolation:isolate}
+.hero-in{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;min-height:clamp(540px,76vh,780px);padding-block:clamp(104px,13vh,140px) clamp(44px,6vh,64px);transform:translate3d(0,calc(var(--p,0)*var(--hh,800px)*.22),0);opacity:calc(1 - var(--p,0)*1.4)}
+.hero-copy{position:relative;z-index:1;display:grid;justify-items:start;gap:clamp(20px,2.4vw,30px);max-width:min(40rem,46%)}
+.hero h1{font-size:var(--t-hero);font-weight:660;line-height:.94;letter-spacing:-.04em}
+.hero h1 span{display:block}
+.hero .lead{color:var(--on-dark-2);max-width:54ch}
+.pill30{display:inline-flex;align-items:center;gap:12px;padding:6px 18px 6px 6px;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.13);color:var(--on-dark-2);font-size:.93rem;line-height:1.3;text-decoration:none;transition:background .3s,color .3s}
+.pill30:hover{background:rgba(255,255,255,.13);color:#fff}
+.pill30 b{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--cyan);color:var(--navy);font:800 .88rem/1 var(--display)}
+@keyframes stagein{from{opacity:0}}
+
+.film{position:absolute;right:0;bottom:0;z-index:0;display:block;width:min(62%,1000px);max-width:none;height:auto;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 20%,#000 31%);mask-image:linear-gradient(90deg,transparent 20%,#000 31%);animation:stagein 1.1s ease .1s both}
+.film text{font-family:var(--body)}
+.ldm{display:none}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.film :is(.reel,.actB,.vB,.vC,.b2,.selN,.ck,.ps,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop,.clk){opacity:0}
+.film .runB{opacity:.4}
+.film .cone{opacity:.3}
+.type{animation:type .5s steps(2) infinite alternate}
+@keyframes type{to{transform:translateY(-3px)}}
+.brands-w{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.18)}
+.brands{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:28px;padding-block:20px;color:#fff;font-size:.93rem;line-height:1.35}
+.brands>p{max-width:23ch}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 52s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.marq-track span{display:flex;align-items:center;gap:clamp(28px,3.4vw,52px);padding-left:clamp(28px,3.4vw,52px);font:620 clamp(1.05rem,.9rem + .6vw,1.45rem)/1 var(--display);font-stretch:112%;letter-spacing:-.015em;color:#fff;white-space:nowrap}
+.marq-track span::after{content:"";width:7px;height:7px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--cyan)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.sheet{position:relative;z-index:2;margin-top:calc(var(--r-sheet)*-1);padding-bottom:var(--inset);border-radius:var(--r-sheet);background:var(--paper);box-shadow:0 -26px 60px rgba(2,8,22,.5)}
+.panel{position:relative;isolation:isolate;overflow:hidden;margin-inline:var(--inset);border-radius:var(--r-sheet);background:var(--sheet)}
+.panel+.panel{margin-top:var(--inset)}
+.panel.ink{background:var(--navy)}
+.panel.grad{background:var(--grad);--on-dark-2:#fff;--on-dark-3:#fff}
+[id^="home-"]{scroll-margin-top:84px}
+
+.filter{display:grid;gap:14px;margin-bottom:22px}
+.filter>p:first-child{font-weight:600}
+.roles{display:flex;flex-wrap:wrap;gap:8px}
+.role{height:44px;padding:0 18px;border:0;border-radius:999px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2);font-weight:500;font-size:.95rem;cursor:pointer;transition:background .3s,color .3s,box-shadow .3s}
+.role:hover{box-shadow:inset 0 0 0 1.5px var(--aqua);color:var(--ink)}
+.role[aria-pressed="true"]{background:var(--navy);box-shadow:none;color:#fff}
+.role-note{min-height:1.6em;color:var(--muted)}
+[hidden]{display:none!important}
+.phero{position:relative;isolation:isolate;overflow:hidden;background:var(--grad);padding-bottom:var(--r-sheet);--on-dark-2:#fff}
+.phero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:center;gap:clamp(28px,5vw,80px);padding-block:clamp(124px,16vh,172px) clamp(48px,7vh,84px)}
+.phero-copy{display:grid;justify-items:start;gap:clamp(16px,2vw,24px)}
+.phero h1{font-size:clamp(2.5rem,1.5rem + 4.2vw,5rem);font-weight:660;line-height:.98;letter-spacing:-.04em}
+.phero .lead{color:var(--on-dark-2);max-width:48ch}
+.crumb{display:flex;gap:10px;font-size:.95rem;color:var(--on-dark-2)}
+.crumb a{color:var(--cyan);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.phero-art{border-radius:var(--r-panel);overflow:hidden;box-shadow:0 30px 70px -30px rgba(2,8,22,.8),inset 0 0 0 1px rgba(255,255,255,.12)}
+.vrow{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);align-items:center;gap:clamp(28px,5vw,80px)}
+.vrow>div{display:grid;gap:16px}
+.vid{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:var(--r-panel);background:var(--navy);box-shadow:0 24px 60px -30px rgba(11,29,63,.6)}
+.fgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+.fgrid li{padding:26px 24px 28px;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.fgrid h3{font-size:var(--t-h3);margin-bottom:10px}
+.fgrid p{color:var(--ink-2);font-size:.98rem}
+.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start;gap:clamp(36px,6vw,104px)}
+.two>div{display:grid;justify-items:start;gap:22px}
+.btable{width:100%;border-collapse:collapse}
+.btable th,.btable td{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.14);text-align:left;font-weight:500}
+.btable th{font-size:.86rem;color:var(--on-dark-2)}
+.btable th:last-child,.btable td:last-child{text-align:right;color:var(--on-dark-2)}
+.vt,.nt b .vt{color:var(--viable-ink)}
+.nt b .vt{display:inline;margin:0;max-width:none}
+.dark .vt,.dark .nt b .vt{color:inherit}
+.vrule::before,#page[data-pg="viable-test-kit"] .phero h1::before,#page[data-pg="viable-test-kit"] .facts::before{content:"";display:block;width:36px;height:4px;border-radius:2px;background:var(--viable)}
+.vrule::before{margin-bottom:14px}
+.dgrid .vrule{position:relative}
+.dgrid .vrule::before{position:absolute;left:0;top:-13px;margin:0}
+#page[data-pg="viable-test-kit"] .phero h1::before{width:44px;height:5px;margin-bottom:clamp(14px,1.6vw,22px)}
+#page[data-pg="viable-test-kit"] .facts::before{margin:20px 0 4px}
+.reach{justify-self:end;width:min(100%,470px);padding:clamp(20px,2.4vw,30px) clamp(20px,2.6vw,34px) clamp(8px,1vw,14px);border-radius:var(--r-panel);background:rgba(14,42,82,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 30px 70px -34px rgba(2,8,22,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.reach h2{margin-bottom:clamp(12px,1.4vw,18px);font-size:var(--t-h3);letter-spacing:-.02em}
+.reach dl>div{display:grid;grid-template-columns:4.6rem minmax(0,1fr);align-items:baseline;gap:16px;padding:15px 0;border-top:1px solid rgba(255,255,255,.16)}
+.reach dt{font-size:.95rem}
+.reach dd{font-weight:600;overflow-wrap:anywhere}
+.reach a{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.5)}
+.reach a:hover{text-decoration-color:#fff}
+.ways>li{gap:16px;align-content:stretch;grid-template-rows:auto auto 1fr auto}
+.ticks.sm{gap:11px;align-content:start}
+.ticks.sm li{align-items:flex-start;gap:12px;font-size:.98rem;color:var(--ink)}
+.ticks.sm svg{width:18px;height:18px;margin-top:3px}
+.vpanel{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start;gap:clamp(22px,5vw,80px);margin-top:clamp(14px,1.6vw,24px);padding:clamp(22px,3vw,40px) clamp(22px,3vw,44px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.vpanel h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.2rem)}
+.vpanel p{margin-top:12px;max-width:36ch;color:var(--ink-2)}
+.vpanel .cases{margin-top:0}
+.two.even{grid-template-columns:repeat(2,minmax(0,1fr))}
+.two.even .ticks{margin-block:clamp(22px,2.6vw,32px)}
+.two.even .cases{margin-top:0}
+.actions.after{margin-top:clamp(24px,3vw,40px)}
+@media (max-width:959px){.reach{justify-self:stretch;width:100%}.vpanel,.two.even{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:599px){.fgrid.c4{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:419px){.reach dl>div{grid-template-columns:minmax(0,1fr);gap:3px;padding:12px 0}.reach dt{font-size:.88rem}}
+.bnote{margin-top:18px;max-width:46ch;color:var(--on-dark-2);font-size:.96rem;line-height:1.5}
+.ticks{display:grid;gap:14px;width:100%}
+.ticks li{display:flex;align-items:center;gap:14px;font-weight:500}
+.ticks svg{flex:none;width:20px;height:20px}
+@media (max-width:959px){.phero-in,.vrow,.two{grid-template-columns:minmax(0,1fr)}.fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+#page .sec{padding-block:clamp(52px,6.4vw,96px)}
+#page .sheet>.sec+.sec{padding-top:0}
+#page .sheet>.sec:first-child{padding-top:clamp(52px,6.4vw,96px)}
+#page .sec-head{margin-bottom:clamp(24px,3.4vw,44px)}
+.phero.plain .phero-in{grid-template-columns:minmax(0,1fr);padding-bottom:clamp(40px,6vh,72px)}
+.phero.plain h1{max-width:20ch}
+.phero.plain .lead{max-width:62ch}
+.phero h1:focus{outline:none}
+.body{color:var(--ink-2);max-width:64ch}
+.lk{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.facts{width:100%;padding:8px clamp(20px,2.4vw,32px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.facts div{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.facts div:last-child{border:0}
+.facts dt{color:var(--muted);font-size:.95rem}
+.facts dd{font-weight:600}
+.two>.cases,.two>.faqs,.two>.dgrid,.two>.form{align-self:start}
+.two .cases{width:100%;margin-top:6px}
+.fgrid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fgrid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fgrid.num{counter-reset:n}
+.fgrid.num li{counter-increment:n}
+.fgrid.num li::before{content:counter(n);display:grid;place-items:center;width:32px;height:32px;margin-bottom:18px;border-radius:50%;background:var(--navy);color:#fff;font:600 .9rem/1 var(--body)}
+.fgrid .big{font:660 clamp(2.2rem,1.5rem + 2.4vw,3.6rem)/1 var(--display);font-stretch:112%;letter-spacing:-.035em;color:var(--ink);margin-bottom:10px}
+.q{font:580 1.14rem/1.35 var(--display);font-stretch:106%;letter-spacing:-.016em}
+.dgrid{display:grid;gap:clamp(14px,1.6vw,24px);width:100%}
+.dgrid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dgrid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dgrid>li{display:grid;align-content:start;justify-items:start;gap:14px;padding:clamp(22px,2.6vw,34px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.dgrid h3{font-size:var(--t-h3)}
+.dgrid p{color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:7px 14px;border-radius:999px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);font-weight:500;font-size:.93rem}
+.dgrid .chips li{background:var(--paper)}
+.dark .chips li{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.bgroup{display:grid;gap:14px}
+.bgroup+.bgroup{margin-top:28px}
+.bgroup h3{font:600 .95rem/1.3 var(--body);font-stretch:100%;letter-spacing:0;color:var(--muted)}
+.dark .bgroup h3{color:var(--on-dark-2)}
+.ticks.c2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
+.callout{padding-bottom:clamp(14px,1.6vw,24px)}
+.callout .world{margin-top:0}
+.sec+.callout{margin-top:calc(clamp(52px,6.4vw,96px)*-.45)}
+.callout+.sec{padding-top:clamp(40px,5vw,72px)!important}
+.two>.faqs{display:block;justify-items:normal;width:100%;border-top:1px solid var(--line)}
+.faq{border-bottom:1px solid var(--line)}
+.faq summary{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:18px 0;cursor:pointer;list-style:none;font:620 1.1rem/1.35 var(--display);font-stretch:108%;letter-spacing:-.015em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font:400 1.5rem/1 var(--body);color:var(--muted)}
+.faq[open] summary::after{content:"\2212"}
+.faq div{display:grid;gap:10px;padding:0 0 22px;max-width:66ch;color:var(--ink-2)}
+.osteps{display:grid;gap:12px;counter-reset:o}
+.osteps li{counter-increment:o;display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;color:var(--ink-2)}
+.osteps li::before{content:counter(o);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);font:600 .82rem/1 var(--body);color:var(--ink)}
+.form{display:grid;gap:20px;width:100%}
+.frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.form label,.form legend{display:block;margin-bottom:8px;padding:0;font-weight:600;font-size:.96rem}
+.form input:not([type=radio]),.form select,.form textarea{display:block;width:100%;min-height:52px;padding:12px 16px;border:0;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--line);font:inherit;color:var(--ink)}
+.form textarea{min-height:150px;resize:vertical}
+.form fieldset{margin:0;padding:0;border:0;min-width:0}
+.yn{display:flex;gap:24px}
+.yn label{display:flex;align-items:center;gap:8px;margin:0;font-weight:500}
+.yn input{width:20px;height:20px;accent-color:var(--navy)}
+.fmsg{padding:16px 18px;border-radius:14px;background:var(--wash);font-weight:500}
+.nlist li[hidden]{display:none}
+@media (max-width:959px){.fgrid.c3,.dgrid.c3{grid-template-columns:repeat(2,minmax(0,1fr))}.dgrid.c2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:599px){.fgrid,.fgrid.c3,.fgrid.c2,.dgrid.c3,.ticks.c2,.frow{grid-template-columns:minmax(0,1fr)}.facts div{grid-template-columns:minmax(0,1fr);gap:4px}}
+@media (max-width:599px){.fgrid{grid-template-columns:minmax(0,1fr)}}
+.pcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px);margin-bottom:clamp(28px,3.4vw,44px)}
+.pcard{position:relative;display:flex;flex-direction:column;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;text-decoration:none;transition:box-shadow .35s}
+.pcard.off{display:none}
+.pcard:hover,.pcard:focus-visible{box-shadow:inset 0 0 0 1.5px var(--aqua),0 22px 44px -26px rgba(11,29,63,.5)}
+.pscene{display:block;aspect-ratio:16/10;background:var(--grad)}
+.pscene svg{display:block;width:100%;height:100%}
+.pscene text{font-family:var(--body)}
+.pcard .grp{margin:20px 24px 0;font-size:.86rem;color:var(--muted)}
+.pcard h3{margin:6px 24px 0;font-size:var(--t-h3);letter-spacing:-.02em}
+.pcard p{margin:10px 84px 26px 24px;color:var(--ink-2);font-size:.98rem;transition:opacity .18s}
+.pcard p.sw{opacity:0}
+.pcard .go{position:absolute;right:18px;bottom:18px;width:46px;height:46px}
+@media (max-width:959px){.pcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:599px){.pcards{grid-template-columns:minmax(0,1fr)}}
+
+.dark .lead,.dark .sec-head p{color:var(--on-dark-2)}
+.auto{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(36px,5.5vw,96px)}
+.auto-copy{display:grid;justify-items:start;gap:22px}
+.benefits{width:100%;border-top:1px solid var(--dark-line)}
+.benefits li{display:grid;grid-template-columns:minmax(0,10.5rem) minmax(0,1fr);gap:6px 18px;padding:13px 0;border-bottom:1px solid var(--dark-line)}
+.benefits b{font-weight:600}
+.benefits span{color:var(--on-dark-2);font-size:.96rem}
+.run{display:grid;gap:22px;padding:clamp(18px,2.6vw,34px);border-radius:var(--r-panel);background:rgba(98,213,232,.06);box-shadow:inset 0 0 0 1px var(--dark-line)}
+.run-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;color:var(--on-dark-3);font-size:.95rem}
+.run-top b{font:640 clamp(1.5rem,1.1rem + 1.5vw,2.4rem)/1 var(--display);font-stretch:112%;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+.cells{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:clamp(3px,.55vw,7px)}
+.cells i{aspect-ratio:1;border-radius:24%;background:rgba(195,208,230,.11);transition:background .4s,transform .4s var(--ease),box-shadow .4s}
+.cells i.r{background:var(--cyan);transform:scale(1.2);box-shadow:0 0 16px rgba(98,213,232,.75)}
+.cells i.d{background:var(--aqua)}
+.cells i.s{background:var(--pass)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:st;font-size:.9rem;line-height:1.35;color:var(--on-dark-2)}
+.steps li{display:grid;gap:8px;align-content:start;counter-increment:st}
+.steps li::before{content:counter(st);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--k);color:var(--navy);font:700 .78rem/1 var(--body)}
+.run figcaption{font-size:.85rem;color:var(--on-dark-3)}
+
+.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start;gap:clamp(40px,6vw,104px)}
+.svc-copy{display:grid;justify-items:start;gap:26px}
+.phw{position:relative;width:100%;padding-top:54px;--ph:1}
+.puck{position:absolute;left:calc(var(--ph)*80% + 5px);top:0;width:22px}
+.puck svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 3px 5px rgba(11,29,63,.25))}
+.puck .bdg{opacity:0;transition:opacity .3s}
+.phw.cert .bdg{opacity:1}
+.phases{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;counter-reset:ph}
+.phases::before,.phases::after{content:"";position:absolute;left:0;top:15px;width:80%;height:2px;background:var(--line)}
+.phases::after{background:linear-gradient(90deg,var(--navy),var(--aqua));transform:scaleX(var(--ph));transform-origin:0 0}
+.phases li{position:relative;z-index:1;counter-increment:ph;padding:46px 10px 0 0;font-weight:600;font-size:.95rem;line-height:1.3;color:var(--muted);transition:color .3s}
+.phases li.on{color:var(--ink)}
+.phases li::before{content:counter(ph);position:absolute;left:0;top:0;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 6px var(--paper),inset 0 0 0 1.5px #B9C6D8;color:var(--muted);font-size:.82rem;transition:background .3s,color .3s,box-shadow .3s,transform .4s var(--ease)}
+.phases li.on::before{background:var(--navy);box-shadow:0 0 0 6px var(--paper);color:#fff;transform:scale(1.1)}
+.phases li.on:nth-child(4)::before{background:var(--pass);color:var(--navy)}
+.note{color:var(--muted);font-size:.96rem;max-width:60ch}
+.sub{font-size:var(--t-h3);margin-bottom:16px}
+.cases{border-top:1px solid var(--line)}
+.case{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 16px;padding:17px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.case b{font:620 1.12rem/1.3 var(--display);font-stretch:108%;letter-spacing:-.015em}
+.case span{grid-column:1;color:var(--muted);font-size:.94rem}
+.case .ic{grid-area:1/2/3/3;color:var(--muted);transition:transform .4s var(--ease),color .3s}
+.case:hover b{color:var(--aqua)}
+.case:hover .ic{color:var(--aqua);transform:translate(3px,-3px)}
+
+.qs{padding-top:0}
+.qnav{display:flex;gap:8px}
+.qnav button{display:grid;place-items:center;width:50px;height:50px;border:0;border-radius:50%;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;transition:background .3s,color .3s}
+.qnav button:hover{background:var(--navy);color:#fff}
+.qstrip{--pad:max(var(--gut),calc((100% - var(--max))/2));display:flex;gap:18px;overflow-x:auto;padding:4px var(--pad) 8px;scroll-padding-inline:var(--pad);scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab}
+.qstrip::-webkit-scrollbar{display:none}
+.qstrip.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.qcard{flex:0 0 min(400px,84%);display:grid;align-content:space-between;gap:18px;aspect-ratio:85.6/53.98;padding:clamp(20px,2.4vw,30px);border-radius:18px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line);scroll-snap-align:start}
+.qcard:nth-child(3n+2){background:var(--grad);box-shadow:none;color:#fff}
+.qcard svg{width:46px}
+.qcard blockquote{font:580 clamp(1.08rem,1rem + .36vw,1.3rem)/1.3 var(--display);font-stretch:106%;letter-spacing:-.018em}
+
+.y30{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,88px)}
+.num30{width:100%;aspect-ratio:1.25}
+.y30-copy{display:grid;justify-items:start;gap:20px}
+.y30-copy p{color:var(--ink-2);max-width:58ch}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--line)}
+.stat{padding:26px 24px 0 0}
+.stat+.stat{padding-left:clamp(14px,2vw,28px);border-left:1px solid var(--line)}
+.stat dt{font:640 clamp(2rem,1.4rem + 1.9vw,3.3rem)/1 var(--display);font-stretch:112%;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.stat dd{margin-top:10px;color:var(--muted);font-size:.95rem}
+
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.pgrid li{border-bottom:1px solid var(--line)}
+.pgrid li:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
+.pgrid a{display:grid;align-content:start;gap:12px;height:100%;padding:28px clamp(14px,2vw,28px) 34px;text-decoration:none;transition:background .35s}
+.pgrid a:hover{background:var(--sheet)}
+.pgrid h3{font-size:var(--t-h3)}
+.pgrid p{color:var(--ink-2);font-size:.96rem}
+.world{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px 32px;margin-top:clamp(28px,4vw,52px);padding:clamp(22px,3vw,38px);border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.world h3{font-size:var(--t-h3);margin-bottom:8px}
+.world p{color:var(--ink-2);max-width:62ch}
+
+.nlist{border-top:1px solid var(--line)}
+.nrow{display:grid;grid-template-columns:9rem minmax(0,1fr) auto;align-items:center;gap:clamp(14px,3vw,44px);padding:24px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.nt b{display:block;font:620 clamp(1.15rem,1rem + .6vw,1.5rem)/1.2 var(--display);font-stretch:108%;letter-spacing:-.022em}
+.nt span{display:block;margin-top:6px;color:var(--ink-2);max-width:72ch}
+
+.cgrid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:clamp(36px,6vw,104px)}
+.cgrid>div{display:grid;justify-items:start;gap:22px}
+.cgrid address{font-style:normal;line-height:1.7;color:var(--on-dark-2)}
+.ul{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.5)}
+.ul:hover{text-decoration-color:#fff}
+.teams{border-top:1px solid rgba(255,255,255,.22)}
+.teams li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 24px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.teams h3{font-size:var(--t-h3)}
+.teams p{margin-top:4px;color:var(--on-dark-2);font-size:.95rem}
+.tc{display:grid;justify-items:end;gap:4px;font-size:.96rem}
+.tc span{font-weight:600}
+
+.foot{position:relative;z-index:2;overflow:hidden;background:var(--navy);color:var(--on-dark-2)}
+.foot-in{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px);padding-block:clamp(56px,7vw,100px) 44px}
+.foot .brand img{height:52px}
+.foot-tag{margin-top:20px;max-width:13ch;font:640 clamp(1.3rem,1.1rem + .8vw,1.85rem)/1.12 var(--display);font-stretch:112%;letter-spacing:-.025em;color:#fff}
+.foot h3{margin-bottom:14px;font:600 .92rem/1.3 var(--body);letter-spacing:0;color:#fff}
+.foot ul{display:grid;gap:10px;font-size:.95rem}
+.foot a{text-decoration:none;transition:color .25s}
+.foot ul a:hover,.foot-base a:hover{color:#fff}
+.foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-block:22px;border-top:1px solid var(--dark-line);font-size:.88rem}
+.giant{width:100%;height:auto;padding-inline:var(--inset)}
+.giant text{font:800 150px var(--display);font-stretch:118%;fill:none;stroke:rgba(98,213,232,.4);stroke-width:1px;vector-effect:non-scaling-stroke}
+
+.js .rise{transition:transform 1.1s var(--ease) var(--d,0s)}
+.js .rise:not(.in){transform:translateY(38px)}
+
+@media (max-width:959px){
+  .hero-in{min-height:0;padding-bottom:calc(73vw + 96px);transform:none;opacity:1}
+  .hero-copy{max-width:none}
+  .film{width:122%;bottom:68px}
+  .auto,.svc,.y30,.cgrid{grid-template-columns:minmax(0,1fr)}
+  .num30{max-width:520px}
+  .foot-in{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot-in>div:first-child{grid-column:1/-1}
+}
+@media (max-width:899px){
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pgrid li:not(:nth-child(3n+1)){border-left:0}
+  .pgrid li:nth-child(even){border-left:1px solid var(--line)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){padding-left:0;border-left:0}
+  .stat:nth-child(n+3){margin-top:26px;border-top:1px solid var(--line)}
+}
+@media (max-width:759px){
+  .sec-head.row,.world{grid-template-columns:minmax(0,1fr)}
+  .brands{grid-template-columns:minmax(0,1fr);gap:12px}
+  .brands>p{max-width:none}
+  .nrow{grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}
+  .nrow .tag{grid-area:1/1}
+  .nrow .nt{grid-area:2/1}
+  .nrow .go{grid-area:1/2/3/3;width:44px;height:44px}
+  .benefits li{grid-template-columns:minmax(0,1fr)}
+  .teams li{grid-template-columns:minmax(0,1fr)}
+  .tc{justify-items:start}
+}
+@media (max-width:559px){
+  .pgrid{grid-template-columns:minmax(0,1fr)}
+  .pgrid li:nth-child(even){border-left:0}
+  .phw{padding-top:0}
+  .puck{display:none}
+  .phases{grid-template-columns:minmax(0,1fr);gap:16px}
+  .phases::before,.phases::after{left:15px;top:0;width:2px;height:calc(100% - 32px)}
+  .phases::after{background:linear-gradient(var(--navy),var(--aqua));transform:scaleY(var(--ph))}
+  .phases li{padding:5px 0 5px 50px}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li{grid-template-columns:24px minmax(0,1fr);align-items:center;gap:12px}
+  .cells{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .foot-in{grid-template-columns:minmax(0,1fr)}
+}
+.still .marq-track{animation-play-state:paused}
+.rest .film{animation:none}
+.hero-ctl{position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-size:clamp(.78rem,1.05vw,.9rem);pointer-events:none}
+.hero-ctl>*{pointer-events:auto}
+.btn.motion{min-height:2.9em;padding:0 1.2em;font-size:1em;background:rgba(14,42,82,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.chap{display:grid;padding:.6em 1.15em .2em;border-radius:14px;background:rgba(14,42,82,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14);font:600 1em/1.2 var(--body);white-space:nowrap}
+.chap-t{display:grid}
+.chap-t b{grid-area:1/1;font-weight:600;opacity:0;transition:opacity .25s}
+.chap-t b.on{opacity:1}
+.chap-b{display:flex;gap:4px}
+.chap-b button{position:relative;flex:1;min-width:16px;height:24px;padding:0;border:0;border-radius:4px;background:none;cursor:pointer}
+.chap-b button::before,.chap-b button i{content:"";position:absolute;left:0;right:0;top:10px;height:3px;border-radius:2px;background:rgba(255,255,255,.24)}
+.chap-b button i{background:var(--cyan);transform:scaleX(var(--f,0));transform-origin:0 50%}
+.chap-b button:hover::before{background:rgba(255,255,255,.5)}
+.chap-b button:focus-visible{outline:2px solid var(--cyan);outline-offset:1px}
+@media (max-width:959px){.hero-ctl{bottom:12px;flex-direction:row;align-items:center;justify-content:space-between;font-size:.86rem}}
+@media (max-width:699px){
+  .hero-in{padding-bottom:calc(103vw + 92px)}
+  .film{overflow:visible;-webkit-mask-image:none;mask-image:none}
+  .pnl{transform:translate(194px,-238px) scale(1.75) translate(-530px,-10px)}
+  .ldm{display:block}
+  .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-668px,-292px)}
+}
+@media (max-width:519px){.motion .ml{display:none}}
+@media (prefers-reduced-motion:reduce){
+  :root:not(.motion-ok) *,:root:not(.motion-ok) *::before,:root:not(.motion-ok) *::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  :root:not(.motion-ok) .hero-in{transform:none;opacity:1}
+  :root:not(.motion-ok) .marq-track{animation:none;flex-wrap:wrap;width:auto;row-gap:12px}
+  :root:not(.motion-ok) .marq-track [aria-hidden]{display:none}
+}
+
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.hd-name{padding-left:12px;border-left:1px solid rgba(255,255,255,.3);font:600 1.02rem/1.2 var(--body);font-stretch:100%;letter-spacing:0}
+.tag.pv{background:rgba(255,255,255,.14);color:#fff}
+.hd-hero .phero-in{padding-block:clamp(132px,18vh,188px) clamp(44px,7vh,80px)}
+.hd-hero .phero-copy{justify-items:stretch;max-width:760px}
+.hsearch{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 22px;border-radius:999px;background:#fff;color:var(--ink);box-shadow:0 24px 60px -30px rgba(2,8,22,.8)}
+.hsearch .ic{color:var(--muted)}
+.hsearch input{flex:1;min-width:0;height:48px;padding:0;border:0;background:none;font:inherit;font-size:1.08rem;color:var(--ink);outline:none}
+.hsearch input::-webkit-search-cancel-button{display:none}
+.hsearch:focus-within{outline:2px solid #fff;outline-offset:3px}
+.pops{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:.95rem}
+.pops a{padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-weight:500;text-decoration:none;transition:background .3s}
+.pops a:hover{background:rgba(255,255,255,.22)}
+.meta{font-size:.95rem}
+.tgrid h3 a{text-decoration:none}
+.tgrid h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.tl{display:grid;width:100%;border-top:1px solid var(--line)}
+.tl a{display:block;padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink-2);text-decoration:none;font-size:.98rem;line-height:1.35}
+.tl a:hover{color:var(--ink)}
+#results .nrow,.alist .nrow{grid-template-columns:minmax(0,1fr) auto}
+#results .nrow .tag{justify-self:start;margin-bottom:8px}
+.art{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);align-items:start;gap:clamp(32px,6vw,96px)}
+.prose{display:grid;gap:18px;max-width:72ch;font-size:1.05rem}
+.prose>p{color:var(--ink-2)}
+.prose h2{margin-top:14px;font-size:var(--t-h3)}
+.prose a{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.prose .osteps{gap:14px}
+.prose .osteps li{grid-template-columns:32px minmax(0,1fr);gap:14px}
+.prose .osteps li::before{width:32px;height:32px;background:var(--navy);box-shadow:none;color:#fff}
+.dots{display:grid;gap:10px;padding-left:22px;list-style:disc;color:var(--ink-2)}
+.callnote{padding:14px 18px;border-radius:14px;background:var(--wash);font-weight:500}
+.code{display:block;margin:0;padding:14px 16px;border-radius:12px;background:var(--navy);color:#fff;font:500 .9rem/1.55 ui-monospace,"Cascadia Mono",Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.kv{width:100%;border-collapse:collapse;border-top:1px solid var(--line)}
+.kv th,.kv td{padding:12px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.kv th{width:36%;padding-right:20px;font-weight:600}
+.kv td{color:var(--ink-2);overflow-wrap:anywhere}
+.fig{display:grid;gap:4px;padding:16px 18px;border-radius:14px;border:1.5px dashed #B9C6D8;color:var(--muted);font-size:.94rem}
+.fig b{font-weight:600;color:var(--ink-2)}
+.prose .cases{margin:0}
+.side{position:sticky;top:96px;display:grid;gap:18px}
+.box{display:grid;justify-items:start;gap:12px;padding:22px 24px 24px;border-radius:var(--r-panel);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--line)}
+.box h2{font:600 1.02rem/1.3 var(--body);font-stretch:100%;letter-spacing:0}
+.box p{color:var(--ink-2);font-size:.96rem}
+.box ul{width:100%}
+.sl{display:block;padding:6px 0;color:var(--ink-2);text-decoration:none;font-size:.96rem;line-height:1.35}
+.sl:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.sl[aria-current]{color:var(--ink);font-weight:600}
+.form input[type=file]{padding:12px 16px;min-height:0}
+@media (max-width:1180px){.tag.pv{display:none}}
+@media (max-width:959px){.art{grid-template-columns:minmax(0,1fr)}.side{position:static}}
+@media (max-width:599px){.hsearch{padding-left:16px}.hsearch .btn{padding:0 18px}.kv th{width:42%}}
+.nt .tag{display:inline-block;margin:0 0 8px;color:var(--navy)}
+@media (min-width:960px){.foot-in.c3{grid-template-columns:minmax(0,1.35fr) repeat(3,minmax(0,1fr))}}
+#results[hidden]+#topics{padding-top:clamp(52px,6.4vw,96px)}
+.prose,.prose .case b,.prose .case span{overflow-wrap:anywhere}
+.prose .btn{white-space:normal;padding-block:10px;line-height:1.25;text-align:center}
+.hd-hero .phero-copy{grid-template-columns:minmax(0,1fr)}
+@media (max-width:599px){.hsearch input{font-size:1rem}.hsearch .ic{display:none}}
+.brand a{display:inline-flex;align-items:center;color:inherit;text-decoration:none}
+a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
+
+.phero.plain h1{overflow-wrap:anywhere}
+@media (max-width:599px){.phero.plain:not(.hd-hero) h1{font-size:clamp(1.75rem,7.6vw,2.5rem);line-height:1.04}}
+@media (max-width:480px){.hdr-in{gap:10px;padding:0 8px 0 14px}.brand{gap:8px}.hd-name{padding-left:9px;font-size:.95rem}.hdr-cta{gap:6px}.hdr-cta .btn.sm.cy{padding-inline:12px;font-size:.84rem}}
+@media (max-width:374px){.hdr-cta .btn.sm.cy{display:none}}
+
+.hd-name{border-left:2px solid var(--viable)}
+.btn.cy{background:var(--viable-ink);color:#fff}
+.btn.cy::before{background:#A30F1F}
+.phero h1::before{content:"";display:block;width:44px;height:5px;margin-bottom:clamp(14px,1.6vw,22px);border-radius:2px;background:var(--viable)}
+.tag{background:#FCE8EA;color:#8E1320}
+.fgrid.num.stages li::before{background:var(--viable-ink)}
+.sl[aria-current]{padding-left:12px;box-shadow:inset 2px 0 0 var(--viable)}
+.vt{color:var(--viable-ink)}
+.dark .vt{color:inherit}
+.phero.plain.vh-hero .phero-in{grid-template-columns:minmax(0,1fr) minmax(0,.62fr);align-items:center;gap:clamp(28px,5vw,80px)}
+.vh-hero .phero-copy{max-width:none}
+.vart{display:block;width:100%;max-width:440px;justify-self:end;filter:drop-shadow(0 26px 34px rgba(2,8,22,.45))}
+.stages{margin-bottom:clamp(24px,3vw,40px)}
+.links2 .cases{margin-top:0}
+@media (max-width:959px){.phero.plain.vh-hero .phero-in{grid-template-columns:minmax(0,1fr)}.vart{display:none}}
+@media (max-width:519px){.hdr-cta .btn.sm.cy{display:none}}
+@media (max-width:359px){.hd-name{font-size:.88rem;padding-left:8px}}
+.phero .crumb a{color:#fff;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:3px}
+.phero .crumb a:hover{text-decoration-color:#fff}
+
+.pvtag{position:fixed;left:12px;bottom:12px;z-index:96;padding:7px 13px;border-radius:999px;background:rgba(14,42,82,.94);color:#fff;font:600 .78rem/1.2 "Instrument Sans","Segoe UI",system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 22px -10px rgba(2,8,22,.7),inset 0 0 0 1px rgba(255,255,255,.24)}
+.pvtag:hover{background:#0E2A52;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:599px){.pvtag{left:8px;bottom:8px;padding:6px 11px}.pvx{display:none}}
+@media print{.pvtag{display:none}}
+</style>
+</head>
+<body>
+<a class="pvtag" href="https://vhelpdesk.iccsolutions.com/hc/en-us" rel="noopener" title="This is a design preview. Open the live VIABLE helpdesk." aria-label="Design preview, not the live VIABLE helpdesk. Open the live VIABLE helpdesk.">Design preview<span class="pvx">, not the live VIABLE helpdesk</span></a>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr dark" id="hdr">
+  <div class="hdr-in">
+    <span class="brand"><a data-site aria-label="ICC Solutions website, home page"><img src="media/logo-white.png" alt="ICC Solutions" width="355" height="230"></a><a class="hd-name" href="#home" aria-label="VIABLE Helpdesk home">VIABLE Helpdesk</a></span>
+    <nav class="nav" id="nav" aria-label="Topics">
+      <i class="nav-ind" aria-hidden="true"></i>
+      <a href="#t-start">Getting set up</a>
+      <a href="#t-tests">Running tests</a>
+      <a href="#t-brands">Brand test cases</a>
+      <a href="#t-cert">Certification</a>
+      <a href="#t-support">Support</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="btn sm gh" data-site>Main website</a>
+      <a class="btn sm gh" href="https://vhelpdesk.iccsolutions.com/hc/en-us/signin" target="_blank" rel="noopener">Sign in</a>
+      <a class="btn sm cy" href="#new">Raise a ticket</a>
+      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<nav class="menu dark" id="menu" aria-label="Menu">
+  <a href="#home">VIABLE Helpdesk home</a>
+  <a href="#t-start">Getting set up</a>
+  <a href="#t-tests">Running tests</a>
+  <a href="#t-brands">Brand test cases</a>
+  <a href="#t-cert">Certification</a>
+  <a href="#t-support">Working with VIABLE support</a>
+  <a href="#new">Raise a ticket</a>
+  <a href="https://vhelpdesk.iccsolutions.com/hc/en-us/signin" target="_blank" rel="noopener">Sign in</a>
+  <a data-icchd>ICC Solutions Helpdesk</a>
+  <a data-site>Main website</a>
+</nav>
+<main id="main"><div id="page"></div></main>
+<footer class="foot dark" id="foot"></footer>
+<script>
+(()=>{
+'use strict';
+const D=document,R=D.documentElement,$=(s,r=D)=>r.querySelector(s),$$=(s,r=D)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)R.classList.add('motion-ok');
+
+const HD='https://vhelpdesk.iccsolutions.com/hc/en-us',WEB='https://www.iccsolutions.com';
+const SITE='../';
+const ICCHD='../helpdesk/';
+const UPLOADS='https://uploads.iccsolutions.com/',REMOTE='https://iccsolutions.beyondtrustcloud.com/',GUIDE=HD+'/categories/360003044060-VIABLE-User-Guide',MYICC='https://my.iccsolutions.com/';
+const TOPICS=[
+  ['start','Getting set up','Activating VIABLE, installing drivers and getting your PC ready.'],
+  ['tests','Running tests','What the tool is asking for during a test, and what its messages mean.'],
+  ['brands','Brand test cases','Notes on individual Visa ADVT, American Express and Mastercard tests.'],
+  ['cert','Certification','The steps from your test list to certification, and sending your results.'],
+  ['support','Working with VIABLE support','Raising a ticket, remote support and how to reach us.']
+];
+const STAGES=[
+  ['Open Testing','Advised first. Run every test that applies to you and get them passing.'],
+  ['Validation Testing','The dry run. Send your results and receipts, and the Certification Team tells you what to correct.'],
+  ['Certification Testing','The official run, in a one-week window, sent to the Certification Team for review.']
+];
+const RAW=String.raw;
+const ARTICLES=[
+{s:'kit',t:'What is in the VIABLE kit',tp:'start',new:1,b:[
+  'VIABLE is a closed-loop EMV test kit for merchants and ISVs certifying with Worldpay. It suits any EMV contact or contactless chip terminal configuration, and is built on the ICC Solutions platform.',
+  {kv:[['Card schemes included','American Express, Discover, Mastercard and Visa'],['Optional add-ons','INTERAC, JCB and Fuel'],['Host simulator','Simulates acquirer authorisation requests and responses, so you do not need to connect online to the test host'],['Analysis','Automated import and export analysis tools, with transaction logs captured without complex hardware'],['Probes','The kit is probe ready'],['Receipts','A Brother DS 620 mobile scanner is available for scanning receipts to send with your test results']]},
+  {x:['The VIABLE test kit, on the ICC Solutions website',SITE+'#viable-test-kit']}]},
+{s:'hosted-activate',t:'Activating Hosted VIABLE',tp:'start',u:'2022-12',id:'6842497868444',b:[
+  'Hosted VIABLE is activated with a soft licence key. A USB licence key does not work with it.',
+  ['Install the Hosted VIABLE software and let the install finish.','Open the Licenses folder shown below.','Create an empty text file in that folder called addsoftlicense.txt.','Start Hosted VIABLE from its Desktop shortcut.','Select Add Soft-Licensed Suite, at the top right.','Send the code it shows you to viable@iccsolutions.com.','The Helpdesk team sends you a licence, which activates Hosted VIABLE.'],
+  {c:RAW`\Documents\ICC Solutions Limited\Licenses`},
+  {f:'One screenshot: the Add Soft-Licensed Suite button'}]},
+{s:'user-guide',t:'The VIABLE user guide',tp:'start',u:'2019-02',id:'207398905',b:[
+  'The user guide is on this helpdesk, for signed-in customers. It covers getting started (what is in the box, installing, licensing and running the tool) and testing with VIABLE (importing test lists, creating projects, and running open, validation and certification testing).',
+  {x:['Open the user guide (sign-in needed)',GUIDE]},
+  {n:'If you do not have a helpdesk login, raise a ticket or email viable@iccsolutions.com.'}]},
+{s:'sentinel-driver',t:'Drivers for the Sentinel USB licence key',tp:'start',u:'2022-07',id:'207398435',b:[
+  'The driver installer is attached to the current article. It works on Windows 10 and Windows 11.',
+  'You can also find it in the downloads area of MyICC.',
+  {d:[['Sentinel_System_Driver_Installer_7.5.9.exe','2,865 KB']]},
+  {x:['Open MyICC',MYICC]}]},
+{s:'reader-drivers',t:'Card reader drivers',tp:'start',u:'2016-01',id:'207398085',b:[
+  'Open the card reader driver page and select your reader. It lists the Identive Cloud 4700F, the Omnikey 5421 and the SCM SDI010 or SDI011, with a download from the maker for each.',
+  {x:['Card reader drivers',WEB+'/dualinterface/']}]},
+{s:'plug-and-play',t:'Windows tries to install a driver when I place a card on the reader',tp:'start',also:'tests',u:'2022-07',id:'207397875',b:[
+  'Windows Plug and Play is trying to install a driver for the card itself. That clashes with the tool, and Windows can overwrite the logs on the card. Switch the smart card settings off. These steps are for Windows 10 and Windows 11.',
+  ['Select Start, type gpedit.msc and press Enter. You can also open Run, type gpedit.msc and press Enter.','Under Computer Configuration, open Administrative Templates.','Open Windows Components, then Smart Card.','Open the first setting, choose Disabled, then select Next Setting. Carry on until every setting in the folder is Disabled.','Restart the PC.','Run the test again.'],
+  {c:'gpedit.msc'},
+  {d:[['Disable_Smartcard_Plug_and_Play_for_Windows.pdf','773 KB']]}]},
+{s:'software-list',t:'Listing the software installed on your PC',tp:'start',also:'support',u:'2016-10',id:'206817730',b:[
+  'The Helpdesk may ask what is installed on your PC. To list it:',
+  ['Press Start, type PowerShell and press Enter.','Paste the command below and press Enter. The list of installed programs appears.','To save the list as a file, run the same command with > and a file path on the end, as in the second example.'],
+  {c:RAW`Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize`},
+  {c:RAW`Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize > c:\users\yourname\desktop\installedprograms.txt`},
+  {f:'One screenshot: the list in PowerShell'}]},
+
+{s:'fallback-test',t:'A test case says there is no script, or is a fallback test',tp:'tests',u:'2016-03',id:'207150169',b:[
+  'A fallback test needs no script. It uses only the magnetic stripe data on the back of the card.',
+  ['Run the test. A text box with a blue box tells you which card to use.','Follow the instructions in Transaction Details at the bottom of the screen (the yellow box). While the test runs, a prompt at the top flashes yellow and blue.','When you have run the test, place the card back on the reader and press Back to complete the test and answer the observation questions.'],
+  {f:'Six screenshots: the card prompt, Transaction Details and the flashing prompt'}]},
+{s:'card-version',t:'“Incorrect Card Version for test”',tp:'tests',u:'2016-02',id:'207825035',b:[
+  'The card on the reader has an old applet on it. The message is asking you to update the card to the newest one.',
+  ['Leave the card on the reader and select Update. A new window opens.','Select Update, at the bottom right of that window. It takes about 10 seconds.','When it finishes, the status at the bottom left reads “Operation completed successfully” and the top left shows the card’s current version.','Close the window. The test you chose now loads to the card, ready to run as normal.'],
+  {f:'Three screenshots: the message, and the Card Load Utility before and after the update'}]},
+{s:'external-authenticate',t:'What External Authenticate means',tp:'tests',also:'brands',u:'2016-04',id:'206765219',b:[
+  'Some tests need the terminal to process an EXTERNAL AUTHENTICATE command, and some need it not to.',
+  'The command asks the application on the card to verify a cryptogram, which arrives in EMV tag 91 of the response.',
+  'The terminal performs external authentication when both of these are true:',
+  {u:['The AIP (Application Interchange Profile) shows that issuer authentication is supported.','Tag 91 is present in field DE55 of the 0110 or 0210 message.']},
+  'When both are true, the terminal should perform it whether the response is an approval or a decline.']},
+{s:'issuer-scripts',t:'An Issuer Scripts question shows as failed, but the commands are in the log',tp:'tests',also:'brands',u:'2016-04',id:'208235445',b:[
+  'A test can be marked as failed on the question about the terminal sending every Issuer Script command between the two GENERATE AC commands, in the order it received them, even though the log shows the commands were sent.',
+  'A few tests have questions where the tool answers one by comparing it with another. Here it first needs the host log’s answer to the question about the issuer simulator sending a 71 Issuer Script with seven commands.',
+  'If you have not imported a host log, the tool cannot answer either question for you. You can:',
+  {u:['import the host log, or','answer the question as Pass yourself, if you are checking the host log by eye.']}]},
+{s:'tcpip',t:'TCP/IP signals in the EMV suite',tp:'tests',u:'2016-12',id:'115000000570',b:[
+  'The EMV suite can send three signals over TCP/IP, so that a test device can follow a test as it runs:',
+  {kv:[['DOWNLOAD_END','The tool has finished downloading the script onto the card.'],['PERFORM_TXN_START','The tool is waiting for the user to perform the transaction.'],['PERFORM_TXN_END','The tool has uploaded the log and is processing it.']]},
+  'The last signal gives the terminal the most time to prepare for the next transaction: it can load its next configuration while the current test is processed and analysed.',
+  {h:'Turning it on'},
+  'Place a file named TCPIPComms.txt in this folder:',
+  {c:RAW`C:\iccsim50\TMat EMV\ICCSimTMatBase`},
+  'The file has one line: the IP address and port of the TCP/IP connection on your test device, written <IP>:<port>. The IP is in the form AA.BB.CC.DD and the port is a four-digit number.',
+  {h:'What is sent'},
+  {kv:[['When a script is selected','STX:<Test Name>:TEST:[<Test Case>:<Test Name>]:ETX'],['When the script has downloaded','STX:<Test Name>:DOWNLOAD_END:ETX'],['While the tool waits for the log','STX:<Test Name>:PERFORM_TXN_START:ETX'],['When the log has been uploaded','STX:<Test Name>:PERFORM_TXN_END:ETX']]},
+  {n:'The < and > marks are not sent. They only bracket the part that varies. The connection is made once, when the tool starts: if it is lost, restart the tool.'},
+  'These signals are normally used with the card in the ICCSimSC Smart Connector, which is for contact terminals only.']},
+{s:'card-voltage',t:'Card voltage',tp:'tests',u:'2016-10',id:'206385964',b:[
+  'G&D smart cards and SIM cards comply with all the relevant standards, including the voltage range defined in ISO 7816-3: ID-1 cards support 5 V, and SIM cards 1.8 V, 3 V and 5 V.']},
+
+{s:'advt-14',t:'Visa ADVT Test Case 14',tp:'brands',u:'2017-10',id:'206707409',b:[
+  'The test asks whether the terminal sends 97 zeroes followed by the transaction date in the GET PROCESSING OPTIONS command.',
+  'The tool checks the 97 zeroes for you, on the Analysis tab. You only need to check the transaction date at the end of the GPO data. Select the GPO button to jump to it.']},
+{s:'advt-10-cda',t:'Visa ADVT Test Case 10: what the CDA modes mean',tp:'brands',u:'2016-04',id:'206707399',b:[
+  'The test’s questions ask which CDA mode your terminal uses. The modes are defined in the EMV specification, and your terminal vendor should be able to tell you which applies.',
+  {kv:[['Mode 1','CDA is supported, and is performed at the first GENERATE AC when an ARQC is requested and at the second when a TC is requested and the terminal has gone online. CDA at the first GENERATE AC for a TC is a given.'],['Mode 2','CDA is supported, and is performed at the first GENERATE AC when an ARQC is requested, but not at the second when a TC is requested and the terminal has gone online. CDA at the first GENERATE AC for a TC is a given, as it is if the terminal did not go online.'],['Mode 3','CDA is supported, but is not sent at the first GENERATE AC when an ARQC is requested, nor at the second when a TC is requested and the terminal has gone online.']]}]},
+{s:'amex-13',t:'American Express contact Test Case 13',tp:'brands',u:'2016-02',id:'207790825',b:[
+  'In this test the transaction is declined first, then approved by an authorisation number entered by hand.',
+  ['The transaction is declined. The declined receipt does not need to show PIN VERIFIED.','The terminal prompts the user to call the issuer for an authorisation number.','The number is entered by hand, the approval happens locally, and a second receipt is printed with the new authorisation code.'],
+  'The approval receipt should show PIN VERIFIED and everything that was on the original receipt, with the new authorisation code.',
+  {n:'Send the second receipt. It is needed for certification.'}]},
+{s:'axp-emv-015',t:'American Express AXP EMV 015: how to run it',tp:'brands',u:'2016-04',id:'206707449',b:[
+  'This test is about a loss of communications. There are three ways to run it. Use whichever works with your terminal, and ask the Helpdesk if you would like a hand.',
+  {kv:[['Point the terminal at a different IP address','For this test only, change the host IP address on your system to one that is not our host. The terminal still tries to go online, but the transaction never arrives.'],['Have the host send an empty response','An empty response from the host counts as no response. Some terminals have had problems when it is done this way.'],['Disconnect the communications','On some terminals this makes the system decline the transaction straight away.']]}]},
+{s:'common-us-debit',t:'Mastercard: if your terminal prefers Common US Debit',tp:'brands',u:'2018-12',id:'206431884',b:[
+  'If the Mastercard suite has several AIDs and your terminal is set up to prefer Common US Debit, you may see these tests fail.',
+  {f:'Extract from the Mastercard specification'},
+  'Your terminal cannot presume that Common US Debit can be selected when other AIDs are present on the card. Update the application in the device so that it can select other AIDs where needed.']},
+
+{s:'process',t:'The certification process, step by step',tp:'cert',u:'2021-03',id:'206749449',pop:1,b:[
+  'From your first test list to the result, as set out in the VIABLE certification steps guide. You can download the guide at the end of this page.',
+  {h:'Before you start'},
+  'As part of the Statement of Work process, your testing requirements are reviewed: your data collection information and your Level 1 and Level 2 LoA documents. When that is settled, Worldpay sends you the test lists and TSE files for every brand suite in your certification project.',
+  {h:'The three stages'},
+  {kv:STAGES.map(([k],i)=>[k,['Advised first. It lets you run every test that applies to you and make sure they pass before the next two stages.','Your dry run. Run every test and make sure they pass, then send your results and receipts to the Certification Team, who review them and tell you what to correct before the certification run.','The official run. Run every test, make sure they pass and are correct, then send your results and receipts to the Certification Team for review.'][i]])},
+  {h:'Setting up a project'},
+  ['Create a project in the tool. When asked, import the test list or TSE file that Worldpay sent you.','Enter your Client or Customer ID. It is in your Testing Requirement Confirmation email. Enter it carefully: it is how your validation and certification results are tracked.','Choose the Host Type: the first option for closed-loop testing, the second for open-loop testing.','Select Save, then run every test case that was imported.'],
+  {h:'Receipts'},
+  'Some tests need a picture of the receipt with the results. Label each receipt with the test name the tool gives during the test, and scan it as the test asks. Use one image file for each receipt. For American Express, send both the merchant copy and the customer copy where there are two.',
+  {h:'If a test fails'},
+  'Go to the failing test case, select Mail to Support, fill in the details and send them to viable@iccsolutions.com. The Helpdesk looks into it and comes back to you. See [[ticket|raising a ticket]].',
+  {h:'Validation'},
+  ['When every test in the project is green, choose Send Results for Validation from the Tools menu. Do this for each test suite.','Give the three-digit Validation Identification Code when asked. It is sent to you by email. If you have not had one, email viable@iccsolutions.com.','When every suite has arrived, the review begins. You get an email confirming your results were received and when to expect feedback, then another with the outcome.','If anything failed, correct it and send again only the test cases affected, in their suite, unless you are told otherwise.'],
+  {n:'If Send Results for Validation will not send, see [[uploads|sending results through the uploads portal]].'},
+  {h:'Certification'},
+  ['When every suite has passed validation and payment for your certification is confirmed, you are contacted to book a one-week certification window. Once it is agreed, you receive a Certification Number.','During the window, create a new project for each card brand test suite and select Certification Testing. Enter the Certification Number when asked. Every project must be finished within the window.','When every test is green, use Send Results for Validation again, as you did for validation. The certification review runs the same way: an email confirming receipt, then the outcome, with only the affected test cases to send again if anything failed.','When every brand suite has passed with nothing outstanding, your results are sent to American Express for its own review, if American Express is part of your project.','When American Express approves them, your Worldpay Implementation Consultant is told, and advises you on the next steps.'],
+  {d:[['Worldpay-Viable_certification-steps_v2.0.pdf','884 KB']]}]},
+{s:'uploads',t:'Sending results through the uploads portal',tp:'cert',u:'2018-08',id:'206749359',pop:1,b:[
+  'If you cannot send your results to the Certification Team from inside the tool, upload them on the web. Run Send Results for Validation in the tool first: that is what makes the zip file.',
+  ['Open the uploads portal and select Login.','Enter your Client ID and password. If you do not know them, raise a ticket.','Browse to the zip file that holds your results. It is in the folder shown below: sort the folder by date and the file should be at the top.','Check it is the right file for your project name and number.','Enter your email address. A confirmation is sent to it when the file has uploaded.','Select Upload.'],
+  {c:RAW`C:\iccsim50\termlogs\Vantiv CID-xxxx`},
+  {f:'One screenshot: the upload page'},
+  {x:['Open the uploads portal',UPLOADS]}]},
+{s:'receipts',t:'Receipts for your test results',tp:'cert',new:1,b:[
+  'Some tests need a picture of the receipt to go with the results. The certification guide sets out how to send them:',
+  {u:['Label each receipt with the test name the tool gives you during the test.','Scan each receipt as the test asks, one image file per receipt.','For American Express, send both the merchant copy and the customer copy, where there are two.']},
+  'Some tests need more than one receipt: in [[amex-13|American Express Test Case 13]], for example, the second receipt is the one certification needs.',
+  'A Brother DS 620 mobile receipt scanner is available for the VIABLE kit, to scan receipts quickly and send them with your results.',
+  {x:['Brother DS 620 scanner details (PDF)',WEB+'/_files/ugd/411106_c23ea484d7ab44bab438e7b71ad4d605.pdf']}]},
+{s:'ids',t:'Your Client ID, Validation Identification Code and Certification Number',tp:'cert',new:1,b:[
+  'Three references come up during certification. This is where each one comes from.',
+  {kv:[['Client ID','Also called your Customer ID. It is in your Testing Requirement Confirmation email. Enter it carefully when you create a project: it is how your validation and certification results are tracked. With your password, it is also your login for the uploads portal.'],['Validation Identification Code','Three digits, sent to you by email. The tool asks for it when you send results for validation.'],['Certification Number','Sent to you once your one-week certification window is agreed. Enter it when you create each Certification Testing project.']]},
+  'If you do not have one of them, raise a ticket or email viable@iccsolutions.com.']},
+{s:'terminal-parameters',t:'The Worldpay EMV Terminal Parameter Guide',tp:'cert',u:'2019-02',id:'115001653010',pop:1,b:[
+  'The guide attached to the current article tells you which AIDs to set up on the terminal, and what the TACs and floor limits need to be.',
+  {d:[['EMV_Terminal_Parameters_Guide_V.5.pdf','326 KB']]}]},
+{s:'public-keys',t:'Public keys for the terminal',tp:'cert',u:'2023-06',id:'207398015',b:[
+  'Two files are attached to the current article, one for each environment.',
+  {kv:[['EMV Network Keys - Test','For the test environment'],['EMV Network Keys - Prod','For the production environment']]},
+  {d:[['EMV_Network_Keys_-_Test.pdf','303 KB'],['EMV_Network_Keys_-_Prod.pdf','297 KB']]}]},
+{s:'tag-9c',t:'EMV tag 9C in the request message',tp:'cert',also:'tests',u:'2019-02',id:'207998835',b:[
+  'Worldpay has confirmed that when the terminal sends an EMV transaction, the value of EMV tag 9C in the request message should be the same as subfield 1 of DE 3, the processing code.',
+  {n:'So if DE 3 is 01xxxx, tag 9C should also be 01.'}]},
+
+{s:'remote-support',t:'Can someone connect to my PC to help?',tp:'support',u:'2026-06',id:'207407675',pop:1,b:[
+  'Yes. We use a safe and secure remote support tool.',
+  ['Open the remote support portal and fill in the form.','You are placed in a queue, and a Technical Support engineer joins you.'],
+  'The portal works through a firewall without a VPN, all traffic is encrypted, and calls are logged and recorded for an audit trail.',
+  {x:['Open the remote support portal',REMOTE]}]},
+{s:'ticket',t:'Raising a ticket, and what to include',tp:'support',new:1,pop:1,b:[
+  'Email viable@iccsolutions.com or use the request form. For a failing test, go to the test case in the tool, select Mail to Support and fill in the details.',
+  'A ticket is answered faster when it has:',
+  {u:['Your Client ID, which is also called your Customer ID.','Your project name and number, and the brand suite you are testing.','The version of the VIABLE tool you are running.','What you did and what happened, with the exact wording of any error.','For a failed test, the test case and its log.']},
+  {x:['Raise a ticket','#new']}]},
+{s:'contact',t:'Contact details',tp:'support',new:1,b:[
+  {kv:[['VIABLE support','viable@iccsolutions.com'],['Remote support','iccsolutions.beyondtrustcloud.com'],['Uploads portal','uploads.iccsolutions.com'],['Orders and payments','admin@iccsolutions.com'],['Quotes and add-on suites','sales@iccsolutions.com'],['Address','ICC Solutions Limited, The Causeway, Warrington, WA4 6PS, United Kingdom']]},
+  'For other ICC Solutions test tools and test cards, use the ICC Solutions Helpdesk.',
+  {x:['ICC Solutions Helpdesk',ICCHD]}]}
+];
+
+
+const BY={},TOPIC={};ARTICLES.forEach(a=>BY[a.s]=a);TOPICS.forEach(t=>TOPIC[t[0]]=t);
+const inTopic=t=>[...ARTICLES.filter(a=>a.tp===t),...ARTICLES.filter(a=>a.also===t)];
+const X=u=>/^(https?:|mailto:)/.test(u)?`href="${u}" target="_blank" rel="noopener"`:`href="${u}"`,LNK=u=>u[0]==='#'?`href="${u}"`:X(u);
+const I={arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',ext:'<path d="M7 17 17 7M9 7h8v8"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',down:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const OKI=`<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#3CCB98"/><path d="M5.6 10.2l3 3 5.8-6.4" fill="none" stroke="#0E2A52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const when=u=>MONTHS[+u.slice(5)-1]+' '+u.slice(0,4);
+const VT=s=>s.replace('VIABLE','<span class="vt">VIABLE</span>');
+const tx=s=>esc(s).replace(/\[\[([a-z0-9-]+)\|([^\]]+)\]\]/g,(m,g,w)=>`<a href="#a-${g}">${w}</a>`);
+const plain=s=>s.replace(/\[\[[a-z0-9-]+\|([^\]]+)\]\]/g,'$1');
+const words=a=>a.b.map(x=>typeof x==='string'?x:Array.isArray(x)?x.join(' '):x.u?x.u.join(' '):x.kv?x.kv.map(r=>r.join(' ')).join(' '):x.h||x.n||x.c||'').map(plain).join(' ');
+const first=a=>{const p=a.b.find(x=>typeof x==='string')||(a.b.find(Array.isArray)||[''])[0]||'';const t=plain(p);return t.length>150?t.slice(0,t.lastIndexOf(' ',148))+'…':t};
+
+const VCARD=(x,y,w)=>{const h=w/1.586,r=w*.05,i=r*.3,f=n=>n.toFixed(1);
+  return `<rect x="${x}" y="${f(y)}" width="${w}" height="${f(h)}" rx="${f(r)}" fill="#fff"/><image href="media/card-viable.jpg" x="${f(x+i)}" y="${f(y+i)}" width="${f(w-2*i)}" height="${f(h-2*i)}" preserveAspectRatio="none"/>`
+    +`<rect x="${f(x+w*.1)}" y="${f(y+h*.3)}" width="${f(w*.13)}" height="${f(h*.2)}" rx="${f(w*.02)}" fill="#CFC8AC" stroke="#8E8870" stroke-width=".8"/>`
+    +`<rect x="${f(x+w*.52)}" y="${f(y+h*.13)}" width="${f(w*.38)}" height="${f(h*.04)}" rx="1.5" fill="#8D99A8"/><rect x="${f(x+w*.66)}" y="${f(y+h*.22)}" width="${f(w*.24)}" height="${f(h*.03)}" rx="1.5" fill="#B5BFCA"/>`
+    +`<rect x="${x}" y="${f(y)}" width="${w}" height="${f(h)}" rx="${f(r)}" fill="none" stroke="#0E2A52" stroke-opacity=".28" stroke-width="1"/>`};
+const ART=`<svg class="vart" viewBox="0 0 380 268" aria-hidden="true"><g transform="rotate(-7 190 120)">${VCARD(70,40,240)}</g><g transform="rotate(6 190 120)">${VCARD(70,44,240)}</g>${VCARD(70,100,240)}</svg>`;
+
+const SLASH='<span aria-hidden="true">/</span>';
+const pageHead=(crumbs,h1,lead,extra='')=>`
+<section class="phero dark plain" aria-labelledby="pg-h"><div class="wrap phero-in"><div class="phero-copy">
+  <nav class="crumb" aria-label="Breadcrumb">${[['VIABLE Helpdesk','#home'],...crumbs].map(c=>Array.isArray(c)?`<a href="${c[1]}">${c[0]}</a>`:`<span>${c}</span>`).join(SLASH)}</nav>
+  <h1 id="pg-h">${h1}</h1>${lead?`<p class="lead">${lead}</p>`:''}${extra}
+</div></div></section>`;
+const row=(a,tag)=>`<li><a class="nrow" href="#a-${a.s}"><span class="nt">${tag?`<span class="tag">${TOPIC[a.tp][1]}</span>`:''}<b>${esc(a.t)}</b><span>${esc(first(a))}</span></span><span class="go">${ic('arrow')}</span></a></li>`;
+const caseRow=([t,d,u])=>`<li><a class="case" ${LNK(u)}><b>${t}</b>${d?`<span>${d}</span>`:''}${ic(u[0]==='#'?'arrow':'ext')}</a></li>`;
+const TEAMS=[['VIABLE support','Help with the Worldpay VIABLE test kit','viable@iccsolutions.com'],['Admin team','Orders, payments, delivery and annual maintenance','admin@iccsolutions.com'],['Sales team','New kits, add-on suites and quotes','sales@iccsolutions.com']];
+const contact=()=>`
+<section class="panel grad dark" aria-labelledby="c-h"><div class="wrap sec cgrid">
+  <div><h2 class="h2" id="c-h">Talk to VIABLE support</h2>
+    <p class="lead">Email <a class="ul" href="mailto:viable@iccsolutions.com">viable@iccsolutions.com</a>, or ask for a remote session and an engineer will connect to your PC.</p>
+    <div class="actions"><a class="btn cy" href="#new">Raise a ticket</a><a class="btn gh" href="#a-remote-support">Remote support</a></div></div>
+  <ul class="teams">${TEAMS.map(([t,d,e])=>`<li><div><h3>${t}</h3><p>${d}</p></div><div class="tc"><a class="ul" href="mailto:${e}">${e}</a></div></li>`).join('')}</ul>
+</div></section>`;
+const INCLUDE=['Your Client ID','Your project name and number, and the brand suite','The version of the VIABLE tool you are running','What you did and what happened, with the exact wording of any error','For a failed test, the test case and its log'];
+const LINKS=[
+  ['Uploads portal','Send validation and certification results on the web',UPLOADS],
+  ['Remote support portal','A Technical Support engineer connects to your PC',REMOTE],
+  ['VIABLE user guide','On this helpdesk, once you sign in',GUIDE],
+  ['MyICC','Your downloads, including the Sentinel driver',MYICC],
+  ['The VIABLE test kit','What the kit includes, on the ICC Solutions website',SITE+'#viable-test-kit']
+];
+
+const POP=ARTICLES.filter(a=>a.pop);
+const home=()=>`
+<section class="phero dark plain hd-hero vh-hero" aria-labelledby="pg-h"><div class="wrap phero-in"><div class="phero-copy">
+  <h1 id="pg-h">How can we help with VIABLE?</h1>
+  <form class="hsearch" id="sf" role="search"><label class="vh" for="q">Search the VIABLE helpdesk</label>${ic('search')}<input id="q" type="search" placeholder="Search for a test, an error or a step" autocomplete="off" spellcheck="false"><button class="btn cy" type="submit">Search</button></form>
+  <p class="pops"><span>Often needed</span>${POP.map(a=>`<a href="#a-${a.s}">${esc(a.t)}</a>`).join('')}</p>
+</div>${ART}</div></section>
+<div class="sheet">
+  <section class="sec" id="results" hidden><div class="wrap"><div class="sec-head"><h2 id="r-h" tabindex="-1">Search results</h2><p id="r-n" aria-live="polite"></p></div><ul class="nlist" id="r-l"></ul><div class="actions" style="margin-top:28px"><button class="btn gh" type="button" id="r-x">Clear the search</button><a class="btn cy" href="#new">Raise a ticket</a></div></div></section>
+  <section class="sec" id="topics"><div class="wrap">
+    <div class="sec-head"><h2>Browse by topic</h2><p>${ARTICLES.length} guides and fixes for the Worldpay VIABLE test kit.</p></div>
+    <ul class="dgrid c3 tgrid">${TOPICS.map(([s,n,d])=>{const as=inTopic(s);return `<li><h3><a href="#t-${s}">${n}</a></h3><p>${d}</p><div class="tl">${as.slice(0,4).map(a=>`<a href="#a-${a.s}">${esc(a.t)}</a>`).join('')}</div><a class="btn sm gh" href="#t-${s}">All ${as.length} articles</a></li>`}).join('')}
+      <li><h3>${VT('The VIABLE user guide')}</h3><p>Installing, licensing and running VIABLE, then each stage of testing, step by step. It opens once you sign in to the helpdesk.</p><div class="actions"><a class="btn sm gh" ${X(GUIDE)}>Open the user guide</a><a class="btn sm gh" href="#a-user-guide">About the guide</a></div></li></ul>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><h2>Certification in three stages</h2><p>Every certification run goes through the same three stages, one brand suite at a time.</p></div>
+    <ol class="fgrid num c3 stages">${STAGES.map(([t,d])=>`<li><h3>${t}</h3><p>${d}</p></li>`).join('')}</ol>
+    <div class="actions"><a class="btn cy" href="#a-process">The certification process, step by step</a><a class="btn gh" href="#a-uploads">Sending your results</a></div>
+  </div></section>
+  <section class="sec"><div class="wrap two even">
+    <div><h2 class="h2">Before you raise a ticket</h2><p class="lead">Five things that let us answer the first time, without writing back for more.</p>
+      <ul class="ticks">${INCLUDE.map(x=>`<li>${OKI}${x}</li>`).join('')}</ul>
+      <div class="actions"><a class="btn cy" href="#new">Raise a ticket</a><a class="btn gh" href="#a-ticket">More on tickets</a></div></div>
+    <div class="links2"><h3 class="sub">Useful links</h3><ul class="cases">${LINKS.map(caseRow).join('')}</ul></div>
+  </div></section>
+  ${contact()}
+</div>`;
+const topic=s=>{const [,n,d]=TOPIC[s],as=inTopic(s);return pageHead([n],n,d)+`
+<div class="sheet"><section class="sec"><div class="wrap"><ul class="nlist alist">${as.map(a=>row(a)).join('')}</ul></div></section>${contact()}</div>`};
+const BODY=x=>typeof x==='string'?`<p>${tx(x)}</p>`:Array.isArray(x)?`<ol class="osteps">${x.map(i=>`<li><span>${tx(i)}</span></li>`).join('')}</ol>`
+  :x.u?`<ul class="dots">${x.u.map(i=>`<li>${tx(i)}</li>`).join('')}</ul>`
+  :x.h?`<h2>${esc(x.h)}</h2>`
+  :x.n?`<p class="callnote">${tx(x.n)}</p>`
+  :x.c?`<pre class="code">${esc(x.c)}</pre>`
+  :x.kv?`<table class="kv"><tbody>${x.kv.map(([k,v])=>`<tr><th scope="row">${esc(k)}</th><td>${tx(v)}</td></tr>`).join('')}</tbody></table>`
+  :x.f?`<p class="fig"><b>${esc(x.f)}</b>Shown in the current article. It will carry over once checked for card numbers.</p>`
+  :x.x?`<p><a class="btn sm" ${LNK(x.x[1])}>${esc(x.x[0])}</a></p>`:'';
+const article=s=>{const a=BY[s],[ts,tn]=TOPIC[a.tp],sib=inTopic(ts),src=a.id?`${HD}/articles/${a.id}`:'';
+  const files=a.b.filter(x=>x.d).flatMap(x=>x.d);
+  return pageHead([[tn,'#t-'+ts]],esc(a.t),'',a.u?`<p class="meta">Updated ${when(a.u)}</p>`:'')+`
+<div class="sheet"><section class="sec"><div class="wrap art">
+  <article class="prose">${a.b.filter(x=>!x.d).map(BODY).join('')}
+    ${files.length?`<h2>Downloads</h2><ul class="cases">${files.map(([f,z])=>`<li><a class="case" ${X(src)}><b>${esc(f)}</b><span>${z}, attached to the current article</span>${ic('down')}</a></li>`).join('')}</ul>`:''}
+  </article>
+  <aside class="side">
+    <div class="box"><h2>Still stuck?</h2><p>Send us the details. For a failing test, use Mail to Support from the test case.</p><a class="btn sm cy" href="#new">Raise a ticket</a>${s==='ticket'?'':`<a class="sl" href="#a-ticket">What to include</a>`}</div>
+    <nav class="box" aria-label="${tn}"><h2>${tn}</h2><ul>${sib.map(x=>`<li><a class="sl" href="#a-${x.s}"${x.s===s?' aria-current="page"':''}>${esc(x.t)}</a></li>`).join('')}</ul></nav>
+  </aside>
+</div></section>${contact()}</div>`};
+const ABOUT=['Running a test','A failed test or its analysis','Licence or activation','The card reader or the cards','Validation or certification results','Something else'];
+const request=()=>pageHead(['Raise a ticket'],'Raise a ticket','Tell us what happened and we will reply by email. For other ICC Solutions tools and test cards, use the ICC Solutions Helpdesk.',`<div class="actions"><a class="btn gh" ${X(ICCHD)}>ICC Solutions Helpdesk</a></div>`)+`
+<div class="sheet"><section class="sec"><div class="wrap two">
+  <div><h2 class="h2">What helps us help you</h2><ul class="ticks">${INCLUDE.map(x=>`<li>${OKI}${x}</li>`).join('')}</ul><p class="note">Reporting a failing test? Go to the test case in the tool and select Mail to Support. <a class="lk" href="#a-ticket">More on tickets</a>.</p></div>
+  <form class="form" id="rq">
+    <div class="frow"><div><label for="r-e">Your email</label><input id="r-e" name="email" type="email" autocomplete="email" required></div><div><label for="r-c">Client ID</label><input id="r-c" name="client" type="text" required></div></div>
+    <div class="frow"><div><label for="r-p">What is it about</label><select id="r-p" name="about" required><option value="">Choose one</option>${ABOUT.map(p=>`<option>${p}</option>`).join('')}</select></div><div><label for="r-v">VIABLE version</label><input id="r-v" name="version" type="text" required></div></div>
+    <div><label for="r-j">Project name and number</label><input id="r-j" name="project" type="text"></div>
+    <div><label for="r-s">Subject</label><input id="r-s" name="subject" type="text" required></div>
+    <div><label for="r-d">What happened</label><textarea id="r-d" name="detail" required></textarea></div>
+    <div><label for="r-f">Log or screenshot (optional)</label><input id="r-f" name="file" type="file"></div>
+    <div class="actions"><button class="btn cy" type="submit">Send to VIABLE support</button></div>
+    <p class="fmsg" id="rq-msg" role="status" hidden></p>
+  </form>
+</div></section>${contact()}</div>`;
+
+const norm=s=>s.toLowerCase().replace(/licens/g,'licenc').replace(/([iy])z(e|a|i)/g,'$1s$2').replace(/labeled/g,'labelled').replace(/canceled/g,'cancelled');
+const SHORT=[['american express','amex axp'],['mastercard','mc'],['get processing options','gpo'],['generate ac','genac gac'],['client id','customer id cid'],['card reader','cardreader']];
+const more=s=>SHORT.filter(([l])=>s.includes(l)).map(([,k])=>k).join(' ');
+const INDEX=ARTICLES.map(a=>{const t=a.t.toLowerCase(),all=(a.t+' '+TOPIC[a.tp][1]+' '+words(a)).toLowerCase();return [a,norm(t+' '+more(t)),norm(all+' '+more(all))]});
+function search(q){
+  const ws=norm(q).split(/\s+/).filter(Boolean),res=$('#results'),tops=$('#topics');if(!res)return;
+  if(!ws.length){res.hidden=true;tops.hidden=false;return}
+  const hits=INDEX.filter(([,,all])=>ws.every(w=>all.includes(w))).sort((x,y)=>ws.every(w=>y[1].includes(w))-ws.every(w=>x[1].includes(w))).map(h=>h[0]);
+  res.hidden=false;tops.hidden=true;
+  $('#r-n').textContent=hits.length?`${hits.length} ${hits.length===1?'article matches':'articles match'} “${q.trim()}”.`:`Nothing matches “${q.trim()}”. Try the exact wording of the error, or fewer words. If it is not here, raise a ticket.`;
+  $('#r-l').innerHTML=hits.map(a=>row(a,1)).join('');
+}
+
+const page=$('#page'),nav=$('#nav'),ind=$('.nav-ind',nav),links=$$('a',nav),hdr=$('#hdr');
+let act=null;
+const moveInd=a=>{if(!a){ind.style.opacity=0;return}ind.style.opacity=1;ind.style.width=a.offsetWidth+'px';ind.style.transform=`translateX(${a.offsetLeft}px)`};
+nav.addEventListener('pointerover',e=>{const a=e.target.closest('a');if(a)moveInd(a)});
+nav.addEventListener('pointerleave',()=>moveInd(act));
+function route(){
+  const h=location.hash.slice(1),kind=h.slice(0,2),slug=h.slice(2);let html,title,lit='';
+  if(kind==='t-'&&TOPIC[slug]){html=topic(slug);title=TOPIC[slug][1];lit=slug}
+  else if(kind==='a-'&&BY[slug]){html=article(slug);title=BY[slug].t;lit=BY[slug].tp}
+  else if(h==='new'){html=request();title='Raise a ticket'}
+  else{html=home();title=''}
+  page.innerHTML=html;D.title=(title?title+' | ':'')+'VIABLE Helpdesk';scrollTo(0,0);
+  act=links.find(a=>a.getAttribute('href')==='#t-'+lit)||null;links.forEach(a=>a.classList.toggle('on',a===act));moveInd(act);
+  const q=$('#q');
+  if(q){q.addEventListener('input',()=>search(q.value));$('#sf').addEventListener('submit',e=>{e.preventDefault();search(q.value);if(q.value.trim())$('#r-h').focus()});$('#r-x').addEventListener('click',()=>{q.value='';search('');q.focus()})}
+  const rq=$('#rq');
+  if(rq)rq.addEventListener('submit',e=>{e.preventDefault();const m=$('#rq-msg');m.hidden=false;m.innerHTML=`This is a design preview, so nothing has been sent. To reach VIABLE support now, email <a href="mailto:viable@iccsolutions.com">viable@iccsolutions.com</a> or use the <a ${X(HD+'/requests/new')}>current request form</a>.`});
+  if(h&&h!=='home'){const h1=$('h1',page);h1.tabIndex=-1;h1.focus({preventScroll:true})}
+}
+addEventListener('hashchange',route);
+
+const point=(sel,u)=>$$(sel).forEach(a=>{a.setAttribute('href',u);if(/^https?:/.test(u)){a.target='_blank';a.rel='noopener'}});
+point('[data-site]',SITE);point('[data-icchd]',ICCHD);
+const burger=$('#burger'),menu=$('#menu');
+const setMenu=o=>{R.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Close menu':'Open menu');menu.inert=!o};
+setMenu(false);
+burger.addEventListener('click',()=>setMenu(!R.classList.contains('menu-open')));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+D.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;setMenu(false);
+  if(a.classList.contains('skip')){e.preventDefault();const h1=$('h1',page);h1.tabIndex=-1;h1.focus();h1.scrollIntoView()}});
+addEventListener('scroll',()=>hdr.classList.toggle('stuck',scrollY>30),{passive:true});
+addEventListener('resize',()=>moveInd(act));
+const FOOT=[['Topics',TOPICS.map(([s,n])=>[n,'#t-'+s])],
+  ['Support',[['Raise a ticket','#new'],['What to include','#a-ticket'],['Remote support','#a-remote-support'],['Uploads portal',UPLOADS],['Contact details','#a-contact']]],
+  ['ICC Solutions',[['Main website',SITE],['ICC Solutions Helpdesk',ICCHD],['MyICC',MYICC],['VIABLE user guide',GUIDE],['Privacy policy',WEB+'/privacy-policy']]]];
+$('#foot').innerHTML=`
+<div class="wrap foot-in c3">
+  <div><a class="brand" href="#home"><img src="media/logo-white.png" alt="ICC Solutions" width="355" height="230"></a><p class="foot-tag">Reliable testing. Conclusive results.</p></div>
+  ${FOOT.map(([h,ls])=>`<div><h3>${h}</h3><ul>${ls.map(([t,u])=>`<li><a ${LNK(u)}>${t}</a></li>`).join('')}</ul></div>`).join('')}
+</div>
+<div class="wrap foot-base"><span>© 2026 ICC Solutions Ltd</span><span>Design preview of vhelpdesk.iccsolutions.com</span></div>
+<svg class="giant" viewBox="0 0 1000 146" aria-hidden="true"><text x="2" y="122" textLength="996" lengthAdjust="spacingAndGlyphs">ICC Solutions</text></svg>`;
+route();
+})();
+</script>
+</body>
+</html>
