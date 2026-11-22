@@ -29,7 +29,7 @@
   --grad:linear-gradient(125deg,var(--navy) 20%,var(--aqua));
   --red:#C8323F; --pass:#3CCB98;
   --viable:#EC2024; --viable-ink:#D0182A;
-  --paper:#F2F5F9; --sheet:#FFFFFF; --wash:#E4F2F7; --ink:var(--navy); --ink-2:#3A4967; --muted:#63718C; --line:#D9E1EB;
+  --paper:#F2F5F9; --sheet:#FFFFFF; --wash:#E4F2F7; --ink:var(--navy); --ink-2:#3A4967; --muted:#5F6D88; --line:#D9E1EB; --field:#76859B;
   --on-dark-2:#C3D0E6; --on-dark-3:#93A5C5; --dark-line:rgba(195,208,230,.17);
   --display:"Archivo","Arial Nova","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
   --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
@@ -110,10 +110,13 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .burger i{display:block;width:18px;height:2px;border-radius:2px;background:#fff;transition:transform .45s var(--ease)}
 .menu-open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
 .menu-open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
-.menu{position:fixed;inset:0;z-index:45;display:grid;align-content:center;padding:96px var(--gut) 40px;overflow:auto;background:var(--navy);visibility:hidden;clip-path:circle(0 at calc(100% - 52px) 46px);transition:clip-path .7s var(--ease),visibility 0s .7s}
+.menu{position:fixed;inset:0;z-index:45;display:flex;flex-direction:column;padding:96px 0 0;background:var(--navy);visibility:hidden;clip-path:circle(0 at calc(100% - 52px) 46px);transition:clip-path .7s var(--ease),visibility 0s .7s}
 .menu-open .menu{visibility:visible;clip-path:circle(170% at calc(100% - 52px) 46px);transition:clip-path .9s var(--ease),visibility 0s}
 .menu a{display:block;padding:13px 0;border-bottom:1px solid var(--dark-line);font:640 clamp(1.7rem,7vw,2.7rem)/1.1 var(--display);font-stretch:112%;letter-spacing:-.03em;text-decoration:none;transform:translateY(26px);transition:transform .8s var(--ease)}
 .menu-open .menu a{transform:none}
+.menu-in{flex:1;min-height:0;display:flex;flex-direction:column;overflow:auto;padding:0 var(--gut) 40px}
+.menu-in>*{flex:none}.menu-in>:first-child{margin-top:auto}.menu-in>:last-child{margin-bottom:auto}
+@media (max-height:560px){.menu a{padding:8px 0;font-size:clamp(1.25rem,6.2vh,1.7rem)}}
 @media (max-width:1099px){.nav,.hdr-cta .gh{display:none}.burger{display:grid}}
 .hdr.tight .nav,.hdr.tight .hdr-cta .gh{display:none}.hdr.tight .burger{display:grid}
 @media (max-width:479px){.hdr-cta .my{display:none}}
@@ -278,7 +281,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .form{display:grid;gap:20px;width:100%}
 .frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .form label,.form legend{display:block;margin-bottom:8px;padding:0;font-weight:600;font-size:.96rem}
-.form input:not([type=radio]),.form select,.form textarea{display:block;width:100%;min-height:52px;padding:12px 16px;border:0;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--line);font:inherit;color:var(--ink)}
+.form input:not([type=radio]),.form select,.form textarea{display:block;width:100%;min-height:52px;padding:12px 16px;border:0;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--field);font:inherit;color:var(--ink)}
 .form textarea{min-height:150px;resize:vertical}
 .form fieldset{margin:0;padding:0;border:0;min-width:0}
 .yn{display:flex;gap:24px}
@@ -353,6 +356,8 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .phases li.on::before{background:var(--navy);box-shadow:0 0 0 6px var(--paper);color:#fff;transform:scale(1.1)}
 .phases li.on:nth-child(4)::before{background:var(--pass);color:var(--navy)}
 .note{color:var(--muted);font-size:.96rem;max-width:60ch}
+.vtx{margin-top:14px;max-width:60ch}.vtx summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.vtx ol{margin:12px 0 0;padding-left:1.3em;color:var(--ink-2);font-size:.96rem;line-height:1.5}.vtx li+li{margin-top:6px}
 .sub{font-size:var(--t-h3);margin-bottom:16px}
 .cases{border-top:1px solid var(--line)}
 .case{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 16px;padding:17px 0;border-bottom:1px solid var(--line);text-decoration:none}
@@ -840,7 +845,8 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
 .tp-h b{overflow:hidden;text-overflow:ellipsis}
 .tp-pl{margin-left:auto}
 .tp-b{display:grid;gap:5px;padding:6px 8px 10px}
-.tp-t{color:#e16d00;font-size:15px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+#ap-body:focus{outline:none}
+.tp-t{color:#b85800;font-size:15px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
 .tp h5{margin-top:6px;font-size:13px;font-weight:700}
 .tp-tb{width:100%;border-collapse:collapse;font-size:11.5px}
 .tp-tb th{padding:2px 5px;border:1px solid #c9c9c9;background:#fde3bd;font-weight:700;text-align:left}
@@ -903,7 +909,7 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
 .ap-layer[hidden]{display:none}
 .ap-dlg{width:min(100%,var(--w,420px));max-height:100%;overflow:auto;background:#f6f6f6;border:1px solid #8f8f8f;border-radius:7px;box-shadow:0 18px 44px -14px rgba(0,0,0,.5)}
 .dlg-bar{display:flex;align-items:center;height:29px;padding-left:10px;background:#fff;border-bottom:1px solid #e3e3e3}
-.dlg-bar.blue{background:#2a78d6;border-color:#2a78d6;color:#fff;font-weight:600}
+.dlg-bar.blue{background:#2670cc;border-color:#2670cc;color:#fff;font-weight:600}
 .dlg-x{display:grid;place-items:center;width:42px;height:100%;margin-left:auto;border:0;background:none}
 .dlg-x:hover{background:#e81123}
 .dlg-x:hover .ti path{stroke:#fff}
@@ -1103,7 +1109,7 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
 .tm-a{font:600 2.5cqw/1.1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:#43566B}
 .tm-b{font:700 4.6cqw/1.05 var(--body);letter-spacing:-.01em}
 .tm-c{min-height:2.6cqw;font:600 2.6cqw/1.1 var(--body);color:#2D4155}
-.tm-screen.ok .tm-b{color:#0E7A52}
+.tm-screen.ok .tm-b{color:#0B6B47}
 .tm-screen.bad .tm-b{color:#B0202E}
 .tm-screen.pin .tm-c{font-size:3.4cqw;letter-spacing:.3em}
 .tm-screen.busy .tm-c::after{content:"";display:inline-block;width:1.6cqw;height:1.6cqw;margin-left:1cqw;border-radius:50%;
@@ -1230,12 +1236,14 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
   </div>
 </header>
 <nav class="menu dark" id="menu" aria-label="Menu">
+<div class="menu-in">
   <a href="#run">Run a test</a>
   <a href="#test-yourself">Test yourself</a>
   <a data-site="#pos-atm-testing">ICCSimTMat test suites</a>
   <a data-hd="#g-getting-started">Getting started guide</a>
   <a data-site="#get-in-touch">Contact us</a>
   <a data-site>Main website</a>
+</div>
 </nav>
 <main id="main"><div id="page"></div></main>
 <footer class="foot dark" id="foot"></footer>
@@ -1410,7 +1418,7 @@ $('#page').innerHTML=`
         <div class="ap-title">${ti('logo')}<span id="ap-tt">ICCSimTM : Test Manager</span><span class="ap-demo">Demo copy</span><span class="ap-win" aria-hidden="true"><i>${ti('wmin')}</i><i>${ti('wmax')}</i><i>${ti('wx')}</i></span></div>
         <div class="ap-menu" role="menubar" aria-label="ICCSimTMat menu" id="ap-menu"></div>
         <div class="ap-tools" role="toolbar" aria-label="ICCSimTMat toolbar" id="ap-tools"></div>
-        <div class="ap-body" id="ap-body"></div>
+        <div class="ap-body" id="ap-body" tabindex="-1"></div>
         <div class="ap-status" id="ap-status"></div>
         <div class="ap-layer" id="ap-layer" hidden></div>
         <div class="ap-pop" id="ap-pop" hidden></div>
@@ -1509,7 +1517,7 @@ const TOOLS=()=>[['newp','newp','',A.scr==='tasks'||main(),'New Project'],['open
   ['an','an','Analyse',main()&&free()&&hasLog(A.sel)],['anh','','Analyse Highlighted',main()&&free()&&hasLog(A.sel)],'|',
   ['calc','calc','Calc',A.scr==='tasks'||main()],'|',['logs','','Open Log Folder',main()],['plans','','Open Test Plan Folder',main()],'|',['help','help','Help',true]];
 const toolsHtml=()=>TOOLS().map(x=>x==='|'?'<span class="tsep" aria-hidden="true"></span>':
-  `<button type="button" class="tb${x[0]==='run'||x[0]==='runc'?' keep':''}" data-act="${x[0]}"${x[3]?'':' disabled'}${x[2]?'':` aria-label="${x[4]}" title="${x[4]}"`}>${x[1]?ti(x[1]):''}${x[2]?`<span>${x[2]}</span>`:''}</button>`).join('');
+  `<button type="button" class="tb${x[0]==='run'||x[0]==='runc'?' keep':''}" data-act="${x[0]}"${x[3]?'':' disabled'} aria-label="${x[4]||x[2]}" title="${x[4]||x[2]}">${x[1]?ti(x[1]):''}${x[2]?`<span>${x[2]}</span>`:''}</button>`).join('');
 
 function statusHtml(){const c=counts(),m=main();
   return `<span>Project: <b>${m?esc(P.name):'None'}</b></span><span>Test Plan: <b>${m?esc(P.suite.n):'None'}</b></span><span>Test Script: <b>${m?P.tests[A.sel].sc:'None'}</b></span>
@@ -1573,11 +1581,16 @@ function analysisTab(){const i=A.sel,r=A.res[i],t=P.tests[i];
 let DLG=null;
 const dbar=(t,x=1,cls='')=>`<div class="dlg-bar${cls?' '+cls:''}"><span id="dlg-h">${t}</span>${x?`<button type="button" class="dlg-x" data-act="dlg-x" aria-label="Close">${ti('wx')}</button>`:''}</div>`;
 const setInert=on=>$$('#app>.ap-title,#app>.ap-menu,#app>.ap-tools,#app>.ap-body,#app>.ap-status').forEach(e=>e.inert=on);
-function dlg(kind,html,{focus=true,esc:canEsc=false}={}){const ret=DLG?DLG.ret:D.activeElement;DLG={kind,canEsc,ret};closePop();const L=$('#ap-layer');
-  L.innerHTML=`<div class="ap-dlg dl-${kind}" role="dialog" aria-modal="true" aria-labelledby="dlg-h">${html}</div>`;L.hidden=false;setInert(true);
+const keyOf=e=>{const d=e&&e.dataset;if(!d)return null;
+  return d.fk?`[data-fk="${d.fk}"]`:d.act==='tab'?`[data-act="tab"][data-tab="${d.tab}"]`:d.act&&e.closest('#ap-tools')?`#ap-tools [data-act="${d.act}"]`:d.menu&&e.closest('#ap-menu')?`#ap-menu [data-menu="${d.menu}"]`:null};
+let popRet=null;
+function dlg(kind,html,{focus=true,esc:canEsc=false}={}){const ret=DLG?DLG.ret:D.activeElement;
+  DLG={kind,canEsc,ret,sel:DLG?DLG.sel:keyOf(ret)};closePop();const L=$('#ap-layer');
+  L.innerHTML=`<div class="ap-dlg dl-${kind}" role="dialog" aria-labelledby="dlg-h">${html}</div>`;L.hidden=false;setInert(true);
   if(focus){const f=$('[data-first]',L)||$('button:not([disabled]),input',L);f&&f.focus({preventScroll:true})}}
-function closeDlg(){const r=DLG&&DLG.ret;DLG=null;const L=$('#ap-layer');L.hidden=true;L.innerHTML='';setInert(false);
-  if(r&&D.contains(r)&&app.contains(r))r.focus({preventScroll:true})}
+function closeDlg(){const d=DLG,L=$('#ap-layer'),had=!!d&&L.contains(D.activeElement);DLG=null;L.hidden=true;L.innerHTML='';setInert(false);
+  if(!d)return;let t=d.ret&&app.contains(d.ret)?d.ret:d.sel?$(d.sel,app):null;if(t&&t.disabled)t=null;
+  if(t)t.focus({preventScroll:true});else if(had)$('#ap-body').focus({preventScroll:true})}
 const loginDlg=()=>`${dbar('Login',0)}<div class="lg-head"><img src="media/logo-white.png" alt="ICC Solutions" width="62" height="40"></div>
   <div class="lg"><h3 class="lg-h">Login</h3><div class="lg-col">
     <div class="lg-f">${ti('user')}<span class="lg-in" aria-label="Username">demo.tester</span></div>
@@ -1655,21 +1668,22 @@ function chooseBrand(k){A.brand=k;$$('.su-brand',app).forEach(x=>x.setAttribute(
 function popAt(items,x,y,label){const P=$('#ap-pop');
   P.innerHTML=`<div class="pop" role="menu" aria-label="${label}">${items.map(it=>it==='-'?'<hr>':`<button type="button" role="menuitem" data-act="${it[1]}"${it[2]===false?' disabled':''}>${it[0]}</button>`).join('')}</div>`;
   P.hidden=false;const w=app.clientWidth,pw=P.offsetWidth;P.style.left=Math.max(0,Math.min(x,w-pw-4))+'px';P.style.top=y+'px';$('button:not([disabled])',P)?.focus({preventScroll:true})}
-function closePop(){const P=$('#ap-pop');if(P.hidden)return;P.hidden=true;P.innerHTML='';$$('#ap-menu [aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'))}
+function closePop(back){const P=$('#ap-pop');if(P.hidden)return;const had=P.contains(D.activeElement);P.hidden=true;P.innerHTML='';
+  if(back&&had){const t=popRet&&app.contains(popRet)&&!popRet.disabled?popRet:$('#ap-body');t.focus({preventScroll:true})}$$('#ap-menu [aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'))}
 function openMenu(b){const open=b.getAttribute('aria-expanded')==='true';closePop();if(open)return;
   const m=MENUS.find(x=>x[0]===b.dataset.menu),r=b.getBoundingClientRect(),ar=app.getBoundingClientRect();
-  b.setAttribute('aria-expanded','true');popAt(m[1],r.left-ar.left,r.bottom-ar.top,m[0])}
-function ctxMenu(e){const ar=app.getBoundingClientRect();
+  b.setAttribute('aria-expanded','true');popRet=b;popAt(m[1],r.left-ar.left,r.bottom-ar.top,m[0])}
+function ctxMenu(e){const ar=app.getBoundingClientRect();popRet=$(`[data-fk="row-${A.sel}"]`,app);
   popAt([['Run Highlighted Tests','run',free()],['Run Checked Tests','runc',free()&&A.chk.size>0],'-',['Select All','selall'],['Select All Untested','seluntested'],['Clear Ticks','selnone'],'-',['Show Log in Windows Explorer','logs'],['Report Generator','na']],e.clientX-ar.left,e.clientY-ar.top,'Test list')}
 
 let toastT;
 function toast(t){const el=$('#ap-toast');el.textContent=t;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),3200)}
 
-function render(){const a=D.activeElement,fk=a&&app.contains(a)?a.dataset.fk:null;
+function render(){const a=D.activeElement,inWin=!!a&&a!==app&&app.contains(a)&&!a.closest('#ap-layer,#ap-menu,#ap-pop'),key=inWin?keyOf(a):null;
   $('#ap-tt').textContent=main()?`ICCSimTMat Test Manager - ${P.name}`:'ICCSimTM : Test Manager';app.dataset.scr=A.scr;
   $('#ap-tools').innerHTML=toolsHtml();$('#ap-status').innerHTML=statusHtml();
   $('#ap-body').innerHTML=A.scr==='tasks'?tasksHtml():main()?mainHtml():'<div class="ap-blank"></div>';
-  if(fk){const e=$(`[data-fk="${fk}"]`,app);e&&e.focus({preventScroll:true})}}
+  if(inWin&&!app.contains(D.activeElement)){const e=key&&$(key,app);(e&&!e.disabled?e:$('#ap-body')).focus({preventScroll:true})}}
 function toScreen(s,focus=true){A.scr=s;closePop();closeDlg();render();
   if(s==='login')dlg('login',loginDlg(),{focus});else if(s==='licence')dlg('licence',licDlg(),{focus});
   else if(focus)$(s==='tasks'?'[data-fk="tse-file"]':`[data-fk="row-${A.sel}"]`,app)?.focus({preventScroll:true});guide()}
@@ -1801,7 +1815,7 @@ function act(a,b,e){switch(a){
 }}
 app.addEventListener('click',e=>{const b=e.target.closest('[data-act]');
   if(!b){const tr=e.target.closest('tbody tr[data-i]');if(tr&&!e.target.closest('input')&&A.sel!==+tr.dataset.i){A.sel=+tr.dataset.i;render()}return}
-  if(b.disabled)return;if(b.closest('#ap-pop'))closePop();act(b.dataset.act,b,e)});
+  if(b.disabled)return;if(b.closest('#ap-pop'))closePop(true);act(b.dataset.act,b,e)});
 app.addEventListener('dblclick',e=>{if(e.target.closest('.fx-f'))openSuites()});
 app.addEventListener('change',e=>{const c=e.target;
   if(c.classList.contains('ck')){const i=+c.dataset.i;c.checked?A.chk.add(i):A.chk.delete(i);render();$(`.ck[data-i="${i}"]`,app)?.focus({preventScroll:true});return}
@@ -1810,7 +1824,7 @@ app.addEventListener('change',e=>{const c=e.target;
 app.addEventListener('input',e=>{if(e.target.id==='calc-in')calc()});
 app.addEventListener('contextmenu',e=>{const tr=e.target.closest('tbody tr[data-i]');if(!tr||!main())return;e.preventDefault();A.sel=+tr.dataset.i;render();ctxMenu(e)});
 app.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){if(!$('#ap-pop').hidden){e.stopPropagation();closePop();return}
+  if(e.key==='Escape'){if(!$('#ap-pop').hidden){e.stopPropagation();closePop(true);return}
     if(DLG?.canEsc){e.stopPropagation();const k=DLG.kind;closeDlg();if(k==='file'||k==='suites')guide()}return}
   if((e.key==='ArrowDown'||e.key==='ArrowUp')&&e.target.closest('#ap-pop')){e.preventDefault();const bs=$$('#ap-pop button:not([disabled])'),k=bs.indexOf(D.activeElement);
     bs[(k+(e.key==='ArrowDown'?1:-1)+bs.length)%bs.length]?.focus();return}

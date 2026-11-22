@@ -29,7 +29,7 @@
   --grad:linear-gradient(125deg,var(--navy) 20%,var(--aqua));
   --red:#C8323F; --pass:#3CCB98;
   --viable:#EC2024; --viable-ink:#D0182A;
-  --paper:#F2F5F9; --sheet:#FFFFFF; --wash:#E4F2F7; --ink:var(--navy); --ink-2:#3A4967; --muted:#63718C; --line:#D9E1EB;
+  --paper:#F2F5F9; --sheet:#FFFFFF; --wash:#E4F2F7; --ink:var(--navy); --ink-2:#3A4967; --muted:#5F6D88; --line:#D9E1EB; --field:#76859B;
   --on-dark-2:#C3D0E6; --on-dark-3:#93A5C5; --dark-line:rgba(195,208,230,.17);
   --display:"Archivo","Arial Nova","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
   --body:"Instrument Sans","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
@@ -110,10 +110,13 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .burger i{display:block;width:18px;height:2px;border-radius:2px;background:#fff;transition:transform .45s var(--ease)}
 .menu-open .burger i:first-child{transform:translateY(3.5px) rotate(45deg)}
 .menu-open .burger i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
-.menu{position:fixed;inset:0;z-index:45;display:grid;align-content:center;padding:96px var(--gut) 40px;overflow:auto;background:var(--navy);visibility:hidden;clip-path:circle(0 at calc(100% - 52px) 46px);transition:clip-path .7s var(--ease),visibility 0s .7s}
+.menu{position:fixed;inset:0;z-index:45;display:flex;flex-direction:column;padding:96px 0 0;background:var(--navy);visibility:hidden;clip-path:circle(0 at calc(100% - 52px) 46px);transition:clip-path .7s var(--ease),visibility 0s .7s}
 .menu-open .menu{visibility:visible;clip-path:circle(170% at calc(100% - 52px) 46px);transition:clip-path .9s var(--ease),visibility 0s}
 .menu a{display:block;padding:13px 0;border-bottom:1px solid var(--dark-line);font:640 clamp(1.7rem,7vw,2.7rem)/1.1 var(--display);font-stretch:112%;letter-spacing:-.03em;text-decoration:none;transform:translateY(26px);transition:transform .8s var(--ease)}
 .menu-open .menu a{transform:none}
+.menu-in{flex:1;min-height:0;display:flex;flex-direction:column;overflow:auto;padding:0 var(--gut) 40px}
+.menu-in>*{flex:none}.menu-in>:first-child{margin-top:auto}.menu-in>:last-child{margin-bottom:auto}
+@media (max-height:560px){.menu a{padding:8px 0;font-size:clamp(1.25rem,6.2vh,1.7rem)}}
 @media (max-width:1099px){.nav,.hdr-cta .gh{display:none}.burger{display:grid}}
 .hdr.tight .nav,.hdr.tight .hdr-cta .gh{display:none}.hdr.tight .burger{display:grid}
 @media (max-width:479px){.hdr-cta .my{display:none}}
@@ -278,7 +281,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .form{display:grid;gap:20px;width:100%}
 .frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .form label,.form legend{display:block;margin-bottom:8px;padding:0;font-weight:600;font-size:.96rem}
-.form input:not([type=radio]),.form select,.form textarea{display:block;width:100%;min-height:52px;padding:12px 16px;border:0;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--line);font:inherit;color:var(--ink)}
+.form input:not([type=radio]),.form select,.form textarea{display:block;width:100%;min-height:52px;padding:12px 16px;border:0;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--field);font:inherit;color:var(--ink)}
 .form textarea{min-height:150px;resize:vertical}
 .form fieldset{margin:0;padding:0;border:0;min-width:0}
 .yn{display:flex;gap:24px}
@@ -353,6 +356,8 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .phases li.on::before{background:var(--navy);box-shadow:0 0 0 6px var(--paper);color:#fff;transform:scale(1.1)}
 .phases li.on:nth-child(4)::before{background:var(--pass);color:var(--navy)}
 .note{color:var(--muted);font-size:.96rem;max-width:60ch}
+.vtx{margin-top:14px;max-width:60ch}.vtx summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.vtx ol{margin:12px 0 0;padding-left:1.3em;color:var(--ink-2);font-size:.96rem;line-height:1.5}.vtx li+li{margin-top:6px}
 .sub{font-size:var(--t-h3);margin-bottom:16px}
 .cases{border-top:1px solid var(--line)}
 .case{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 16px;padding:17px 0;border-bottom:1px solid var(--line);text-decoration:none}
@@ -776,6 +781,7 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
   </div>
 </header>
 <nav class="menu dark" id="menu" aria-label="Menu">
+<div class="menu-in">
   <a href="#home">VIABLE Helpdesk home</a>
   <a href="#t-start">Getting set up</a>
   <a href="#t-tests">Running tests</a>
@@ -788,6 +794,7 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
   <a href="https://vhelpdesk.iccsolutions.com/hc/en-us/signin" target="_blank" rel="noopener">Sign in</a>
   <a data-icchd>ICC Solutions Helpdesk</a>
   <a data-site>Main website</a>
+</div>
 </nav>
 <main id="main"><div id="page"></div></main>
 <footer class="foot dark" id="foot"></footer>
@@ -1328,6 +1335,7 @@ const secRow=s=>`<li><a class="nrow" href="${gid(s.g,s.n)}"><span class="nt"><sp
 let liveT=0;
 function search(q){
   const ws=norm(q).split(/\s+/).filter(Boolean),res=$('#results'),tops=$('#topics'),gds=$('#guides');if(!res)return;
+  try{history.replaceState({...history.state,q:ws.length?q:''},'')}catch(e){}
   clearTimeout(liveT);
   if(!ws.length){res.hidden=true;tops.hidden=false;gds.hidden=false;return}
   const ph=ws.join(' '),score=([,t,all])=>(ws.every(w=>t.includes(w))?2:0)+(ws.length>1&&all.includes(ph)?1:0);
@@ -1347,6 +1355,11 @@ const goSec=n=>{const h=$(`#gs-${n}-h`,page);if(!h){scrollTo(0,0);return}h.tabIn
 const moveInd=a=>{if(!a){ind.style.opacity=0;return}ind.style.opacity=1;ind.style.width=a.offsetWidth+'px';ind.style.transform=`translateX(${a.offsetLeft}px)`};
 nav.addEventListener('pointerover',e=>{const a=e.target.closest('a');if(a)moveInd(a)});
 nav.addEventListener('pointerleave',()=>moveInd(act));
+let settleN=0,moved=false;
+['wheel','touchstart','keydown','pointerdown'].forEach(t=>addEventListener(t,()=>{moved=true},{passive:true,capture:true}));
+const settle=n=>{const k=++settleN,again=()=>{if(k===settleN&&!moved&&location.hash.endsWith('-'+n))goSec(n)};moved=false;
+  if(D.fonts&&D.fonts.ready)D.fonts.ready.then(again);
+  if(D.readyState!=='complete')addEventListener('load',again,{once:true})};
 function route(){
   const h=location.hash.slice(1),kind=h.slice(0,2),slug=h.slice(2);let html,title,lit='',view='',sec=0;
   const gm=kind==='g-'&&/^(.+?)(?:-(\d+))?$/.exec(slug),gg=gm&&GBY[gm[1]];
@@ -1359,10 +1372,10 @@ function route(){
   page.innerHTML=html;page.dataset.v=view;D.title=(title?title+' | ':'')+'VIABLE Helpdesk';scrollTo(0,0);spy();
   act=links.find(a=>a.getAttribute('href')==='#t-'+lit)||null;links.forEach(a=>a.classList.toggle('on',a===act));moveInd(act);
   const q=$('#q');
-  if(q){q.addEventListener('input',()=>search(q.value));$('#sf').addEventListener('submit',e=>{e.preventDefault();search(q.value);if(q.value.trim())$('#r-h').focus()});$('#r-x').addEventListener('click',()=>{q.value='';search('');q.focus()})}
+  if(q){const sq=history.state&&history.state.q;if(sq){q.value=sq;search(sq)}q.addEventListener('input',()=>search(q.value));$('#sf').addEventListener('submit',e=>{e.preventDefault();search(q.value);if(q.value.trim())$('#r-h').focus()});$('#r-x').addEventListener('click',()=>{q.value='';search('');q.focus()})}
   const rq=$('#rq');
   if(rq)rq.addEventListener('submit',e=>{e.preventDefault();const m=$('#rq-msg');m.hidden=false;m.innerHTML=`This is a design preview, so nothing has been sent. To reach VIABLE support now, email <a href="mailto:viable@iccsolutions.com">viable@iccsolutions.com</a> or use the <a ${X(HD+'/requests/new')}>current request form</a>.`});
-  if(sec)goSec(sec);else if(h&&h!=='home'){const h1=$('h1',page);h1.tabIndex=-1;h1.focus({preventScroll:true})}
+  if(sec){goSec(sec);settle(sec)}else if(h&&h!=='home'){const h1=$('h1',page);h1.tabIndex=-1;h1.focus({preventScroll:true})}
 }
 addEventListener('hashchange',route);
 
