@@ -9,5 +9,5 @@ A preview of a proposed new ICC Solutions website (`index.html`), helpdesk (`hel
 - The ICC helpdesk's getting started guide, and its PDF, are a draft for ICC to check.
 - `try/` is Try a test run, a working copy of ICCSimTMat's screens with demo tests, for ICC to look at. The website links to it from
   the home page and the POS & ATM testing page.
-- Built on 22 November 2026 from website v2.39.0, helpdesk v1.7.0, VIABLE helpdesk v1.5.0 and Try a test run v2.4.0.
+- Built on 22 November 2026 from website v2.42.0, helpdesk v1.7.0, VIABLE helpdesk v1.5.0 and Try a test run v2.4.0.
 - Earlier versions are kept, each in a folder named after it: `v2.20.0/`, `v2.28.0/`.

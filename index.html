@@ -137,7 +137,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .film text{font-family:var(--body)}
 .ldm{display:none}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
-.film :is(.reel,.actB,.vC,.b2,.selN,.ck,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop){opacity:0}
+.film :is(.reel,.actB,.vC,.b2,.selN,.ck,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop,.tickC){opacity:0}
 .film .runB{opacity:.4}
 .film .cone{opacity:.3}
 .type{animation:type .5s steps(2) infinite alternate}
@@ -501,9 +501,9 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 @media (max-width:699px){
   .hero-in{padding-bottom:calc(103vw + 92px)}
   .film{overflow:visible;-webkit-mask-image:none;mask-image:none}
-  .pnl{transform:translate(206px,-70px) scale(1.7) translate(-530px,-124px)}
+  .pnl{transform:translate(190px,-76px) scale(1.65) translate(-500px,-112px)}
   .ldm{display:block}
-  .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-668px,-292px)}
+  .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-510px,-292px)}
 }
 @media (forced-colors:active){.brand img{forced-color-adjust:none;background:var(--navy);border-radius:8px}
   .btn,.form input:not([type=radio]),.form select,.form textarea,.hsearch{border:1px solid transparent}}
@@ -1002,25 +1002,27 @@ const FLAT=e=>{const m=y=>`matrix(-.28 .38 1 0 ${e} ${y})`,cx=f1(e+13.1);return 
 <g class="tickF" opacity="0"><rect transform="${m(318)}" x="4" y="5" width="34" height="28" rx="4" fill="#3CCB98"/><path d="M${f1(cx-5)} 325.6l3.4 3.2 6.8-6.6" fill="none" stroke="#06203F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>`};
 const NW='fill="none" stroke="#E8F2FA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"',NC=NW.replace('#E8F2FA','#62D5E8');
 const NCARD=`<rect x="569" y="168" width="26" height="28" rx="4" ${NW}/><rect x="574" y="174" width="9" height="7" rx="1.6" fill="#62D5E8"/>`;
-const NSUB=(t,c)=>T(630,185,13.5,t,{f:'#9FD3EA',c});
-const NSTEP=(c,icon,title,sub)=>`<g class="${c}"${c==='nA'?'':' opacity="0"'}>${icon}${T(630,165,19,title,{w:700})}${sub}</g>`;
-const NARR=`${GLASS(530,124,452,100)}<circle cx="582" cy="174" r="30" fill="#62D5E8" fill-opacity=".12" stroke="#62D5E8" stroke-opacity=".55" stroke-width="1.3"/><circle class="nrg" opacity="0" cx="582" cy="174" r="30" fill="none" stroke="#62D5E8" stroke-width="2"/>
-${NSTEP('nA',`<path class="npl" d="M573 159v30l25-15z" fill="#62D5E8" stroke="#62D5E8" stroke-width="2.4" stroke-linejoin="round"/>`,'Running the test',NSUB('Chosen in ICCSimTMat on his laptop'))}
-${NSTEP('nB',`${NCARD}<path class="nar" d="M582 149v13M576.5 156.5l5.5 5.5 5.5-5.5" ${NC}/>`,'Script downloads to the card',NSUB('The card sits on the reader'))}
-${NSTEP('nC',`<rect x="565" y="151" width="24" height="46" rx="4.5" ${NW}/><rect x="569.5" y="156" width="15" height="12" rx="2" fill="#62D5E8"/><g fill="#E8F2FA">${[176,182,188].map(y=>[572.5,577,581.5].map(x=>`<circle cx="${x}" cy="${y}" r="1.4"/>`).join('')).join('')}</g><g class="nwv" ${NC}><path d="M595 167a9 9 0 0 1 0 14"/><path d="M600.5 161.5a17 17 0 0 1 0 25"/></g><g class="nok" opacity="0"><circle cx="603" cy="152" r="8" fill="#3CCB98"/><path d="M599 152l3 3.1 5.2-5.9" fill="none" stroke="#06203F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`,'Testing on the terminal',`${NSUB('He taps the card and keys in the PIN','nc1')}<g class="nc2" opacity="0">${NSUB('The terminal approves')}</g>`)}
-${NSTEP('nD',`${NCARD}<path class="nar" d="M582 163v-13M576.5 155.5l5.5-5.5 5.5 5.5" ${NC}/>`,'Results read back from the card',NSUB('The card goes back on the reader'))}
-${NSTEP('nE',[161,174,187].map((y,i)=>`<circle cx="569.5" cy="${y}" r="1.6" fill="#E8F2FA" fill-opacity=".5"/><path d="M580 ${y}h19" ${NW} stroke-opacity=".45"/><path class="nq${i+1}" opacity="0" d="M565.5 ${y}l3.2 3.3 5.6-6.6" fill="none" stroke="#3CCB98" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`).join(''),'Checking what the terminal did',NSUB('Amount shown, PIN asked, approved'))}
-${NSTEP('nF',`<g class="nps"><circle cx="582" cy="174" r="22" fill="#3CCB98"/><path d="M571.5 174.5l7.4 7.6 13.6-15.6" fill="none" stroke="#06203F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>`,'Test passed',NSUB('Saved in the test plan as a Pass'))}
-${[1,2,3,4,5,6].map(i=>{const x=600+i*30;return `<rect x="${x}" y="197" width="24" height="4" rx="2" fill="#fff" fill-opacity=".2"/><rect class="np${i}"${i>1?' opacity="0"':''} x="${x}" y="197" width="24" height="4" rx="2" fill="${i<6?'#62D5E8':'#3CCB98'}"/>`}).join('')}`;
-const PANEL=`<path d="M543 320V228" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><path class="ldm" d="M543 223V109" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><circle cx="543" cy="326" r="3.5" fill="#62D5E8"/>
+const NDOTS=[177,183.5,190].map(y=>[572.5,582,591.5].map(x=>`<circle cx="${x}" cy="${y}" r="1.5"/>`).join('')).join('');
+const NSTEP=(c,icon,lines)=>`<g class="${c}"${c==='nA'?'':' opacity="0"'}><g transform="translate(-36 -14)">${icon}</g>${lines.map((t,i)=>T(592,f1(166-(lines.length-1)*11+i*22),17,t,{w:600})).join('')}</g>`;
+const NARR=`${GLASS(500,112,486,112)}<circle cx="546" cy="160" r="30" fill="#62D5E8" fill-opacity=".12" stroke="#62D5E8" stroke-opacity=".55" stroke-width="1.3"/><circle class="nrg" opacity="0" cx="546" cy="160" r="30" fill="none" stroke="#62D5E8" stroke-width="2"/>
+${NSTEP('nA',`<path class="npl" d="M573 159v30l25-15z" fill="#62D5E8" stroke="#62D5E8" stroke-width="2.4" stroke-linejoin="round"/>`,['The test is executed from','the ICCSimTMat tool'])}
+${NSTEP('nB',`${NCARD}<path class="nar" d="M582 149v13M576.5 156.5l5.5 5.5 5.5-5.5" ${NC}/>`,['Card remains on the reader','to download the script'])}
+${NSTEP('nC',`<rect x="565" y="151" width="24" height="46" rx="4.5" ${NW}/><rect x="569.5" y="156" width="15" height="12" rx="2" fill="#62D5E8"/><g fill="#E8F2FA">${[176,182,188].map(y=>[572.5,577,581.5].map(x=>`<circle cx="${x}" cy="${y}" r="1.4"/>`).join('')).join('')}</g><g class="nwv" ${NC}><path d="M595 167a9 9 0 0 1 0 14"/><path d="M600.5 161.5a17 17 0 0 1 0 25"/></g>`,['Tool notifies user to place the card','onto the testing device to perform','the transaction'])}
+${NSTEP('nD',`<rect x="563" y="151" width="38" height="46" rx="5" ${NW}/><rect x="568" y="156" width="28" height="13" rx="2.5" fill="#0D2F60" stroke="#62D5E8" stroke-width="1.2"/>${[573.6,579.2,584.8,590.4].map(x=>`<circle cx="${x}" cy="162.5" r="1.7" fill="none" stroke="#9FD3EA" stroke-width=".9"/><circle class="npd" opacity="0" cx="${x}" cy="162.5" r="1.9" fill="#fff"/>`).join('')}<g fill="#E8F2FA">${NDOTS}</g><g class="nok" opacity="0"><circle cx="604" cy="152" r="8" fill="#3CCB98"/><path d="M600 152l3 3.1 5.2-5.9" fill="none" stroke="#06203F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`,['The user follows the testing','instructions'])}
+${NSTEP('nE',`${NCARD}<path class="nar" d="M582 163v-13M576.5 155.5l5.5-5.5 5.5 5.5" ${NC}/>`,['User places the card back onto the','reader to upload the results'])}
+${NSTEP('nF',`<g class="nps"><circle cx="582" cy="174" r="22" fill="#3CCB98"/><path d="M571.5 174.5l7.4 7.6 13.6-15.6" fill="none" stroke="#06203F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>`,['Test has passed'])}
+${[1,2,3,4,5,6].map(i=>{const x=562+i*30;return `<rect x="${x}" y="204" width="24" height="4" rx="2" fill="#fff" fill-opacity=".2"/><rect class="np${i}"${i>1?' opacity="0"':''} x="${x}" y="204" width="24" height="4" rx="2" fill="${i<6?'#62D5E8':'#3CCB98'}"/>`}).join('')}`;
+const PANEL=`<path d="M543 320V228" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><path class="ldm" d="M543 223V115" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><circle cx="543" cy="326" r="3.5" fill="#62D5E8"/>
 <g class="pnl">${NARR}</g>`;
+const RDM=y=>`matrix(-.28 .38 1 0 616 ${y})`;
+const READER=`<path d="M607.6 335.4H647.6L656 324V328.6L647.6 340H607.6Z" fill="#B3C9DB"/><rect transform="${RDM(324)}" width="30" height="40" rx="5" fill="url(#gDev)"/><rect transform="${RDM(324)}" x="3.5" y="3.5" width="23" height="33" rx="3.5" fill="none" stroke="#9DB7CC" stroke-width="1.2"/><circle cx="640" cy="337.7" r="1.8" fill="#3CCB98"/><g class="ledB" opacity="0"><circle cx="640" cy="337.7" r="6.5" fill="#F5A623" fill-opacity=".3"/><circle cx="640" cy="337.7" r="2.3" fill="#F5A623"/></g><g class="cdock"><g transform="${RDM(322)}">${CARD(3,1,24,38)}</g></g>`;
 const ACT1=`<ellipse cx="672" cy="388" rx="300" ry="150" fill="url(#gGlow)"/>
 <g transform="translate(${A1X} ${f1(584*(1-A1K))}) scale(${A1K})">
 <rect x="512" y="352" width="10" height="232" fill="#143C6F"/><rect x="1042" y="352" width="10" height="232" fill="#143C6F"/>
 ${SEATED(...HIP,HIM,'ubA')}${MIRROR(HIP2[0],SEATED(...HIP2,HER,'ubB'))}
 <rect x="502" y="340" width="560" height="12" rx="6" fill="url(#gTop)"/>
-${LAPTOP}<path d="M603 338h10" stroke="#5E93C4" stroke-width="2"/>
-<g class="cdock">${DOCKED()}</g><rect x="613" y="308" width="40" height="32" rx="6" fill="url(#gDev)"/><path d="M620 313h26" stroke="#9DB7CC" stroke-width="2" stroke-linecap="round"/><circle cx="646" cy="330" r="2.4" fill="#3CCB98"/><circle class="ledB" opacity="0" cx="646" cy="330" r="2.6" fill="#F5A623"/>
+${LAPTOP}<path d="M603 338h6" stroke="#5E93C4" stroke-width="2"/>
+${READER}
 <rect x="658" y="333" width="56" height="7" rx="3.5" fill="#C9DEEC"/>${TERM(665,246,'tickA',0)}${PINSCR(665,246)}${BADGE(703,250,'badgeA')}
 <g transform="translate(77 -87)" fill="none" stroke="#62D5E8" stroke-width="2.2" stroke-linecap="round"><path class="ripA" d="M635 342a14 14 0 0 1 0 20"/><path class="ripA" d="M642 335a24 24 0 0 1 0 34"/><path class="ripA" d="M649 328a34 34 0 0 1 0 48"/></g>
 ${FLAT(846)}${MIRROR(782,LAPTOP)}
@@ -1028,32 +1030,25 @@ ${ARM1}${ARM2}
 </g>
 ${PANEL}`;
 
-const LEG=(c,x,col,shoe,sole)=>`<g class="lg${c}"><g transform="translate(${x} 486)">${THIGH(148,col)}</g><g class="sn${c}"><g transform="translate(${x} 634)">${SHIN(130,col)}</g><g transform="translate(${x} 782)">${SHOE(shoe,sole)}</g></g></g>`;
-const SHP=[446,334],SHP_PHONE=[548,372],SHP_TAP=[561,365];
-const PERSON=(skin,hair,style)=>`<ellipse cx="462" cy="784" rx="62" ry="6" fill="#030A1A" fill-opacity=".4"/>
-${LEG('B',430,'#173560','#0B2550','#1B3D6A')}${LEG('A',448,'#1E3F73','#1E2F57','#2C4A7E')}
-${NECK(...SHP,1,skin)}${TOP(...SHP,1,'#B5DDD6',166,'#FFFFFF','#93C9C1','gShL')}${HEAD(SHP[0]+HX,SHP[1]+HY,skin,hair,1,style,HK)}`;
-const ARMP=(()=>{const [u,f]=POSE(...SHP,...SHP_PHONE,1);return `${UPPER('pu','#CDEBE6',u)}<g class="phn" transform="translate(${SHP_PHONE[0]} ${SHP_PHONE[1]}) rotate(12)"><rect x="-11" y="-36" width="22" height="46" rx="5" fill="#0B2550" stroke="#9FD3EA" stroke-opacity=".7"/><rect x="-8" y="-32" width="16" height="37" rx="3" fill="#62D5E8" fill-opacity=".55"/></g>${FORE('pfa','#CDEBE6','#FFFFFF',SKIN[2],1,f)}`})();
-const STF=[824,334],STF_HOLD=[744,404],STF_TAP=[652,373],STF_POCKET=[770,505],STF_REST=[730,455];
-const APRON=(sx,sy)=>{const P=PT(x=>f1(sx-x),y=>f1(sy+y));return `<path d="${P('M12 4L28 2C32 12 34 26 34 40L34 200L12 200Z')}" fill="#E4F3F1"/>`
-  +`<path d="${P('M13 4C6 -10 -4 -22 -14 -27')}" fill="none" stroke="#E4F3F1" stroke-width="4" stroke-linecap="round"/>`
-  +`<path d="${P('M12 96L-26 98L-26 104L12 102Z')}" fill="#E4F3F1"/>`
-  +`<path d="${P('M-25 101L-36 95L-36 107Z M-26 103L-31 122L-27 123L-23 104Z')}" fill="#CFE6E3"/>`};
-const STAFF=(()=>{const [u,f]=POSE(...STF,...STF_HOLD,-1);return `${NECK(...STF,-1,SKIN[1])}${TOP(...STF,-1,'#4189C6',200,'','','gShR')}${APRON(...STF)}${HEAD(STF[0]-HX,STF[1]+HY,SKIN[1],'#1B1F33',-1,'bun',HK)}${UPPER('su','#55A0DA',u)}<g class="cardC" transform="translate(${STF_HOLD[0]} ${STF_HOLD[1]}) rotate(-12)">${CARD(-12,-40,24,38)}</g>${FORE('sf','#55A0DA','#3B82BC',SKIN[1],-1,f)}`})();
+const STF=[580,334],STF_HOLD=[500,404],STF_TAP=[468,353];
+const STAFF=(()=>{const [u,f]=POSE(...STF,...STF_HOLD,-1);return `${NECK(...STF,-1,SKIN[1])}${TOP(...STF,-1,'#4189C6',200,'','','gShR')}${HEAD(STF[0]-HX,STF[1]+HY,SKIN[1],'#1B1F33',-1,'bun',HK)}${UPPER('su','#55A0DA',u)}<g class="cardC" transform="translate(${STF_HOLD[0]} ${STF_HOLD[1]}) rotate(-12)">${CARD(-12,-40,24,38)}</g>${FORE('sf','#55A0DA','#3B82BC',SKIN[1],-1,f)}`})();
+const CB=[740,334],CB_HOLD=[820,404],CB_UNDER=[887,445],CB_SLOT=[890,425],CB_KEYS=[897,372];
+const STAFF2=(()=>{const [u,f]=POSE(...CB,...CB_HOLD,1);return [`${NECK(...CB,1,SKIN[0],1)}${TOP(...CB,1,'#4189C6',200,'','','gShL')}${HEAD(CB[0]+HX,CB[1]+HY,SKIN[0],'#7A4A2A',1,'man',HK)}${UPPER('tu','#55A0DA',u)}<g class="cardS" opacity="0" transform="translate(${CB_SLOT[0]} ${CB_SLOT[1]}) rotate(8)">${CARD(-12,-40,24,38)}</g><g class="cardD" transform="translate(${CB_HOLD[0]} ${CB_HOLD[1]}) rotate(12)">${CARD(-12,-40,24,38)}</g>`,FORE('tf','#55A0DA','#3B82BC',SKIN[0],1,f)]})();
+const TY=316;
+const TSTAND=x=>`<rect x="${x+17}" y="${TY+82}" width="8" height="${462-TY-82}" fill="#C9DEEC"/><rect x="${x-4}" y="460" width="50" height="8" rx="4" fill="url(#gDev)"/>`;
+const TERM_L=`${TSTAND(400)}${TERM(400,TY,'tickB')}`;
+const TERM_R=`${TERM(878,TY,'tickC',8)}<g transform="translate(878 ${TY}) rotate(8 21 44)"><g class="pinB" opacity="0"><rect x="4" y="5" width="34" height="28" rx="4" fill="url(#gScr)"/>${T(21,15.5,8.5,'PIN',{a:'middle',w:700,f:'#9FD3EA'})}${[0,1,2,3].map(i=>`<circle cx="${10.5+i*7}" cy="24.5" r="2.3" fill="none" stroke="#9FD3EA" stroke-width="1"/><circle class="pdB" opacity="0" cx="${10.5+i*7}" cy="24.5" r="2.3" fill="#fff"/>`).join('')}</g></g>`;
 const S4B=`${SHELF(300,[[806,30,58,.3],[842,40,40,.2],[890,26,66,.34],[924,44,46,.22],[976,30,58,.3],[1010,36,38,.2]])}${SHELF(386,[[900,36,48,.22],[944,40,44,.3],[990,30,58,.2]])}
-<path d="M606 198v16" stroke="#8FC1EA" stroke-width="2"/><path class="cone" d="M566 252h80l96 216H470z" fill="url(#gCone)"/><path d="M566 252h80l-20-40h-40z" fill="url(#gDev)"/>
-<path d="M690 198v18M742 198v18" stroke="#8FC1EA" stroke-opacity=".7" stroke-width="1.5"/><rect x="664" y="214" width="104" height="40" rx="9" fill="#0F3260" stroke="#fff" stroke-opacity=".22"/>
-<text class="closed" x="716" y="240" text-anchor="middle" font-size="16" font-weight="700" fill="#9FD3EA">Closed</text><text class="open" x="716" y="240" text-anchor="middle" font-size="16" font-weight="700" fill="#3CCB98">Open</text>
-${STAFF}`;
-const COUNTER=`<rect x="540" y="484" width="480" height="298" fill="url(#gPanel)"/><path d="M730 498v250M920 498v250" stroke="#fff" stroke-opacity=".06" stroke-width="2"/><rect x="552" y="760" width="480" height="22" fill="#0A2347"/><rect x="520" y="468" width="500" height="16" rx="8" fill="url(#gTop)"/>`;
-const S4F=`<g fill="none" stroke="#62D5E8" stroke-width="2.2" stroke-linecap="round"><path class="ripB" d="M635 342a14 14 0 0 1 0 20"/><path class="ripB" style="animation-delay:.2s" d="M642 335a24 24 0 0 1 0 34"/><path class="ripB" style="animation-delay:.4s" d="M649 328a34 34 0 0 1 0 48"/></g>
-<g class="shop">${PERSON(SKIN[2],'#6B4A36','long')}${ARMP}${RIPL('ripC')}</g>`;
-const TERM2=`<rect x="601" y="420" width="8" height="42" fill="#C9DEEC"/><rect x="580" y="460" width="50" height="8" rx="4" fill="url(#gDev)"/>${TERM(584,336,'tickB')}${BADGE(630,336)}`;
-const MTCALL=`${GLASS(668,292,300,132)}${CARD(682,302,66,104)}${T(764,321,12,'Merchant test cards',{f:'#9FD3EA'})}
-${['Chip and PIN','Refund','Contactless'].map((t,i)=>{const y=345+i*22;return `<circle cx="771" cy="${y-4.5}" r="6.5" fill="none" stroke="#5E93C4" stroke-width="1.3"/>${OKDOT(771,y-4.5,i<2?'':'okB')}${T(786,y,14,t,{w:600})}`}).join('')}
-${T(764,413,13,'Ready to trade',{w:700,f:'#3CCB98',c:'rdy'})}`;
+<g transform="translate(-500 0)">${SHELF(300,[[806,30,58,.3],[842,40,40,.2],[890,26,66,.34],[924,44,46,.22]])}</g>
+<path class="cone" d="M636 198h48l150 270H486z" fill="url(#gCone)"/>
+${TSTAND(878)}${STAFF2[0]}${TERM_R}${STAFF2[1]}${TERM_L}${STAFF}`;
+const COUNTER=`<rect x="340" y="484" width="680" height="298" fill="url(#gPanel)"/><path d="M566 498v250M793 498v250" stroke="#fff" stroke-opacity=".06" stroke-width="2"/><rect x="352" y="760" width="680" height="22" fill="#0A2347"/><rect x="320" y="468" width="700" height="16" rx="8" fill="url(#gTop)"/>`;
+const S4F=`<g fill="none" stroke="#62D5E8" stroke-width="2.2" stroke-linecap="round"><path class="ripB" d="M451 322a14 14 0 0 1 0 20"/><path class="ripB" d="M458 315a24 24 0 0 1 0 34"/><path class="ripB" d="M465 308a34 34 0 0 1 0 48"/></g>`;
+const MTCALL=`${GLASS(510,292,300,132)}${CARD(524,302,66,104)}${T(606,322,12,'Merchant test cards',{f:'#9FD3EA'})}
+${['Contactless test','Contact test'].map((t,i)=>{const y=350+i*26;return `<circle cx="614" cy="${y-5}" r="7.5" fill="none" stroke="#5E93C4" stroke-width="1.3"/><g transform="translate(${f1(614-614*1.15)} ${f1((y-5)*(1-1.15))}) scale(1.15)">${OKDOT(614,y-5,'ok'+(i+1))}</g>${T(631,y,15,t,{w:600})}`}).join('')}
+${T(606,410,13,'Training complete',{w:700,f:'#3CCB98',c:'rdy'})}`;
 
-const CAPS=['Choose the test','Run on the terminal','Certified','Check in store','Live'];
+const CAPS=['Choose the test','Run on the terminal','Certified','Train the cashiers','Training complete'];
 const DEFS=`<svg class="defs" aria-hidden="true"><defs>
   <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1EEE2"/><stop offset=".5" stop-color="#D2CDBA"/><stop offset="1" stop-color="#ADA68F"/></linearGradient>
   ${GRAD('gDev','#F6FBFE','#CFE3F0',0,1)}${GRAD('gTop','#4C93D2','#2A6DB0',0,1)}${GRAD('gPanel','#184A84','#0D2D59',0,1)}${GRAD('gScr','#06183A','#0D2F60',1,1)}
@@ -1069,7 +1064,7 @@ const FILM=`<svg class="film" viewBox="0 0 1000 600" aria-hidden="true">
 <g class="reel">
   <rect x="0" y="584" width="1000" height="16" fill="url(#gFloor)"/>
   <g class="actA">${ACT1}</g>
-  <g class="actB"><g transform="translate(0 -198)">${S4B}${COUNTER}${S4F}${TERM2}</g></g>
+  <g class="actB"><g transform="translate(0 -198)">${S4B}${COUNTER}${S4F}</g></g>
   <g class="actB"><g class="mtcc">${MTCALL}</g></g>
   <g class="flyc" opacity="0"><g transform="translate(${A1X} ${f1(584*(1-A1K))}) scale(${A1K})"><g class="flyr">${DOCKED()}</g></g></g>
 </g>
@@ -1669,17 +1664,18 @@ function startMotion(){
   });
   requestAnimationFrame(loop);
 }
-const BEATS=[0,2.1,5.7,10.7,13.6],FILM_LEN=18.2,REST_AT=5.12;
+const MAP=[[2.05,2.9],[3,2.2],[3,.4],[3.72,2],[3.95,1],[5.15,2.8],[6.6,3],[9,3]],ACT1_LEN=MAP.reduce((s,r)=>s+r[1],0);
+const BEATS=[0,2.9,11.3,ACT1_LEN+.3,ACT1_LEN+7.6],FILM_LEN=ACT1_LEN+10,REST_AT=11.27;
 function buildFilm(){
   const f=$('.film'),q=s=>$(s,f),qa=s=>$$(s,f);
-  const T=gsap.timeline({repeat:-1,paused:true});
-  const P={hx:PAD[0],hy:PAD[1],hr:0,lean:0,h2x:PAD2[0],h2y:PAD2[1],lean2:0,chx:STF_HOLD[0],chy:STF_HOLD[1],sx:-420,sb:0,ha:-16,ka:4,hb:15,kb:16,tap:0};
-  const e={ub:q('.ubA'),ua:q('.ua'),fa:q('.fa'),ub2:q('.ubB'),ua2:q('.ua2'),fa2:q('.fa2'),ch:q('.chand'),su:q('.su'),sf:q('.sf'),sc:q('.cardC'),shop:q('.shop'),lgA:q('.lgA'),snA:q('.snA'),lgB:q('.lgB'),snB:q('.snB'),pu:q('.pu'),pf:q('.pfa'),ph:q('.phn')};
+  const M=gsap.timeline({repeat:-1,paused:true}),A=gsap.timeline({paused:true});let T=A;
+  const P={hx:PAD[0],hy:PAD[1],hr:0,lean:0,h2x:PAD2[0],h2y:PAD2[1],lean2:0,chx:STF_HOLD[0],chy:STF_HOLD[1],bx:CB_HOLD[0],by:CB_HOLD[1],br:12};
+  const e={ub:q('.ubA'),ua:q('.ua'),fa:q('.fa'),ub2:q('.ubB'),ua2:q('.ua2'),fa2:q('.fa2'),ch:q('.chand'),su:q('.su'),sf:q('.sf'),sc:q('.cardC'),tu:q('.tu'),tf:q('.tf'),cd:q('.cardD')};
   const caps=$$('.chap-t b'),steps=$$('.chap-b button');
   const at=(el,o)=>{for(const k in o)el.setAttribute(k,o[k])},n=v=>+v.toFixed(2);
   let was='',beat=-1;
   const draw=()=>{
-    const t=T.time();let b=0;while(b<4&&t>=BEATS[b+1])b++;
+    const t=M.time();let b=0;while(b<4&&t>=BEATS[b+1])b++;
     if(b!==beat){beat=b;caps.forEach((c,i)=>c.classList.toggle('on',i===b));steps.forEach((s,i)=>{s.style.setProperty('--f',i<b?1:0);i===b?s.setAttribute('aria-current','step'):s.removeAttribute('aria-current')})}
     steps[b].style.setProperty('--f',n((t-BEATS[b])/((BEATS[b+1]||FILM_LEN)-BEATS[b])));
     const now=Object.values(P).join();if(now===was)return;was=now;
@@ -1691,12 +1687,8 @@ function buildFilm(){
     [u,fo]=POSE(...lean(HIP2,SH2,-P.lean2),P.h2x,P.h2y,-1);e.ua2.setAttribute('transform',u);e.fa2.setAttribute('transform',fo);
     [u,fo]=POSE(...STF,P.chx,P.chy,-1);e.su.setAttribute('transform',u);e.sf.setAttribute('transform',fo);
     e.sc.setAttribute('transform',`translate(${n(P.chx)} ${n(P.chy)}) rotate(-12)`);
-    e.shop.setAttribute('transform',`translate(${n(P.sx)} ${n(P.sb)})`);
-    e.lgA.setAttribute('transform',`rotate(${n(P.ha)} 448 486)`);e.snA.setAttribute('transform',`rotate(${n(P.ka)} 448 634)`);
-    e.lgB.setAttribute('transform',`rotate(${n(P.hb)} 430 486)`);e.snB.setAttribute('transform',`rotate(${n(P.kb)} 430 634)`);
-    const px=SHP_PHONE[0]+(SHP_TAP[0]-SHP_PHONE[0])*P.tap,py=SHP_PHONE[1]+(SHP_TAP[1]-SHP_PHONE[1])*P.tap;
-    [u,fo]=POSE(...SHP,px,py,1);e.pu.setAttribute('transform',u);e.pf.setAttribute('transform',fo);
-    e.ph.setAttribute('transform',`translate(${n(px)} ${n(py)}) rotate(12)`);
+    [u,fo]=POSE(...CB,P.bx,P.by,1);e.tu.setAttribute('transform',u);e.tf.setAttribute('transform',fo);
+    e.cd.setAttribute('transform',`translate(${n(P.bx)} ${n(P.by)}) rotate(${n(P.br)})`);
   };
   gsap.ticker.add(draw);
 
@@ -1711,8 +1703,7 @@ function buildFilm(){
   const reach=(w,x,y,t,d,lift=12)=>{const h=hand[w],mid=(h.cy+y)/2-lift;T.to(P,{[h.x]:x,duration:d,ease:'power2.inOut'},t).to(P,{[h.y]:mid,duration:d/2,ease:'power1.out'},t).to(P,{[h.y]:y,duration:d/2,ease:'power1.in'},t+d/2);h.cy=y};
   const press=(w,...ts)=>{const h=hand[w];ts.forEach(t=>T.to(P,{[h.y]:h.cy+3,duration:.07,ease:'power1.in',yoyo:true,repeat:1},t))};
 
-  T.fromTo(q('.reel'),{opacity:0},{opacity:1,duration:.4,ease:'power1.out'},0).to(q('.reel'),{opacity:0,duration:.5,ease:'power1.in'},FILM_LEN-.6);
-  T.set({},{},FILM_LEN);
+
 
   click(.95);click(1.85);
   T.fromTo(q('.nrg'),{opacity:.9,scale:1,transformOrigin:'50% 50%'},{opacity:0,scale:1.5,duration:.55,ease:'power1.out',immediateRender:false},1.85);
@@ -1725,62 +1716,60 @@ function buildFilm(){
   say('.nA','.nB',2,2.05);nudge(q('.nB .nar'),2.15,3);flash(2.15,3);
   say('.nB','.nC',3,3);
   T.fromTo(q('.nwv'),{opacity:.25},{opacity:1,duration:.2,ease:'steps(1)',yoyo:true,repeat:2,immediateRender:false},3.72);
-  pop(q('.nok'),4.95);tab(q('.nc1'),q('.nc2'),4.95);
+  say('.nC','.nD',4,3.95);qa('.npd').forEach((d,i)=>fade(d,4.42+i*.15,1,.05));pop(q('.nok'),4.95);
   reach('A',RDR[0],RDR[1],2.45,.5);T.to(P,{lean:4,duration:.5,ease:'power2.inOut'},2.45);
-  T.set(q('.cdock'),{opacity:0},3.1).set(e.ch,{opacity:1},3.1);
+  T.set(P,{hr:-40},3);fade(q('.cdock'),3.05,0,.15);fade(e.ch,3.05,1,.15);T.to(P,{hr:0,duration:.4,ease:'power2.out'},3.15);
   reach('A',TAP[0],TAP[1],3.15,.55,14);T.to(P,{lean:12,duration:.55,ease:'power2.inOut'},3.15);
   rip('.ripA',3.72,'0% 50%');fade(q('.pinA'),3.95,1,.15);
   reach('A',PINP[0],PINP[1],3.95,.35,-4);T.to(P,{hr:-75,lean:15,duration:.35,ease:'power2.inOut'},3.95);
   press('A',4.38,4.53,4.68,4.83);qa('.pd').forEach((d,i)=>fade(d,4.42+i*.15,1,.05));
   fade(q('.tickA'),4.95,1,.15);fade(q('.pinA'),4.95,0,.15);
-  reach('A',RDR[0],RDR[1],5.15,.55,10);T.to(P,{hr:0,lean:4,duration:.55,ease:'power2.inOut'},5.15);
-  T.set(q('.cdock'),{opacity:1},5.7).set(e.ch,{opacity:0},5.7);
+  reach('A',RDR[0],RDR[1],5.15,.55,10);T.to(P,{hr:-40,lean:4,duration:.55,ease:'power2.inOut'},5.15);
+  fade(e.ch,5.62,0,.15);fade(q('.cdock'),5.62,1,.15);
   reach('B',KEYS2[0],KEYS2[1],3.45,.55,10);T.to(P,{lean2:10,duration:.55,ease:'power2.inOut'},3.45);
   press('B',4.1,4.27,4.44,4.61);fade(q('.tickF'),4.75,1,.2);
   reach('B',PAD2[0],PAD2[1],5.25,.55,10);T.to(P,{lean2:0,duration:.55,ease:'power2.inOut'},5.25);
   press('B',6.05,6.3,6.9,7.2,7.6,8.1,8.6,9.1,9.6);fade(q('.tickF'),6.6,0,.3);
 
-  say('.nC','.nD',4,5.75);nudge(q('.nD .nar'),5.8,-3);flash(5.8,3);
+  say('.nD','.nE',5,5.15);nudge(q('.nE .nar'),5.8,-3);flash(5.8,3);
   fade(q('.tickA'),6.1,0,.3);
   reach('A',PAD[0],PAD[1],5.85,.5);T.to(P,{lean:0,duration:.5,ease:'power2.inOut'},5.85);
-  say('.nD','.nE',5,6.5);
-  press('A',6.85,7.1,7.35);[1,2,3].forEach((n,i)=>pop(q('.nq'+n),6.88+i*.25));
-  click(7.75);
-  say('.nE','.nF',6,7.95);pop(q('.nps'),8.05);
-  pop(q('.badgeA'),8.95);
-  fade(q('.ubA .eye'),9.15,0,.1);fade(q('.smE'),9.15,1,.12);fade(q('.mN'),9.15,0,.12);fade(q('.mS'),9.15,1,.15);T.to(P,{lean:-2,duration:.6,ease:'power2.out'},9.15);
+  say('.nE','.nF',6,6.6);pop(q('.nps'),6.7);
+  pop(q('.badgeA'),7.1);
+  fade(q('.ubA .eye'),7.3,0,.1);fade(q('.smE'),7.3,1,.12);fade(q('.mN'),7.3,0,.12);fade(q('.mS'),7.3,1,.15);T.to(P,{lean:-2,duration:.6,ease:'power2.out'},7.3);
+
+  T=M;const S=ACT1_LEN;
+  let a0=0,m0=0;MAP.forEach(([a,d])=>{if(a>a0)M.fromTo(A,{time:a0},{time:a,duration:d,ease:'none',immediateRender:false},m0);a0=a;m0+=d});
+  M.fromTo(q('.reel'),{opacity:0},{opacity:1,duration:.4,ease:'power1.out'},0).to(q('.reel'),{opacity:0,duration:.5,ease:'power1.in'},FILM_LEN-.6);
+  M.set({},{},FILM_LEN);
 
   const ca=-12*Math.PI/180,[dcx,dcy]=A1(RDR[0]+6,RDR[1]-25),FLY=[STF_HOLD[0]+21*Math.sin(ca)-dcx,STF_HOLD[1]-21*Math.cos(ca)-198-dcy,-12];
   const fly=q('.flyc'),flr=q('.flyr'),cardC=q('.cardC');
-  T.set(q('.cdock'),{opacity:0},10.4).set(fly,{opacity:1},10.4).set(cardC,{opacity:0},10.4);
-  T.to(q('.actA'),{opacity:0,x:-20,duration:.45,ease:'power2.in'},10.45);
-  T.fromTo(qa('.actB'),{opacity:0,x:20},{opacity:1,x:0,duration:.5,ease:'power2.out'},10.9);
-  T.to(fly,{x:FLY[0],y:FLY[1],duration:.95,ease:'power2.inOut'},10.45);
-  T.to(flr,{rotation:FLY[2],duration:.95,ease:'power2.inOut',transformOrigin:'50% 50%'},10.45).to(flr,{keyframes:[{scale:1.5,duration:.47,ease:'sine.out'},{scale:1/A1K,duration:.48,ease:'sine.in'}],transformOrigin:'50% 50%'},10.45);
-  T.set(fly,{opacity:0},11.4).set(cardC,{opacity:1},11.4);
+  fade(q('.cdock'),S,0,.2);fade(fly,S,1,.2);T.set(cardC,{opacity:0},S);
+  T.to(q('.actA'),{opacity:0,x:-20,duration:.45,ease:'power2.in'},S+.05);
+  T.fromTo(qa('.actB'),{opacity:0,x:20},{opacity:1,x:0,duration:.5,ease:'power2.out'},S+.5);
+  T.to(fly,{x:FLY[0],y:FLY[1],duration:.95,ease:'power2.inOut'},S+.05);
+  T.to(flr,{rotation:FLY[2],duration:.95,ease:'power2.inOut',transformOrigin:'50% 50%'},S+.05).to(flr,{keyframes:[{scale:1.5,duration:.47,ease:'sine.out'},{scale:1/A1K,duration:.48,ease:'sine.in'}],transformOrigin:'50% 50%'},S+.05);
+  T.set(fly,{opacity:0},S+1).set(cardC,{opacity:1},S+1);
 
-  const tickB=q('.tickB'),eyes=qa('.actB .eye');
-  T.to(P,{chx:STF_TAP[0],chy:STF_TAP[1],duration:.5,ease:'power2.inOut'},11.55);
-  rip('.ripB',12.05,'0% 50%');fade(tickB,12.25,1,.2);pop(q('.okB'),12.45);fade(q('.rdy'),12.7);
-  T.to(P,{chx:STF_POCKET[0],chy:STF_POCKET[1],duration:.4,ease:'power2.in'},12.8).set(cardC,{opacity:0},13.2).to(P,{chx:STF_REST[0],chy:STF_REST[1],duration:.42,ease:'power2.out'},13.22);fade(tickB,13.2,0,.3);
-  blink(eyes[0],11.5,13.5,15.8);
+  const tickB=q('.tickB'),tickC=q('.tickC'),eyes=qa('.actB .eye'),cardD=q('.cardD'),cardS=q('.cardS'),pds=qa('.pdB');
+  const move=(k,[x,y],t,d=.55,ease='power2.inOut')=>T.to(P,{[k+'x']:x,[k+'y']:y,duration:d,ease},t);
+  fade(q('.cone'),S+.6,.7,.6);
+  move('ch',STF_TAP,S+1.3);rip('.ripB',S+1.85,'0% 50%');fade(tickB,S+2.05,1,.2);pop(q('.ok1'),S+2.3);move('ch',STF_HOLD,S+3);fade(tickB,S+3.6,0,.3);
+  move('b',CB_UNDER,S+3.5,.6);T.to(P,{br:8,duration:.6,ease:'power2.inOut'},S+3.5);
+  move('b',CB_SLOT,S+4.15,.3,'power2.out');
+  T.set(cardD,{opacity:0},S+4.5).set(cardS,{opacity:1},S+4.5);fade(q('.pinB'),S+4.5,1,.15);
+  move('b',CB_KEYS,S+4.55,.4);
+  pds.forEach((d,i)=>{const t=S+5.1+i*.3;T.to(P,{by:CB_KEYS[1]+3,duration:.07,ease:'power1.in',yoyo:true,repeat:1},t);fade(d,t+.04,1,.05)});
+  fade(tickC,S+6.3,1,.15);fade(q('.pinB'),S+6.3,0,.15);pop(q('.ok2'),S+6.5);
+  move('b',CB_SLOT,S+6.6,.4);T.set(cardD,{opacity:1},S+7).set(cardS,{opacity:0},S+7);
+  move('b',CB_UNDER,S+7.05,.3,'power2.in');move('b',CB_HOLD,S+7.35,.5);T.to(P,{br:12,duration:.5,ease:'power2.inOut'},S+7.35);fade(tickC,S+7.9,0,.3);
+  fade(q('.rdy'),S+7.7);
+  blink(eyes[0],S+1.1,S+5.6,S+8.9);blink(eyes[1],S+2.7,S+8.2);
 
-  fade(q('.cone'),13.3,1,.6);
-  T.set(q('.closed'),{opacity:0},13.55).set(q('.open'),{opacity:1},13.55);
-  const W0=13.65,ST=.48,kf=(o,h,k)=>({keyframes:Object.fromEntries(Object.entries(o).map(([p,[a,b]])=>[p,{[h]:a,[k]:b}])),duration:ST,ease:'none'});
-  const STANCE={'0%':[-16,4],'50%':[0,3],'100%':[15,16]},SWING={'0%':[15,16],'28%':[6,54],'60%':[-12,44],'84%':[-18,10],'100%':[-16,4]};
-  T.to(P,kf(STANCE,'ha','ka'),W0).to(P,kf(SWING,'ha','ka'),W0+ST).to(P,kf(STANCE,'ha','ka'),W0+2*ST);
-  T.to(P,kf(SWING,'hb','kb'),W0).to(P,kf(STANCE,'hb','kb'),W0+ST).to(P,kf(SWING,'hb','kb'),W0+2*ST);
-  T.to(P,{ha:0,ka:0,hb:0,kb:0,duration:.34,ease:'power2.out'},W0+3*ST);
-  T.to(P,{sx:-34,duration:3*ST,ease:'none'},W0).to(P,{sx:0,duration:.36,ease:'power2.out'},W0+3*ST);
-  T.to(P,{sb:-5,duration:ST/2,ease:'sine.out',yoyo:true,repeat:5},W0);
-  fade(e.shop,W0,1,.5);
-  T.to(P,{tap:1,duration:.3,ease:'power2.inOut'},15.65).to(P,{tap:0,duration:.35,ease:'power2.inOut'},16.6);
-  rip('.ripC',15.9,'100% 50%');fade(tickB,16.1,1,.2);
-  blink(eyes[1],15.55);
 
-  steps.forEach((s,i)=>s.addEventListener('click',()=>T.seek(BEATS[i]+.02)));
-  return T;
+  steps.forEach((s,i)=>s.addEventListener('click',()=>M.seek(BEATS[i]+.02)));
+  return M;
 }
 
 const mbtn=$('#motion'),vis=$('.hero-stage');let FT=null,live=false,seen=true;
