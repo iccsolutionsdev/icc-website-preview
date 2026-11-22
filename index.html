@@ -137,7 +137,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .film text{font-family:var(--body)}
 .ldm{display:none}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
-.film :is(.reel,.actB,.vB,.vC,.b2,.selN,.ck,.ps,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop,.clk){opacity:0}
+.film :is(.reel,.actB,.vC,.b2,.selN,.ck,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop){opacity:0}
 .film .runB{opacity:.4}
 .film .cone{opacity:.3}
 .type{animation:type .5s steps(2) infinite alternate}
@@ -501,7 +501,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 @media (max-width:699px){
   .hero-in{padding-bottom:calc(103vw + 92px)}
   .film{overflow:visible;-webkit-mask-image:none;mask-image:none}
-  .pnl{transform:translate(194px,-238px) scale(1.75) translate(-530px,-10px)}
+  .pnl{transform:translate(206px,-70px) scale(1.7) translate(-530px,-124px)}
   .ldm{display:block}
   .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-668px,-292px)}
 }
@@ -1000,51 +1000,20 @@ const FLAT=e=>{const m=y=>`matrix(-.28 .38 1 0 ${e} ${y})`,cx=f1(e+13.1);return 
 <path d="M${f1(e-11.8)} 334H${f1(e+76.2)}L${e+88} 318V324L${f1(e+76.2)} 340H${f1(e-11.8)}Z" fill="#B3C9DB"/>
 <g transform="${m(318)}"><use href="#pos"/></g>
 <g class="tickF" opacity="0"><rect transform="${m(318)}" x="4" y="5" width="34" height="28" rx="4" fill="#3CCB98"/><path d="M${f1(cx-5)} 325.6l3.4 3.2 6.8-6.6" fill="none" stroke="#06203F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>`};
-const WT=(x,y,s,t,o={})=>T(x,y,s,t,{w:400,f:'#1B1B1B',...o});
-const WSEL=1,WRY=i=>95+i*18.5;
-const WROW=(i,st)=>{const y=WRY(i),b=f1(y+12.9),c=st==='sel'?'#fff':'#1B1B1B',top=f1(y+.5);
-  return (st==='sel'?`<rect x="532.5" y="${top}" width="451" height="17.5" fill="#0078D4"/>`:st==='pass'?`<rect x="532.5" y="${top}" width="451" height="17.5" fill="#8FE28F"/><path d="M550 ${top}v17.5M694 ${top}v17.5M826 ${top}v17.5" stroke="#6FC46F" stroke-width=".8"/>`:'')
-  +`<rect x="536.5" y="${f1(y+4.25)}" width="10" height="10" rx="1.5" fill="#fff" stroke="#8A8A8A" stroke-width=".8"/>`
-  +WT(556,b,11.5,`MC.DEMO.0${i+1}.Scenario.01`,{f:c})+WT(700,b,11.5,`Mastercard_testdemo${i+1}`,{f:c})+WT(832,b,11.5,st==='pass'?'Pass':'Not tested',st==='pass'?{w:700}:{f:c})};
-const WGRID=`<g class="vA"><rect x="532.5" y="79.5" width="451" height="15.5" fill="#F3F3F3"/>${WT(556,90.6,10.5,'Test Case')}${WT(700,90.6,10.5,'Test Script')}${WT(832,90.6,10.5,'Status')}
-<path d="M532.5 95H983.5${[0,1,2,3,4,5].map(i=>`M532.5 ${f1(WRY(i)+18.5)}H983.5`).join('')}M550 79.5V206M694 79.5V206M826 79.5V206" stroke="#E2E2E2" stroke-width=".8"/>
-${[0,1,2,3,4,5].map(i=>WROW(i)).join('')}<g class="sel" opacity="0">${WROW(WSEL,'sel')}</g><g class="ps">${WROW(WSEL,'pass')}</g></g>`;
-const WGROUP=(x,y,w,h,label,lw)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="none" stroke="#CFCFCF" stroke-width=".8"/><rect x="${x+6}" y="${y-5}" width="${lw}" height="10" fill="#fff"/>${WT(x+9,y+3.4,9.5,label)}`;
-const WFIELD=(x,y,w,t,bg='#fff')=>`<rect x="${x}" y="${y}" width="${w}" height="14" fill="${bg}" stroke="${bg==='#fff'?'#7A7A7A':'#DADADA'}" stroke-width=".8"/>${t?WT(x+4,y+10.4,10.5,t):''}`;
-const WPROMPT=(cls,fill,t,col)=>`<g class="${cls}"${cls==='pr1'?'':' opacity="0"'}><rect x="556" y="134" width="168" height="20" fill="${fill}" stroke="#333" stroke-width=".8"/>${WT(640,148.4,12.5,t,{a:'middle',w:700,f:col})}</g>`;
-const WARA=(cls,a,r,v)=>`<g class="${cls}"${cls==='ar1'?'':' opacity="0"'}>${a?WT(804,97.4,10.5,a):''}${r?WT(804,115.4,10.5,r):''}${v?WT(804,133.4,10.5,v):''}</g>`;
-const WTEST=`<g class="vB">${WGROUP(538,86,204,90,'Current Test',60)}${WT(546,104.4,10.5,'Test Case')}${WFIELD(604,94,132,'MC.DEMO.02.Scenario.01')}${WT(546,123.4,10.5,'Test Script')}${WFIELD(604,113,132,'Mastercard_testdemo2')}
-${WPROMPT('pr1','#3F6FE0','Downloading Script','#fff')}${WPROMPT('pr2','#FFD200','Perform the Transaction','#1B1B1B')}${WPROMPT('pr3','#3F6FE0','Uploading Log','#fff')}${WPROMPT('pr4','#8FE28F','Test Passed','#1B1B1B')}
-<rect x="556" y="160" width="168" height="7" fill="#E6E6E6" stroke="#BCBCBC" stroke-width=".6"/><rect class="pf" x="556" y="160" width="168" height="7" fill="#06B025"/>
-${WT(795,97.4,10.5,'Action:',{a:'end'})}${WT(795,115.4,10.5,'Result:',{a:'end'})}${WT(795,133.4,10.5,'Advice:',{a:'end'})}${WFIELD(800,87,180,'','#EBEBEB')}${WFIELD(800,105,180,'','#EBEBEB')}${WFIELD(800,123,180,'','#EBEBEB')}
-${WARA('ar1','Downloading script to card','','Keep the card on the reader')}${WARA('ar2','Wait for log on card','Script loaded OK','Perform transaction in device')}${WARA('ar3','Uploading the log','','Keep the card on the reader')}${WARA('ar4','Uploading the log','Read Card Log Data OK','Answer the questions')}${WARA('ar5','Test finished','Analysis','')}
-${WGROUP(750,148,230,28,'Test Card Required',88)}<rect x="758" y="155" width="214" height="16" fill="#FDDCC0" stroke="#7A7A7A" stroke-width=".8"/>${WT(865,166.6,10.5,'ICC Demo Card',{a:'middle',w:700})}
-<rect x="538" y="183" width="442" height="22" fill="#FFD200" stroke="#9A9A9A" stroke-width=".8"/>${WT(546,197.8,11,'Tap the card on the terminal. Amount 120.00. Enter the PIN when asked.',{w:700})}</g>`;
-const WQ=(n,q,y)=>`<rect x="572" y="${y}" width="218" height="26" fill="#FFD200" stroke="#9A9A9A" stroke-width=".8"/>${WT(578,f1(y+11.4),10.5,`${n}: ${q}`)}<circle cx="583" cy="${f1(y+18.6)}" r="3.6" fill="#fff" stroke="#555" stroke-width=".8"/>${WT(590,y+22,10,'OK')}<circle cx="618" cy="${f1(y+18.6)}" r="3.6" fill="#fff" stroke="#555" stroke-width=".8"/>${WT(625,y+22,10,'NOK')}<circle class="r${n}" opacity="0" cx="583" cy="${f1(y+18.6)}" r="1.9" fill="#0067C0"/>`;
-const WQD=`<g class="qd" opacity="0"><rect x="568" y="77" width="384" height="136" rx="6" fill="#020B1E" fill-opacity=".18"/><rect x="564" y="72" width="384" height="136" rx="6" fill="#F6F6F6" stroke="#8F8F8F" stroke-width=".8"/>
-<path d="M570 72H942a6 6 0 0 1 6 6V90H564V78a6 6 0 0 1 6-6Z" fill="#2F6FDB"/>${WT(572,85,11,'Please Answer The Following Questions',{w:700,f:'#fff'})}
-${WQ(1,'Terminal displayed the amount 120.00?',96)}${WQ(2,'Terminal asked for a PIN?',126)}${WQ(3,'Terminal displayed Approved?',156)}
-${[['Interface','Contactless',104],['CVM','Online PIN',121],['Amount','120.00',138],['Outcome','Approved',155]].map(([k,v,y])=>WT(800,y,10,k)+WT(940,y,10,v,{a:'end',w:700})+`<path d="M800 ${y+4}H940" stroke="#E2E2E2" stroke-width=".8"/>`).join('')}
-<rect x="800" y="164" width="140" height="16" fill="#8FE28F" stroke="#9A9A9A" stroke-width=".8"/>${WT(870,175.6,10,'Analysis &lt;PASS&gt;',{a:'middle',w:700})}
-<path d="M564 187H948" stroke="#E2E2E2" stroke-width=".8"/>${WT(572,200.4,9.5,'OK if the terminal did it, NOK if it didn’t.',{f:'#555'})}
-<rect x="892" y="191" width="48" height="13" rx="2.5" fill="#FDFDFD" stroke="#8F8F8F" stroke-width=".8"/><rect class="svp" opacity="0" x="892" y="191" width="48" height="13" rx="2.5" fill="#CCE4F7" stroke="#0067C0" stroke-width=".8"/>${WT(916,200.6,10.5,'Save',{a:'middle'})}</g>`;
-const WTABS=on=>[['Project',534,50.9],['Test Scripts',584.9,72.2],['Testing',657.1,51.7],['Analysis',708.8,55.9]].map(([t,x,w],i)=>(i===on?`<path d="M${x} 79.4V66.5a1.5 1.5 0 0 1 1.5-1.5H${f1(x+w-1.5)}a1.5 1.5 0 0 1 1.5 1.5V79.4" fill="#fff" stroke="#B5B5B5" stroke-width=".8"/>`:'')+WT(f1(x+8),74.6,10.5,t)).join('');
-const WIN=`<rect x="534" y="15" width="456" height="216" rx="9" fill="#020B1E" fill-opacity=".3"/><rect x="530" y="10" width="456" height="216" rx="8" fill="#F0F0F0"/>
-<path d="M538 10H978a8 8 0 0 1 8 8V31H530V18a8 8 0 0 1 8-8Z" fill="#fff"/><g transform="translate(537.1 13.1) scale(.857)"><rect x="1" y="1" width="14" height="14" rx="3" fill="#0E2A52"/><path d="M4 4.5v7M6.5 4.5h3M6.5 11.5h3M6.5 4.5v7M11.5 4.5h1.5M11.5 11.5h1.5M11.5 4.5v7" stroke="#62D5E8" stroke-width="1.3"/></g>${WT(556,24.6,11.5,'ICCSimTMat Test Manager',{w:500})}
-<path d="M923 20.5h9.5M947 16.2h8.6v8.6h-8.6zM969 16.2l8.6 8.6M977.6 16.2l-8.6 8.6" fill="none" stroke="#2B2B2B" stroke-width="1"/>
-<rect x="530" y="31" width="456" height="14" fill="#fff"/>${[['File',540],['Test Plan',568.2],['Tools',622],['Options',658.2],['Settings',706.8],['Help',757.3]].map(([t,x])=>WT(x,41.8,10,t)).join('')}
-<rect x="530" y="45" width="456" height="18" fill="#FAFAFA"/><path d="M530 45.4H986M530 62.6H986" stroke="#E0E0E0" stroke-width=".8"/><rect class="rbp" opacity="0" x="535.5" y="46.6" width="65" height="14.8" rx="2.5" fill="#CCE4F7" stroke="#0067C0" stroke-width=".7"/><path d="M540 50.6v7l6.4-3.5z" fill="#2BA14A"/>${WT(550,57.8,10.5,'Run Tests')}
-<path d="M604 50.6v7l6.4-3.5z" fill="#B8B8B8"/>${WT(614,57.8,10.5,'Run Checked Tests',{f:'#A3A3A3'})}
-<path d="M716 48.5v11M776 48.5v11M824 48.5v11" stroke="#D0D0D0" stroke-width=".8"/>${WT(722,57.8,10.5,'View Log',{f:'#A3A3A3'})}${WT(782,57.8,10.5,'Analyse',{f:'#A3A3A3'})}<rect x="830" y="49.5" width="6.5" height="9" rx="1" fill="#2B6CB0"/>${WT(840,57.8,10.5,'Calc')}
-<rect x="530" y="63" width="456" height="16.4" fill="#F0F0F0"/><rect x="532" y="79" width="452" height="132" fill="#fff" stroke="#B5B5B5" stroke-width=".8"/><g class="tbA">${WTABS(1)}</g><g class="tbB" opacity="0">${WTABS(2)}</g>
-${WGRID}${WTEST}${WQD}
-<path d="M530 211H986V218a8 8 0 0 1-8 8H538a8 8 0 0 1-8-8Z" fill="#F0F0F0"/><path d="M530 211.4H986" stroke="#D6D6D6" stroke-width=".8"/>${WT(538,221.6,9.5,'Summary:')}
-<rect x="588" y="213.8" width="15" height="10" fill="#1F9D3A"/><g class="s0">${WT(595.5,221.6,9,'0',{a:'middle',w:700,f:'#fff'})}</g><g class="s1" opacity="0">${WT(595.5,221.6,9,'1',{a:'middle',w:700,f:'#fff'})}</g>
-<rect x="605" y="213.8" width="15" height="10" fill="#E0A800"/>${WT(612.5,221.6,9,'0',{a:'middle',w:700,f:'#fff'})}<rect x="622" y="213.8" width="15" height="10" fill="#D23B3B"/>${WT(629.5,221.6,9,'0',{a:'middle',w:700,f:'#fff'})}${WT(980,221.6,9.5,'v4.604.0',{a:'end',f:'#666'})}
-<rect x="530" y="10" width="456" height="216" rx="8" fill="none" stroke="#7D8A99" stroke-width=".8"/>
-<g class="cur"><circle class="clk" cx="1" cy="1" r="3" fill="none" stroke="#0067C0" stroke-width="1.6"/><path d="M0 0v15l4-3.6 2.6 6.2 2.6-1.1-2.6-6.1h5.4z" fill="#fff" stroke="#1B1B1B" stroke-width="1" stroke-linejoin="round"/></g>`;
-const PANEL=`<path d="M543 320V228" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><path class="ldm" d="M543 223V146" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><circle cx="543" cy="326" r="3.5" fill="#62D5E8"/>
-<g class="pnl">${WIN}</g>`;
+const NW='fill="none" stroke="#E8F2FA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"',NC=NW.replace('#E8F2FA','#62D5E8');
+const NCARD=`<rect x="569" y="168" width="26" height="28" rx="4" ${NW}/><rect x="574" y="174" width="9" height="7" rx="1.6" fill="#62D5E8"/>`;
+const NSUB=(t,c)=>T(630,185,13.5,t,{f:'#9FD3EA',c});
+const NSTEP=(c,icon,title,sub)=>`<g class="${c}"${c==='nA'?'':' opacity="0"'}>${icon}${T(630,165,19,title,{w:700})}${sub}</g>`;
+const NARR=`${GLASS(530,124,452,100)}<circle cx="582" cy="174" r="30" fill="#62D5E8" fill-opacity=".12" stroke="#62D5E8" stroke-opacity=".55" stroke-width="1.3"/><circle class="nrg" opacity="0" cx="582" cy="174" r="30" fill="none" stroke="#62D5E8" stroke-width="2"/>
+${NSTEP('nA',`<path class="npl" d="M573 159v30l25-15z" fill="#62D5E8" stroke="#62D5E8" stroke-width="2.4" stroke-linejoin="round"/>`,'Running the test',NSUB('Chosen in ICCSimTMat on his laptop'))}
+${NSTEP('nB',`${NCARD}<path class="nar" d="M582 149v13M576.5 156.5l5.5 5.5 5.5-5.5" ${NC}/>`,'Script downloads to the card',NSUB('The card sits on the reader'))}
+${NSTEP('nC',`<rect x="565" y="151" width="24" height="46" rx="4.5" ${NW}/><rect x="569.5" y="156" width="15" height="12" rx="2" fill="#62D5E8"/><g fill="#E8F2FA">${[176,182,188].map(y=>[572.5,577,581.5].map(x=>`<circle cx="${x}" cy="${y}" r="1.4"/>`).join('')).join('')}</g><g class="nwv" ${NC}><path d="M595 167a9 9 0 0 1 0 14"/><path d="M600.5 161.5a17 17 0 0 1 0 25"/></g><g class="nok" opacity="0"><circle cx="603" cy="152" r="8" fill="#3CCB98"/><path d="M599 152l3 3.1 5.2-5.9" fill="none" stroke="#06203F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`,'Testing on the terminal',`${NSUB('He taps the card and keys in the PIN','nc1')}<g class="nc2" opacity="0">${NSUB('The terminal approves')}</g>`)}
+${NSTEP('nD',`${NCARD}<path class="nar" d="M582 163v-13M576.5 155.5l5.5-5.5 5.5 5.5" ${NC}/>`,'Results read back from the card',NSUB('The card goes back on the reader'))}
+${NSTEP('nE',[161,174,187].map((y,i)=>`<circle cx="569.5" cy="${y}" r="1.6" fill="#E8F2FA" fill-opacity=".5"/><path d="M580 ${y}h19" ${NW} stroke-opacity=".45"/><path class="nq${i+1}" opacity="0" d="M565.5 ${y}l3.2 3.3 5.6-6.6" fill="none" stroke="#3CCB98" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`).join(''),'Checking what the terminal did',NSUB('Amount shown, PIN asked, approved'))}
+${NSTEP('nF',`<g class="nps"><circle cx="582" cy="174" r="22" fill="#3CCB98"/><path d="M571.5 174.5l7.4 7.6 13.6-15.6" fill="none" stroke="#06203F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>`,'Test passed',NSUB('Saved in the test plan as a Pass'))}
+${[1,2,3,4,5,6].map(i=>{const x=600+i*30;return `<rect x="${x}" y="197" width="24" height="4" rx="2" fill="#fff" fill-opacity=".2"/><rect class="np${i}"${i>1?' opacity="0"':''} x="${x}" y="197" width="24" height="4" rx="2" fill="${i<6?'#62D5E8':'#3CCB98'}"/>`}).join('')}`;
+const PANEL=`<path d="M543 320V228" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><path class="ldm" d="M543 223V109" stroke="#62D5E8" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="2 5" stroke-linecap="round"/><circle cx="543" cy="326" r="3.5" fill="#62D5E8"/>
+<g class="pnl">${NARR}</g>`;
 const ACT1=`<ellipse cx="672" cy="388" rx="300" ry="150" fill="url(#gGlow)"/>
 <g transform="translate(${A1X} ${f1(584*(1-A1K))}) scale(${A1K})">
 <rect x="512" y="352" width="10" height="232" fill="#143C6F"/><rect x="1042" y="352" width="10" height="232" fill="#143C6F"/>
@@ -1735,8 +1704,9 @@ function buildFilm(){
   const pop=(el,t)=>T.fromTo(el,{opacity:0,scale:.3,transformOrigin:'50% 50%'},{opacity:1,scale:1,duration:.38,ease:'back.out(2.2)'},t);
   const rip=(sel,t,origin)=>qa(sel).forEach((p,i)=>T.fromTo(p,{opacity:0,scale:.6,transformOrigin:origin},{opacity:.95,scale:.9,duration:.3,ease:'power1.out'},t+i*.16).to(p,{opacity:0,scale:1.5,duration:.8,ease:'power1.out'},t+i*.16+.3));
   const blink=(eye,...ts)=>ts.forEach(t=>T.to(eye,{attr:{ry:.6},duration:.07,ease:'power1.in',yoyo:true,repeat:1},t));
-  const cur=q('.cur'),clk=q('.clk');
-  const click=t=>{T.fromTo(clk,{attr:{r:3},opacity:.9},{attr:{r:14},opacity:0,duration:.4,ease:'power1.out',immediateRender:false},t);T.to(P,{hy:PAD[1]+3,duration:.07,ease:'power1.in',yoyo:true,repeat:1},t-.03)};
+  const click=t=>T.to(P,{hy:PAD[1]+3,duration:.07,ease:'power1.in',yoyo:true,repeat:1},t-.03);
+  const say=(a,b,n,t)=>{fade(q(a),t,0,.12);T.fromTo(q(b),{opacity:0,y:5},{opacity:1,y:0,duration:.25,ease:'power2.out'},t+.1);fade(q('.np'+n),t+.1,1,.2)};
+  const nudge=(el,t,dy)=>T.fromTo(el,{y:0},{y:dy,duration:.2,ease:'sine.inOut',yoyo:true,repeat:3,immediateRender:false},t);
   const hand={A:{x:'hx',y:'hy',cy:PAD[1]},B:{x:'h2x',y:'h2y',cy:PAD2[1]}};
   const reach=(w,x,y,t,d,lift=12)=>{const h=hand[w],mid=(h.cy+y)/2-lift;T.to(P,{[h.x]:x,duration:d,ease:'power2.inOut'},t).to(P,{[h.y]:mid,duration:d/2,ease:'power1.out'},t).to(P,{[h.y]:y,duration:d/2,ease:'power1.in'},t+d/2);h.cy=y};
   const press=(w,...ts)=>{const h=hand[w];ts.forEach(t=>T.to(P,{[h.y]:h.cy+3,duration:.07,ease:'power1.in',yoyo:true,repeat:1},t))};
@@ -1744,18 +1714,18 @@ function buildFilm(){
   T.fromTo(q('.reel'),{opacity:0},{opacity:1,duration:.4,ease:'power1.out'},0).to(q('.reel'),{opacity:0,duration:.5,ease:'power1.in'},FILM_LEN-.6);
   T.set({},{},FILM_LEN);
 
-  gsap.set(cur,{x:760,y:186});
-  T.to(cur,{x:612,y:WRY(WSEL)+10,duration:.55,ease:'power2.inOut'},.35);click(.95);fade(q('.sel'),.97,1,.08);
-  T.to(cur,{x:572,y:55,duration:.5,ease:'power2.inOut'},1.25);click(1.85);fade(q('.rbp'),1.83,1,.05);fade(q('.rbp'),1.97,0,.12);
+  click(.95);click(1.85);
+  T.fromTo(q('.nrg'),{opacity:.9,scale:1,transformOrigin:'50% 50%'},{opacity:0,scale:1.5,duration:.55,ease:'power1.out',immediateRender:false},1.85);
+  T.fromTo(q('.npl'),{scale:.78,transformOrigin:'50% 50%'},{scale:1,duration:.32,ease:'back.out(2.4)',immediateRender:false},1.85);
   press('B',.45,.7,1.05,1.3,1.75,2.5,2.75,3.05);
   blink(q('.ubA .eye'),1.3,6.45);blink(q('.ubB .eye'),.85,3.15,6.45,8.9);
 
   const tab=(a,b,t)=>{fade(a,t,0,.12);fade(b,t,1,.12)},now=(a,b,t)=>T.set(a,{opacity:0},t).set(b,{opacity:1},t);
   const flash=(t,n)=>T.to(q('.ledB'),{opacity:1,duration:.12,ease:'steps(1)',yoyo:true,repeat:2*n-1},t);
-  tab(q('.tbA'),q('.tbB'),2.05);tab(q('.vA'),q('.vB'),2.05);fade(cur,2.02,0,.12);
-  T.fromTo(q('.pf'),{scaleX:0,transformOrigin:'0% 50%'},{scaleX:1,duration:.85,ease:'power1.inOut'},2.15);flash(2.15,3);
-  now(q('.pr1'),q('.pr2'),3);now(q('.ar1'),q('.ar2'),3);T.set(q('.pf'),{scaleX:0},3);
-  T.to(q('.pr2'),{opacity:.3,duration:.2,ease:'steps(1)',yoyo:true,repeat:7},3.2);
+  say('.nA','.nB',2,2.05);nudge(q('.nB .nar'),2.15,3);flash(2.15,3);
+  say('.nB','.nC',3,3);
+  T.fromTo(q('.nwv'),{opacity:.25},{opacity:1,duration:.2,ease:'steps(1)',yoyo:true,repeat:2,immediateRender:false},3.72);
+  pop(q('.nok'),4.95);tab(q('.nc1'),q('.nc2'),4.95);
   reach('A',RDR[0],RDR[1],2.45,.5);T.to(P,{lean:4,duration:.5,ease:'power2.inOut'},2.45);
   T.set(q('.cdock'),{opacity:0},3.1).set(e.ch,{opacity:1},3.1);
   reach('A',TAP[0],TAP[1],3.15,.55,14);T.to(P,{lean:12,duration:.55,ease:'power2.inOut'},3.15);
@@ -1770,16 +1740,13 @@ function buildFilm(){
   reach('B',PAD2[0],PAD2[1],5.25,.55,10);T.to(P,{lean2:0,duration:.55,ease:'power2.inOut'},5.25);
   press('B',6.05,6.3,6.9,7.2,7.6,8.1,8.6,9.1,9.6);fade(q('.tickF'),6.6,0,.3);
 
-  now(q('.pr2'),q('.pr3'),5.75);now(q('.ar2'),q('.ar3'),5.75);
-  T.fromTo(q('.pf'),{scaleX:0},{scaleX:1,duration:.7,ease:'power1.inOut',immediateRender:false},5.8);flash(5.8,3);
+  say('.nC','.nD',4,5.75);nudge(q('.nD .nar'),5.8,-3);flash(5.8,3);
   fade(q('.tickA'),6.1,0,.3);
   reach('A',PAD[0],PAD[1],5.85,.5);T.to(P,{lean:0,duration:.5,ease:'power2.inOut'},5.85);
-  now(q('.ar3'),q('.ar4'),6.5);T.fromTo(q('.qd'),{opacity:0,y:6},{opacity:1,y:0,duration:.25,ease:'power2.out'},6.55);
-  press('A',6.85,7.1,7.35);[1,2,3].forEach((n,i)=>fade(q('.r'+n),6.88+i*.25,1,.05));
-  T.set(cur,{x:880,y:168},7.4);fade(cur,7.42,1,.12);T.to(cur,{x:916,y:198,duration:.28,ease:'power2.inOut'},7.45);click(7.75);fade(q('.svp'),7.73,1,.05);
-  fade(q('.qd'),7.9,0,.15);fade(cur,7.92,0,.12);now(q('.pr3'),q('.pr4'),7.95);now(q('.ar4'),q('.ar5'),7.95);
-  tab(q('.tbB'),q('.tbA'),8.45);tab(q('.vB'),q('.vA'),8.45);
-  fade(q('.ps'),8.6,1,.15);now(q('.s0'),q('.s1'),8.75);
+  say('.nD','.nE',5,6.5);
+  press('A',6.85,7.1,7.35);[1,2,3].forEach((n,i)=>pop(q('.nq'+n),6.88+i*.25));
+  click(7.75);
+  say('.nE','.nF',6,7.95);pop(q('.nps'),8.05);
   pop(q('.badgeA'),8.95);
   fade(q('.ubA .eye'),9.15,0,.1);fade(q('.smE'),9.15,1,.12);fade(q('.mN'),9.15,0,.12);fade(q('.mS'),9.15,1,.15);T.to(P,{lean:-2,duration:.6,ease:'power2.out'},9.15);
 
