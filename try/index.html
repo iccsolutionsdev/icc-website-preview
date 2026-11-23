@@ -137,7 +137,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .film text{font-family:var(--body)}
 .ldm{display:none}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
-.film :is(.reel,.actB,.vB,.vC,.b2,.selN,.ck,.ps,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop,.clk){opacity:0}
+.film :is(.reel,.actB,.vC,.b2,.selN,.ck,.seal,.sl,.badgeA,.tickA,.tickB,.ripA,.ripB,.ripC,.chand,.open,.okB,.rdy,.shop,.tickC){opacity:0}
 .film .runB{opacity:.4}
 .film .cone{opacity:.3}
 .type{animation:type .5s steps(2) infinite alternate}
@@ -501,9 +501,9 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 @media (max-width:699px){
   .hero-in{padding-bottom:calc(103vw + 92px)}
   .film{overflow:visible;-webkit-mask-image:none;mask-image:none}
-  .pnl{transform:translate(194px,-238px) scale(1.75) translate(-530px,-10px)}
+  .pnl{transform:translate(190px,-76px) scale(1.65) translate(-500px,-112px)}
   .ldm{display:block}
-  .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-668px,-292px)}
+  .mtcc{transform:translate(335px,-232px) scale(1.7) translate(-510px,-292px)}
 }
 @media (forced-colors:active){.brand img{forced-color-adjust:none;background:var(--navy);border-radius:8px}
   .btn,.form input:not([type=radio]),.form select,.form textarea,.hsearch{border:1px solid transparent}}
@@ -750,7 +750,15 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
 @media (max-width:599px){.coach{flex-wrap:wrap;padding:12px 14px}.coach-btn{margin-left:22px}}
 @media (max-width:399px){.hdr-cta .btn.sm.cy{display:none}}
 
-.bench{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);gap:clamp(16px,2vw,28px);align-items:start}
+.ptr{position:absolute;left:0;top:0;z-index:30;width:44px;height:32px;pointer-events:none;opacity:0;filter:drop-shadow(0 3px 4px rgba(8,26,56,.4))}
+.ptr[hidden]{display:none}
+.ptr.on{opacity:1;transition:opacity .25s ease-out}
+.ptr-r{display:block;width:100%;height:100%}
+.ptr svg{display:block;width:100%;height:100%;overflow:visible;animation:ptr 1.1s ease-in-out infinite}
+@keyframes ptr{50%{transform:translateX(-8px)}}
+@media (max-width:480px){.ptr{width:34px;height:25px}}
+@media (prefers-reduced-motion:reduce){.ptr svg{animation:none}.ptr.on{transition:none}}
+.bench{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,400px);gap:clamp(16px,2vw,28px);align-items:start}
 @media (max-width:1099px){.bench{grid-template-columns:minmax(0,1fr)}.desk-wrap{width:min(100%,540px);margin-inline:auto}}
 
 .app{container:app/inline-size;position:relative;display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;height:620px;border-radius:8px;
@@ -942,12 +950,37 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
 .dv-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .dv-c{display:grid;align-content:start;gap:8px;padding:8px;border:1px solid #a9a9a9;background:#ececec}
 .dv-c p{font-size:11.5px}
+.dl-folder,.dl-mode{--w:600px}.dl-host{--w:440px}.dl-hostset{--w:400px}.dl-project{--w:560px}
+.dv-g.dv-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dl-mode .wbtn.big,.dl-host .wbtn.big{min-height:58px;font-size:13.5px;line-height:1.3}
+.nf-l{margin:-4px 0 3px 3px;font-size:11.5px}
+.nf-p{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start;margin-bottom:14px}
+.nf-path{min-height:42px;padding:4px 7px;border:1px solid #c6c6c6;background:#fff;overflow-wrap:anywhere}
+.nf-ic{display:grid;place-items:center;width:36px;height:32px;border:1px solid #c6c6c6;border-radius:3px;background:#fff}
+.nf-ic:hover{border-color:#3c7fb1;background:#eef7fe}
+.nf-ic .ti{width:20px;height:20px}
+.nf-rows{display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px 24px;align-items:center}
+.nf-rows p{font-size:11.5px}
+.hs{display:grid;gap:10px;padding:14px 16px 24px}
+.hs label{display:grid;gap:4px}
+.hs select{min-height:24px;padding:1px 5px;border:1px solid #7a7a7a;border-radius:0;background:#fff}
+.np{padding:10px 12px 12px}
+.np .gb{display:grid;gap:8px;justify-items:start}
+.np-kv{width:100%}
+.np-kv dd{min-height:22px}
+.np-kv dd.off{background:#ececec;color:#5c5c5c}
+.np-kv .np-notes{min-height:54px}
 .dl-card,.dl-msg{--w:400px}
 .cn,.mb{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:16px 16px 14px}
 .cn>.ti,.mb>.ti{width:40px;height:40px}
 .cn p+p,.mb p+p{margin-top:8px}
-.cn-card{padding:8px;border:2px solid #111;background:#5b8de8;color:#111;font-size:13px;font-weight:700;text-align:center}
-.cn-t{color:#555;font-size:11.5px}
+.dl-card{--w:460px}
+.cn{grid-template-columns:84px minmax(0,1fr);gap:18px;align-items:center;padding:14px 20px 14px 16px}
+.cn-w{display:block;width:84px;height:auto}
+.cn p+p{margin-top:12px}
+.cn-card{margin:0 12px;padding:11px 8px;border:3px solid #111;background:#ffd400;color:#111;font-size:13.5px;font-weight:700;text-align:center}
+.cn-foot{display:flex;justify-content:flex-end;padding:12px 12px 14px}
+.cn-ok{min-width:128px;min-height:40px;border-color:#c6c6c6;border-radius:4px;background:#fff;font-size:13px;font-weight:400}
 .dl-q{--w:660px}
 .qa{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:8px;padding:8px}
 .qa-list{display:grid;gap:6px}
@@ -1079,7 +1112,10 @@ a.hd-name:hover{text-decoration:underline;text-underline-offset:4px}
   .tb:not(.keep)>span{display:none}
   .ap-status>span:nth-child(2),.ap-status>span:nth-child(3){display:none}
   .tt{grid-template-columns:minmax(0,1fr);grid-template-areas:"cur" "ctl" "arv" "tx" "side" "plan"}
-  .ct-btns,.dv-g{grid-template-columns:minmax(0,1fr)}
+  .ct-btns,.dv-g,.dv-g.dv-2,.nf-rows{grid-template-columns:minmax(0,1fr)}
+  .nf-rows p{margin-bottom:8px}
+  .cn{grid-template-columns:60px minmax(0,1fr);gap:12px;padding-inline:12px}
+  .cn-w{width:60px}
 }
 @media (max-width:599px){.app{height:600px}}
 
@@ -1424,6 +1460,7 @@ $('#page').innerHTML=`
         <div class="ap-pop" id="ap-pop" hidden></div>
         <div class="ap-toast" id="ap-toast" role="status" aria-live="polite"></div>
       </div>
+      <div class="ptr" id="ptr" aria-hidden="true" hidden><span class="ptr-r"><svg viewBox="0 0 44 32"><defs><linearGradient id="ptr-g" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0E2A52"/><stop offset=".55" stop-color="#167F9E"/><stop offset="1" stop-color="#35BFD9"/></linearGradient></defs><path d="M5 10.5h18V4.6a1.5 1.5 0 0 1 2.4-1.2l15.8 11.4a1.5 1.5 0 0 1 0 2.4L25.4 28.6A1.5 1.5 0 0 1 23 27.4v-5.9H5a2.5 2.5 0 0 1-2.5-2.5v-6A2.5 2.5 0 0 1 5 10.5z" fill="url(#ptr-g)" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg></span></div>
       <div class="desk-wrap">
         <div class="desk">
           <div class="desk-s" id="desk">
@@ -1465,7 +1502,7 @@ $('#page').innerHTML=`
 </div>`;
 
 const app=$('#app');
-const A={scr:'login',tab:'scripts',sel:0,chk:new Set(),filter:'all',queue:[],q:0,device:null,reader:'CL',res:[],pick:false,brand:null};
+const A={scr:'login',tab:'scripts',sel:0,chk:new Set(),filter:'all',queue:[],q:0,device:null,reader:'CL',res:[],pick:false,brand:null,np:null};
 const st={i:0,ph:'idle',at:'reader',iface:null,cvm:null,out:null,removed:false,pin:'',ans:[]};
 let P=null,RECENT=[];
 const tests=()=>P?P.tests:[],T=()=>P.tests[st.i],free=()=>st.ph==='idle',main=()=>A.scr==='main';
@@ -1484,19 +1521,67 @@ const two=k=>String(k).padStart(2,'0');
 const txOf=t=>(t.iface==='tap'?'Tap the card on the terminal.':'Insert the card in the chip reader.')+` Amount must be ${fmt(t.amt)}.`
   +(t.cvm!=='No CVM'?' Enter any four digits when the terminal asks for a PIN.':t.decline?' The terminal should not ask for a PIN.':' The terminal should approve without asking for a PIN.')
   +(t.decline?' The card declines this purchase.':'');
+const notes=()=>`A demo project for the ICC Solutions website, made from ${TSE.file}.`;
 function makeProject(b,k){const su=b.s[k],name=`ICC Demo - ${su.n}`;
   return {name,brand:b,suite:su,folder:`Documents\\ICC Solutions Limited\\ICCSimTMat\\termlogs\\${name}`,res:[],
     tests:DEMO_TESTS.map((t,i)=>({...t,id:`${b.c}.DEMO.${two(i+1)}.Scenario.01`,sc:`${b.p}_testdemo${i+1}`,tx:txOf(t)}))}}
 const recent0=()=>RECENT0.map(([k,s])=>makeProject(brandOf(k),s));
-function openProject(p){P=p;A.res=p.res;Object.assign(A,{tab:'scripts',sel:0,chk:new Set(),filter:'all',pick:false,brand:null});
-  RECENT=[p,...RECENT.filter(x=>x!==p&&x.name!==p.name)].slice(0,3);toScreen('main')}
+function openProject(p){P=p;A.res=p.res;Object.assign(A,{tab:'scripts',sel:0,chk:new Set(),filter:'all',pick:false,brand:null,np:null,device:null});
+  RECENT=[p,...RECENT.filter(x=>x!==p&&x.name!==p.name)].slice(0,3);toScreen('main');askDevice()}
+function askDevice(){dlg('device',deviceDlg());guide()}
 
-const coach=(t,tone='info')=>{$('#coach').textContent=t;$('#coach-bar').dataset.tone=tone;const m=$('#desk-msg');m.textContent=t;m.dataset.tone=tone};
+const PGAP=5;
+let ptrQ=0,ptrAt=null;
+const seen=e=>!!e&&!e.disabled&&e.getClientRects().length>0;
+const DSIDE={login:'rl',licence:'lb',folder:'lL',mode:'lL',host:'lL',device:'lL',hostset:'lt',project:'lt',card:'lt',msg:'lt'};
+function aim(){
+  if(!$('#ap-pop').hidden)return [];
+  const g=s=>$(s,app),on=(e,ds,f)=>[...ds].map(d=>[e,d,f]),k=DLG?.kind,pad=$('.rd-pad');
+  if(k==='suites')return A.brand?on(g('.su-item'),'rR'):[[g('.su-brand'),'l'],[g('.su-bl'),'t',.75]];
+  if(k==='file')return A.pick?on(g('.fx-open'),'lt'):on(g('.fx-f'),'rb');
+  if(k==='q'){const n=QS(T()).findIndex((x,i)=>!st.ans[i]),r=n<0?null:g(`#ap-layer input[name="qa${n}"][value="OK"]`);
+    if(!r){const s=g('[data-act="q-save"]'),note=g('.qa-n');return [[s,'l',.5,note],[s,'t',.5,note],[s,'t']]}
+    const lab=r.closest('label'),row=r.closest('.qa-q'),a=lab.getBoundingClientRect(),b=row.getBoundingClientRect();
+    return [[lab,'l'],[row,'R',(a.top+a.height/2-b.top)/b.height]]}
+  if(k==='card'&&st.at!=='reader')return on(pad,'rt');
+  if(k)return DSIDE[k]?on(g('#ap-layer [data-first]'),DSIDE[k]):[];
+  if(A.scr==='tasks')return on(g('[data-fk="tse-file"]'),'lb');
+  if(!main())return [];
+  if(st.ph==='present')return on($(T().iface==='tap'?'.tm-head':'.tm-slot'),'lb');
+  if(st.ph==='pin'){const big=$('#pinpad'),keys=seen(big)?big:$('#tm-keys'),ok=$('.ko',keys);
+    return st.pin.length<4?on(keys,seen(big)?'tl':'lt'):on(ok,'rt')}
+  if(st.ph==='paid'&&st.at!=='reader')return on(pad,'rt');
+  if(free()&&!counts().run)return on(g(`#ap-tools [data-act="${A.chk.size?'runc':'run'}"]`),'rb');
+  return []}
+function point(){if(!ptrQ)ptrQ=requestAnimationFrame(()=>{ptrQ=0;drawPtr()})}
+function drawPtr(){const P=$('#ptr'),opts=aim().filter(o=>seen(o[0]));
+  if(!opts.length){P.hidden=true;ptrAt=null;return}
+  const was=P.hidden;P.hidden=false;
+  const B=$('.bench').getBoundingClientRect(),h=P.offsetWidth/2,w=P.offsetHeight/2;
+  const spot=([el,d,f=.5,avoid])=>{const r=el.getBoundingClientRect(),box=(app.contains(el)?app:$('.desk')).getBoundingClientRect(),across='lLrR'.includes(d);
+    const x=d==='l'?r.left-PGAP-h:d==='r'?r.right+PGAP+h:d==='L'?r.left+PGAP+h:d==='R'?r.right-PGAP-h:r.left+r.width*f,y=d==='t'?r.top-PGAP-h:d==='b'?r.bottom+PGAP+h:r.top+r.height*f;
+    const hx=across?h:w,hy=across?w:h,cx=Math.min(Math.max(x,box.left+hx),box.right-hx),cy=Math.min(Math.max(y,box.top+hy),box.bottom-hy);
+    const v=seen(avoid)&&avoid.getBoundingClientRect(),hit=v&&cx-hx<v.right&&cx+hx>v.left&&cy-hy<v.bottom&&cy+hy>v.top;
+    return {el,d,x:cx,y:cy,ok:Math.abs(cx-x)<2&&Math.abs(cy-y)<2&&!hit}};
+  const all=opts.map(spot),p=all.find(o=>o.ok)||all[0];
+  P.style.transform=`translate(${Math.round(p.x-B.left-h)}px,${Math.round(p.y-B.top-w)}px)`;$('.ptr-r',P).style.transform=`rotate(${{l:0,L:0,r:180,R:180,t:90,b:-90}[p.d]}deg)`;
+  P.dataset.d=p.d;P.dataset.fit=p.ok?'1':'0';
+  if(was||ptrAt!==p.el){P.classList.remove('on');P.getBoundingClientRect();P.classList.add('on')}
+  ptrAt=p.el}
+
+const coach=(t,tone='info')=>{point();$('#coach').textContent=t;$('#coach-bar').dataset.tone=tone;const m=$('#desk-msg');m.textContent=t;m.dataset.tone=tone};
 function guide(){
   if(A.scr==='login')return coach('Click LOGIN: the demo login is filled in for you.');
   if(A.scr==='licence')return coach('Choose the licence: click it.');
-  if(DLG?.kind==='file')return coach(A.pick?'Click Open.':'A TSE file describes the terminal you’re testing. Choose the demo one, then click Open.');
-  if(DLG?.kind==='suites')return coach(A.brand?`Choose one of the ${brandOf(A.brand).n} test suites.`:'Choose a payment brand, then one of its test suites.');
+  const k=DLG?.kind;
+  if(k==='suites')return coach(A.brand?`Choose one of the ${brandOf(A.brand).n} test suites.`:'Choose a payment brand, then one of its test suites.');
+  if(k==='file')return coach(A.pick?'Click Open.':'Now the TSE file, which describes the terminal you’re testing. Choose the demo one, then click Open.');
+  if(k==='folder')return coach('Click Create Folder: the project keeps its logs in a new folder of its own.');
+  if(k==='mode')return coach('Choose Open Testing: you can run any of the suite’s tests on your terminal.');
+  if(k==='host')return coach('Choose the VIABLE Closed Loop Host: the test host that runs on your PC.');
+  if(k==='hostset')return coach('Host settings: keep TCPIP and the protocol as they are, and click OK.');
+  if(k==='project')return coach('Check the project’s name and log directory, then click Save.');
+  if(k==='device')return coach(A.queue.length?'Choose ICCSim Chip Cards first: each test’s script goes onto the ICC card.':'The project’s tests have loaded. Choose ICCSim Chip Cards: each test’s script goes onto the ICC card.');
   if(A.scr==='tasks')return coach(RECENT.length?'Create a project: click Project from TSE File. Or open one under Most Recent Projects.':'Create a project: click Project from TSE File.');
   const c=counts();
   if(!c.run)return coach(`${P.brand.n} project open, with ${c.n} demo tests. Tick some and click Run Checked Tests, or highlight one and click Run Tests.`);
@@ -1538,7 +1623,7 @@ const mainHtml=()=>`<div class="ap-main"><div class="ap-tabs" role="tablist" ari
   <div class="ap-tp" id="ap-tp" role="tabpanel" aria-labelledby="tab-${A.tab}">${({project:projectTab,scripts:scriptsTab,testing:testingTab,analysis:analysisTab})[A.tab]()}</div></div>`;
 
 function projectTab(){const c=counts();
-  return `<div class="pj"><fieldset class="gb"><legend>Project</legend><dl class="pj-kv"><dt>Project Name:</dt><dd>${esc(P.name)}</dd><dt>Log directory:</dt><dd>${esc(P.folder)}</dd><dt>Test plan:</dt><dd>${esc(P.suite.n)} (${P.brand.n})</dd><dt>Notes:</dt><dd>A demo project for the ICC Solutions website, made from ${TSE.file}.</dd></dl></fieldset>
+  return `<div class="pj"><fieldset class="gb"><legend>Project</legend><dl class="pj-kv"><dt>Project Name:</dt><dd>${esc(P.name)}</dd><dt>Log directory:</dt><dd>${esc(P.folder)}</dd><dt>Test plan:</dt><dd>${esc(P.suite.n)} (${P.brand.n})</dd><dt>Notes:</dt><dd>${notes()}</dd></dl></fieldset>
     <fieldset class="gb"><legend>Test Summary</legend><dl class="pj-sum"><div><dt>Tests</dt><dd>${c.n}</dd></div><div><dt>Ticked</dt><dd>${A.chk.size}</dd></div><div><dt>Run</dt><dd>${c.run}</dd></div><div><dt>Passed</dt><dd class="g">${c.pass}</dd></div><div><dt>Failed</dt><dd class="r">${c.fail}</dd></div><div><dt>Investigate</dt><dd class="o">${c.inv}</dd></div></dl></fieldset>
     <fieldset class="gb"><legend>Test Configuration</legend><ul class="pj-cfg">${['Contactless','Contact','No CVM','Online PIN','Offline PIN'].map(x=>`<li>${x}</li>`).join('')}</ul></fieldset></div>`}
 
@@ -1584,11 +1669,11 @@ const setInert=on=>$$('#app>.ap-title,#app>.ap-menu,#app>.ap-tools,#app>.ap-body
 const keyOf=e=>{const d=e&&e.dataset;if(!d)return null;
   return d.fk?`[data-fk="${d.fk}"]`:d.act==='tab'?`[data-act="tab"][data-tab="${d.tab}"]`:d.act&&e.closest('#ap-tools')?`#ap-tools [data-act="${d.act}"]`:d.menu&&e.closest('#ap-menu')?`#ap-menu [data-menu="${d.menu}"]`:null};
 let popRet=null;
-function dlg(kind,html,{focus=true,esc:canEsc=false}={}){const ret=DLG?DLG.ret:D.activeElement;
+function dlg(kind,html,{focus=true,esc:canEsc=false}={}){point();const ret=DLG?DLG.ret:D.activeElement;
   DLG={kind,canEsc,ret,sel:DLG?DLG.sel:keyOf(ret)};closePop();const L=$('#ap-layer');
   L.innerHTML=`<div class="ap-dlg dl-${kind}" role="dialog" aria-labelledby="dlg-h">${html}</div>`;L.hidden=false;setInert(true);
   if(focus){const f=$('[data-first]',L)||$('button:not([disabled]),input',L);f&&f.focus({preventScroll:true})}}
-function closeDlg(){const d=DLG,L=$('#ap-layer'),had=!!d&&L.contains(D.activeElement);DLG=null;L.hidden=true;L.innerHTML='';setInert(false);
+function closeDlg(){point();const d=DLG,L=$('#ap-layer'),had=!!d&&L.contains(D.activeElement);DLG=null;L.hidden=true;L.innerHTML='';setInert(false);
   if(!d)return;let t=d.ret&&app.contains(d.ret)?d.ret:d.sel?$(d.sel,app):null;if(t&&t.disabled)t=null;
   if(t)t.focus({preventScroll:true});else if(had)$('#ap-body').focus({preventScroll:true})}
 const loginDlg=()=>`${dbar('Login',0)}<div class="lg-head"><img src="media/logo-white.png" alt="ICC Solutions" width="62" height="40"></div>
@@ -1606,8 +1691,11 @@ const licDlg=()=>`${dbar('Choose Available Licence')}<div class="lic"><button ty
 const deviceDlg=()=>`${dbar('Choose Script Device')}<div class="dv"><h3>Choose Script Device</h3><div class="dv-g">
   ${[['iccsim','ICCSim Chip Cards','Test scripts are downloaded to an ICCSim card for the tester to hold manually to the device.'],['probe','PaytestProbe','Tests are performed using a PaytestProbe.'],['nomad','Nomad Card Emulator','Tests are executed via an emulator.']]
     .map(([k,b,d])=>`<div class="dv-c"><button type="button" class="wbtn big${k==='iccsim'?' hl':''}" data-act="device" data-d="${k}"${k==='iccsim'?' data-first':''}>${b}</button><p>${d}</p></div>`).join('')}</div></div>`;
-const cardDlg=()=>`${dbar('ICCSim Card Needed',0)}<div class="cn">${ti('card')}<div><p>Please place the following ICCSim card on the reader, then click Yes.</p><p class="cn-card">${CARD}</p><p class="cn-t">Test ${A.q+1} of ${A.queue.length}: ${T().id}</p></div></div>
-  <div class="dlg-foot"><button type="button" class="wbtn" data-act="card-yes" data-first>Yes</button><button type="button" class="wbtn" data-act="card-no">No</button></div>`;
+const WARN='<svg class="cn-w" viewBox="0 0 100 88" aria-hidden="true"><path d="M50 7 94 81H6z" fill="#fff" stroke="#d6201f" stroke-width="11" stroke-linejoin="round"/><path d="M50 31v25" stroke="#111" stroke-width="8" stroke-linecap="round"/><circle cx="50" cy="68.5" r="5" fill="#111"/></svg>';
+const cardDlg=()=>`<div class="dlg-bar pink"><span id="dlg-h" class="vh">ICCSim Card Needed</span><button type="button" class="dlg-x red" data-act="card-no" aria-label="Close and stop the test">${ti('wx')}</button></div>
+  <div class="cn">${WARN}<div><p>This test requires you use a specific ICCSim card.</p><p>Please place the special card on the reader and press OK when ready.</p></div></div>
+  <p class="cn-card">Use any ${esc(P.brand.n)} labelled chip card</p>
+  <div class="cn-foot"><button type="button" class="wbtn cn-ok" data-act="card-yes" data-first>OK</button></div>`;
 const msgDlg=(title,head,text,then='ok')=>`${dbar(title,0)}<div class="mb">${ti('warn')}<div><p><b>${head}</b></p><p>${text}</p></div></div><div class="dlg-foot"><button type="button" class="wbtn" data-act="${then}" data-first>OK</button></div>`;
 const QS=t=>[{q:`Terminal displayed the amount ${fmt(t.amt)}?`,truth:()=>!!st.iface},
   t.cvm==='No CVM'?{q:'Terminal did not ask for a PIN?',truth:()=>st.cvm==='No CVM'}:{q:'Terminal asked for a PIN?',truth:()=>!!st.cvm&&st.cvm!=='No CVM'},
@@ -1653,7 +1741,7 @@ const fileDlg=()=>`<div class="fx-bar"><span class="fx-app">${ti('logo')}</span>
     <div class="fx-prev" aria-hidden="true">${A.pick?'No preview available.':'Select a file to preview.'}</div></div>
   <div class="fx-foot"><span class="fx-l">File name:</span><span class="fx-in" id="fx-in">${A.pick?TSE.file:''}</span><span class="fx-type" aria-hidden="true">TSE files(*.tse,*.tsez)${fi('down','sm')}</span>
     <span class="fx-btns"><button type="button" class="fx-b fx-open" data-act="f-open"${A.pick?'':' disabled'}>Open</button><button type="button" class="fx-b" data-act="f-cancel">Cancel</button></span></div>`;
-function openFileDlg(){A.pick=false;A.brand=null;dlg('file',fileDlg(),{esc:true});guide()}
+function openFileDlg(){A.pick=false;dlg('file',fileDlg(),{esc:true});guide()}
 function pickFile(){A.pick=true;const f=$('.fx-f',app);if(!f)return;f.setAttribute('aria-pressed','true');$('#fx-in').textContent=TSE.file;
   $('.fx-open',app).disabled=false;$('.fx-prev',app).textContent='No preview available.';guide()}
 
@@ -1662,13 +1750,39 @@ const suiteList=()=>{const b=A.brand&&brandOf(A.brand);if(!b)return '';
 const suitesDlg=()=>`<div class="dlg-bar pink"><span id="dlg-h">Available Test Suites</span><button type="button" class="dlg-x red" data-act="dlg-x" aria-label="Close">${ti('wx')}</button></div>
   <div class="su"><section class="su-c" aria-labelledby="su-bh"><h4 id="su-bh">Please choose the Brand:</h4><div class="su-bl">${BRANDS.map((b,k)=>`<button type="button" class="su-brand" data-act="brand" data-b="${b.k}" aria-pressed="${A.brand===b.k}"${k?'':' data-first'}>${b.n}</button>`).join('')}</div></section>
     <section class="su-c" aria-labelledby="su-sh"><h4 id="su-sh">Please choose the Test Suite</h4><div class="su-list" id="su-list">${suiteList()}</div></section></div>`;
-function openSuites(){if(!A.pick)return;A.brand=null;dlg('suites',suitesDlg(),{esc:true});guide()}
+const NEWP=['suites','file','folder','mode','host','hostset','project'];
+function newProject(){Object.assign(A,{pick:false,brand:null,np:null});dlg('suites',suitesDlg(),{esc:true});guide()}
+const choice=(act,label,text,na)=>`<div class="dv-c"><button type="button" class="wbtn big${na?'':' hl'}" data-act="${na?'na':act}"${na?` data-na="${na}"`:' data-first'}>${label}</button>${text.map(p=>`<p>${p}</p>`).join('')}</div>`;
+const folderDlg=()=>`${dbar('Choose New Project Log Folder')}<div class="dv"><h3>Choose New Project Folder</h3>
+  <p class="nf-l" id="nf-l">Current New Project Log Folder</p>
+  <div class="nf-p"><span class="nf-path" role="group" aria-labelledby="nf-l">${esc(A.np.folder)}</span><button type="button" class="nf-ic" data-act="na" data-na="Not in this demo: the demo keeps the folder the tool suggests. Click Create Folder." aria-label="Choose another folder">${ti('open')}</button></div>
+  <div class="nf-rows"><button type="button" class="wbtn big hl" data-act="np-folder" data-first>Create Folder</button><p>Create a new project in the above new folder</p>
+    <button type="button" class="wbtn big" data-act="na" data-na="Not in this demo: Link To Folder shares an existing project’s logs. Click Create Folder.">Link To Folder</button><p>Create a new project but share log folder with an existing project</p>
+    <button type="button" class="wbtn big" data-act="na" data-na="Not in this demo: Copy From Folder copies an existing project’s logs. Click Create Folder.">Copy From Folder</button><p>Create a new project in the above folder copying the logs from an existing project</p></div></div>`;
+const modeDlg=()=>`${dbar('Testing Mode')}<div class="dv"><h3>Choose New Project Mode</h3><div class="dv-g">
+  ${choice('np-mode','Open<br>Testing',['Open Testing lets you test your device with whatever parameters you require.','You have the full range of suite features available. However, this may mean you can select functions for testing that your device does not support.'])}
+  ${choice('','Validation<br>Testing',['Validation Testing mode should be used during pre-certification testing, as a dry-run before the full Certification Test.'],'Not in this demo: Validation Testing is the dry run before certification. Choose Open Testing.')}
+  ${choice('','Certification<br>Testing',['Certification Testing mode should be used when directly preparing to submit a certification.','You will be provided with a list of tests to perform, and a Certification Number to submit under.'],'Not in this demo: Certification Testing needs a Certification Number. Choose Open Testing.')}</div></div>`;
+const hostDlg=()=>`${dbar('Choose Host Type')}<div class="dv"><h3>Choose Host Type</h3><div class="dv-g dv-2">
+  ${choice('np-host','VIABLE<br>Closed Loop Host',['Use the VIABLE local closed loop test host.','Please note: When testing with Closed Loop Host, please ensure encryption is disabled on the device under test.'])}
+  ${choice('','External Host',['Send transactions from your terminal to the external host normally used with this suite.'],'Not in this demo: there is no external host here. Choose the Closed Loop Host.')}</div></div>`;
+const hostSetDlg=()=>`${dbar('Host Settings')}<div class="hs"><label>Host communications mode:<select id="hs-mode"><option>TCPIP</option></select></label>
+  <label>Communication protocol:<select id="hs-proto">${['RAFT610','ISO 8583 IBM','PetrolSpec'].map(x=>`<option>${x}</option>`).join('')}</select></label></div>
+  <div class="dlg-foot"><button type="button" class="wbtn hl" data-act="np-hostok" data-first>OK</button><button type="button" class="wbtn" data-act="np-cancel">Cancel</button></div>`;
+const projDlg=()=>{const p=A.np;return `${dbar('New Project')}<div class="np"><fieldset class="gb"><legend>Project</legend>
+  <dl class="pj-kv np-kv" data-act="na" data-na="Not in this demo: the demo fills these in for you. Click Save."><dt>Project Name:</dt><dd>${esc(p.name)}</dd><dt>Log directory:</dt><dd>${esc(p.folder)}</dd>
+    <dt>Test plan:</dt><dd class="off">${esc(p.suite.n)}</dd><dt>Notes:</dt><dd class="np-notes">${notes()}</dd></dl>
+  <button type="button" class="wbtn" data-act="na">Project Options</button></fieldset></div>
+  <div class="dlg-foot"><button type="button" class="wbtn hl" data-act="np-save" data-first>Save</button><button type="button" class="wbtn" data-act="np-cancel">Cancel</button></div>`};
+const NPD={folder:folderDlg,mode:modeDlg,host:hostDlg,hostset:hostSetDlg,project:projDlg};
+function step(k){if(!A.np)return;dlg(k,NPD[k](),{esc:true});guide()}
+function fileOpen(){if(A.pick)step('folder')}
 function chooseBrand(k){A.brand=k;$$('.su-brand',app).forEach(x=>x.setAttribute('aria-pressed',x.dataset.b===k));const L=$('#su-list');L.innerHTML=suiteList();L.scrollTop=0;guide()}
 
-function popAt(items,x,y,label){const P=$('#ap-pop');
+function popAt(items,x,y,label){point();const P=$('#ap-pop');
   P.innerHTML=`<div class="pop" role="menu" aria-label="${label}">${items.map(it=>it==='-'?'<hr>':`<button type="button" role="menuitem" data-act="${it[1]}"${it[2]===false?' disabled':''}>${it[0]}</button>`).join('')}</div>`;
   P.hidden=false;const w=app.clientWidth,pw=P.offsetWidth;P.style.left=Math.max(0,Math.min(x,w-pw-4))+'px';P.style.top=y+'px';$('button:not([disabled])',P)?.focus({preventScroll:true})}
-function closePop(back){const P=$('#ap-pop');if(P.hidden)return;const had=P.contains(D.activeElement);P.hidden=true;P.innerHTML='';
+function closePop(back){const P=$('#ap-pop');if(P.hidden)return;point();const had=P.contains(D.activeElement);P.hidden=true;P.innerHTML='';
   if(back&&had){const t=popRet&&app.contains(popRet)&&!popRet.disabled?popRet:$('#ap-body');t.focus({preventScroll:true})}$$('#ap-menu [aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'))}
 function openMenu(b){const open=b.getAttribute('aria-expanded')==='true';closePop();if(open)return;
   const m=MENUS.find(x=>x[0]===b.dataset.menu),r=b.getBoundingClientRect(),ar=app.getBoundingClientRect();
@@ -1679,7 +1793,7 @@ function ctxMenu(e){const ar=app.getBoundingClientRect();popRet=$(`[data-fk="row
 let toastT;
 function toast(t){const el=$('#ap-toast');el.textContent=t;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),3200)}
 
-function render(){const a=D.activeElement,inWin=!!a&&a!==app&&app.contains(a)&&!a.closest('#ap-layer,#ap-menu,#ap-pop'),key=inWin?keyOf(a):null;
+function render(){point();const a=D.activeElement,inWin=!!a&&a!==app&&app.contains(a)&&!a.closest('#ap-layer,#ap-menu,#ap-pop'),key=inWin?keyOf(a):null;
   $('#ap-tt').textContent=main()?`ICCSimTMat Test Manager - ${P.name}`:'ICCSimTM : Test Manager';app.dataset.scr=A.scr;
   $('#ap-tools').innerHTML=toolsHtml();$('#ap-status').innerHTML=statusHtml();
   $('#ap-body').innerHTML=A.scr==='tasks'?tasksHtml():main()?mainHtml():'<div class="ap-blank"></div>';
@@ -1699,15 +1813,15 @@ function ts(p){Object.assign(TS,p);const P=$('#tt-prompt');if(P){P.className='pr
 function bar(ms){const b=$('#tt-pbar i');if(!b)return;b.style.transition='none';b.style.width='0';if(ms){b.getBoundingClientRect();b.style.transition=`width ${ms}ms linear`;b.style.width='100%'}}
 
 function runTests(list){if(!free()||!main())return;if(!list.length){toast('Tick the tests you want to run first.');return}
-  A.queue=list;A.q=0;if(!A.device){st.ph='device';render();dlg('device',deviceDlg());coach('Choose ICCSim Chip Cards: each test’s script goes onto the ICC card.');return}nextTest()}
+  A.queue=list;A.q=0;if(!A.device){st.ph='device';render();dlg('device',deviceDlg());guide();return}nextTest()}
 function chooseDevice(d){if(d!=='iccsim'){toast(d==='probe'?'Not in this demo: a PaytestProbe is a different way to run the tests. Choose ICCSim Chip Cards.':'Not in this demo: the emulator replaces the card. Choose ICCSim Chip Cards.');return}
-  A.device='ICCSim Chip Cards';closeDlg();nextTest()}
+  A.device='ICCSim Chip Cards';closeDlg();if(A.queue.length)return nextTest();guide()}
 function nextTest(){if(A.q>=A.queue.length){done();return}const i=A.queue[A.q];
   Object.assign(st,{i,ph:'card',iface:null,cvm:null,out:null,removed:false,pin:'',ans:[]});A.sel=i;A.tab='testing';
   Object.assign(TS,{prompt:'Waiting for card',pk:'blue',action:'Waiting for card',result:'',advice:`Place the ${CARD} on the reader`});render();
-  dlg('card',cardDlg());coach(st.at==='reader'?'The card is on the reader: click Yes to load the test onto it.':'Put the card on the reader, then click Yes.');hints()}
+  dlg('card',cardDlg());coach(st.at==='reader'?'The card is on the reader: click OK to load the test onto it.':'Put the card on the reader, then click OK.');hints()}
 function cardYes(){
-  if(st.at!=='reader'){dlg('msg',msgDlg('ICCSimTMat','Card not found','There is no card on the reader. Put the ICC Demo Card on top of the reader and click Yes again.','card-again'));coach('Put the card on the reader, then click Yes.','warn');return}
+  if(st.at!=='reader'){dlg('msg',msgDlg('ICCSimTMat','Card not found','There is no card on the reader. Put the ICC Demo Card on top of the reader and click OK again.','card-again'));coach('Put the card on the reader, then click OK.','warn');return}
   if(A.reader!=='CL'){dlg('msg',msgDlg('ICCSimTMat','Card not found','ICCSimTMat is using the reader’s contact side, and the card is on top of it, on the contactless side. Choose the CL reader in Tools › Manual Testing: Select Mandatory Reader.','card-stop'));coach('Card not found: ICCSimTMat is set to the reader’s contact side. Choose the CL reader in the Tools menu.','warn');return}
   closeDlg();load()}
 function load(){st.ph='loading';Object.assign(TS,{prompt:'Downloading Script',pk:'blue',action:'Downloading script to card',result:'',advice:'Keep the card on the reader'});render();
@@ -1721,7 +1835,7 @@ function payment(via){const t=T();st.iface=via;st.ph='reading';hints();coach('Th
   if(via==='tap')$$('.tm-leds i').forEach((l,k)=>later(k*150,()=>l.classList.add('on')));
   later(via==='tap'?750:950,()=>{st.ph='processing';screen('Purchase','Processing','Please wait','busy');coach('The terminal is working out how to verify the cardholder.');
     later(900,()=>{st.cvm=via==='tap'?(t.amt>CL_LIMIT?'Online PIN':'No CVM'):'Offline PIN';if(st.cvm==='No CVM')finish(t.decline?'Declined':'Approved');else askPin()})})}
-const pinScreen=()=>screen(money(T().amt),'Enter PIN','●'.repeat(st.pin.length)+'○'.repeat(4-st.pin.length),'pin');
+const pinScreen=()=>(point(),screen(money(T().amt),'Enter PIN','●'.repeat(st.pin.length)+'○'.repeat(4-st.pin.length),'pin'));
 function askPin(){st.ph='pin';st.pin='';leds(false);keys(true);pinScreen();coach('The terminal is asking for a PIN. Enter any four digits on its keypad, then press OK, the green key.')}
 function finish(o){const fromKeys=!!D.activeElement?.closest('#tm-keys,#pinpad');keys(false);leds(false);st.out=o;st.ph='paid';if(fromKeys)card.focus({preventScroll:true});
   screen('Purchase',o,st.iface==='slot'?'Remove card':o==='Approved'?'Thank you':'',o==='Approved'?'ok':'bad');ts({advice:'Put the card back on the reader'});
@@ -1758,7 +1872,7 @@ function save(){const r=judge();A.res[st.i]=r;closeDlg();A.q++;
 function done(){st.ph='idle';A.queue=[];A.tab='scripts';render();$(`[data-fk="row-${A.sel}"]`,app)?.focus({preventScroll:true});guide()}
 function abort(why){stop();keys(false);leds(false);bar(0);led(st.at==='reader'?'on':'off');idle();closeDlg();st.ph='idle';A.queue=[];
   Object.assign(TS,{prompt:'',pk:'',action:'Test stopped',result:'',advice:''});render();coach(why||'The test was stopped. Run it again when you’re ready.','warn');hints()}
-function restart(){stop();keys(false);leds(false);bar(0);closePop();Object.assign(A,{tab:'scripts',sel:0,chk:new Set(),filter:'all',queue:[],q:0,device:null,reader:'CL',res:[],pick:false,brand:null});
+function restart(){stop();keys(false);leds(false);bar(0);closePop();Object.assign(A,{tab:'scripts',sel:0,chk:new Set(),filter:'all',queue:[],q:0,device:null,reader:'CL',res:[],pick:false,brand:null,np:null});
   P=null;RECENT=recent0();
   Object.assign(st,{ph:'idle',iface:null,cvm:null,out:null,removed:false,pin:'',ans:[]});Object.assign(TS,{prompt:'',pk:'',action:'',result:'',advice:''});idle();
   if(st.at!=='reader')moveTo('reader');led('on');toScreen('login');hints()}
@@ -1769,13 +1883,18 @@ function act(a,b,e){switch(a){
   case 'licence':return toScreen('tasks');
   case 'logout':return toScreen('login');
   case 'dlg-x':if(DLG?.kind==='licence')return toScreen('login');if(DLG?.kind==='device'){closeDlg();st.ph='idle';A.queue=[];render();return guide()}
-    if(DLG?.kind==='suites'){closeDlg();return guide()}return closeDlg();
-  case 'tse-file':return openFileDlg();
-  case 'f-pick':pickFile();if(e&&e.detail===0)openSuites();return;
-  case 'f-open':return openSuites();
-  case 'f-cancel':closeDlg();return guide();
+    if(NEWP.includes(DLG?.kind)){closeDlg();return guide()}return closeDlg();
+  case 'tse-file':return newProject();
+  case 'f-pick':pickFile();if(e&&e.detail===0)fileOpen();return;
+  case 'f-open':return fileOpen();
+  case 'f-cancel':case 'np-cancel':closeDlg();return guide();
   case 'brand':return chooseBrand(b.dataset.b);
-  case 'suite':return openProject(makeProject(brandOf(A.brand),+b.dataset.s));
+  case 'suite':A.np=makeProject(brandOf(A.brand),+b.dataset.s);return openFileDlg();
+  case 'np-folder':return step('mode');
+  case 'np-mode':return step('host');
+  case 'np-host':return step('hostset');
+  case 'np-hostok':return step('project');
+  case 'np-save':return A.np?openProject(A.np):closeDlg();
   case 'recent':return openProject(RECENT[+b.dataset.r]);
   case 'na':return toast(b.dataset.na||NA.def);
   case 'tab':A.tab=b.dataset.tab;return render();
@@ -1795,7 +1914,7 @@ function act(a,b,e){switch(a){
   case 'logs':return toast('On your PC, this opens the project’s log folder in Windows Explorer.');
   case 'plans':return toast('On your PC, this opens the test plan folder in Windows Explorer.');
   case 'help':case 'about':return dlg('about',aboutDlg(),{esc:true});
-  case 'newp':if(!free())return toast('Stop the test first.');return openFileDlg();
+  case 'newp':if(!free())return toast('Stop the test first.');return newProject();
   case 'open':if(!free())return toast('Stop the test first.');if(main())return toScreen('tasks');
     return toast('Open a project under Most Recent Projects, or click Project from TSE File.');
   case 'close':if(!free())return toast('Stop the test first.');if(!main())return toast('No project is open.');return toScreen('tasks');
@@ -1816,16 +1935,16 @@ function act(a,b,e){switch(a){
 app.addEventListener('click',e=>{const b=e.target.closest('[data-act]');
   if(!b){const tr=e.target.closest('tbody tr[data-i]');if(tr&&!e.target.closest('input')&&A.sel!==+tr.dataset.i){A.sel=+tr.dataset.i;render()}return}
   if(b.disabled)return;if(b.closest('#ap-pop'))closePop(true);act(b.dataset.act,b,e)});
-app.addEventListener('dblclick',e=>{if(e.target.closest('.fx-f'))openSuites()});
+app.addEventListener('dblclick',e=>{if(e.target.closest('.fx-f'))fileOpen()});
 app.addEventListener('change',e=>{const c=e.target;
   if(c.classList.contains('ck')){const i=+c.dataset.i;c.checked?A.chk.add(i):A.chk.delete(i);render();$(`.ck[data-i="${i}"]`,app)?.focus({preventScroll:true});return}
-  if(c.name&&c.name.startsWith('qa')){st.ans[+c.name.slice(2)]=c.value;c.closest('.qa-q').classList.add('done');return}
+  if(c.name&&c.name.startsWith('qa')){point();st.ans[+c.name.slice(2)]=c.value;c.closest('.qa-q').classList.add('done');return}
   if(c.id==='calc-from')calc()});
 app.addEventListener('input',e=>{if(e.target.id==='calc-in')calc()});
 app.addEventListener('contextmenu',e=>{const tr=e.target.closest('tbody tr[data-i]');if(!tr||!main())return;e.preventDefault();A.sel=+tr.dataset.i;render();ctxMenu(e)});
 app.addEventListener('keydown',e=>{
   if(e.key==='Escape'){if(!$('#ap-pop').hidden){e.stopPropagation();closePop(true);return}
-    if(DLG?.canEsc){e.stopPropagation();const k=DLG.kind;closeDlg();if(k==='file'||k==='suites')guide()}return}
+    if(DLG?.canEsc){e.stopPropagation();const k=DLG.kind;closeDlg();if(NEWP.includes(k))guide()}return}
   if((e.key==='ArrowDown'||e.key==='ArrowUp')&&e.target.closest('#ap-pop')){e.preventDefault();const bs=$$('#ap-pop button:not([disabled])'),k=bs.indexOf(D.activeElement);
     bs[(k+(e.key==='ArrowDown'?1:-1)+bs.length)%bs.length]?.focus();return}
   if((e.key==='ArrowDown'||e.key==='ArrowUp')&&e.target.closest('.grid')&&main()&&A.tab==='scripts'){e.preventDefault();const vis=tests().map((t,i)=>i).filter(shown);
@@ -1835,18 +1954,18 @@ $('#restart').addEventListener('click',restart);
 
 function moved(from,to){
   if(from==='reader'){led('off');
-    if(st.ph==='loading'){stop();bar(0);st.ph='card';ts({prompt:'Waiting for card',pk:'blue',action:'Script download failed',result:'Card removed from the reader',advice:'Put the card back and click Yes'});
-      dlg('card',cardDlg());coach('The card left the reader while the script was loading. Put it back on the reader and click Yes.','warn');hints();return}
+    if(st.ph==='loading'){stop();bar(0);st.ph='card';ts({prompt:'Waiting for card',pk:'blue',action:'Script download failed',result:'Card removed from the reader',advice:'Put the card back and click OK'});
+      dlg('card',cardDlg());coach('The card left the reader while the script was loading. Put it back on the reader and click OK.','warn');hints();return}
     if(st.ph==='logread'){stop();bar(0);st.ph='paid';ts({prompt:'Waiting for log',pk:'blue',action:'Wait for log on card',result:'Failed to power on smartcard',advice:'Put the card back on the reader'});
       coach('Failed to power on smartcard: the card left the reader too soon. Put it back and keep it there until the log has been read.','warn');hints();return}}
   if(from==='slot'&&['reading','processing','pin'].includes(st.ph)){stop();st.removed=true;keys(false);finish('Cancelled');screen('Purchase','Card removed','Cancelled','bad');if(to==='reader')return}
   if(to==='reader'){led('on');if(st.ph==='paid'){readLog();return}
-    if(st.ph==='card')coach('The card is on the reader: click Yes to load the test onto it.');hints();return}
+    if(st.ph==='card')coach('The card is on the reader: click OK to load the test onto it.');hints();return}
   if(st.ph==='present'){payment(to);return}
   if(['idle','device','card','loading','between'].includes(st.ph)){notReady();hints();return}
   hints()}
 
-function hints(){const want=st.ph==='present'?T().iface:{card:'reader',loading:'reader',paid:'reader',logread:'reader'}[st.ph];
+function hints(){point();const want=st.ph==='present'?T().iface:{card:'reader',loading:'reader',paid:'reader',logread:'reader'}[st.ph];
   pad.classList.toggle('hint',want==='reader'&&st.at!=='reader');head.classList.toggle('hint',want==='tap'&&st.at!=='tap');slot.classList.toggle('hint',want==='slot'&&st.at!=='slot');
   $$('.desk-ctl button').forEach(b=>{b.classList.toggle('next',b.dataset.to===want&&st.at!==want);b.setAttribute('aria-pressed',b.dataset.to===st.at)});
   card.setAttribute('aria-label',`ICC test card, ${{reader:'on the reader',tap:'held to the terminal',slot:'in the terminal'}[st.at]}. Drag it, or use the buttons under the desk.`)}
@@ -1942,7 +2061,8 @@ $('#foot').innerHTML=`
 
 RECENT=recent0();idle();quiz();place('reader',false);hints();toScreen('login',false);
 new ResizeObserver(()=>{if(!drag)place(st.at,false)}).observe(desk);
-D.fonts&&D.fonts.ready.then(()=>place(st.at,false));
+new ResizeObserver(point).observe($('.bench'));app.addEventListener('scroll',point,true);
+D.fonts&&D.fonts.ready.then(()=>{place(st.at,false);point()});
 })();
 </script>
 <a class="pvtag" href="https://www.iccsolutions.com" rel="noopener" title="This is a design preview. Open the live website." aria-label="Design preview, not the live website. Open the live website.">Design preview<span class="pvx">, not the live website</span></a>
