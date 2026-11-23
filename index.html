@@ -142,7 +142,8 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 .film .cone{opacity:.3}
 .type{animation:type .5s steps(2) infinite alternate}
 @keyframes type{to{transform:translateY(-3px)}}
-.brands-w{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.18)}
+.brands-w{position:relative;z-index:2;margin-bottom:calc(var(--r-sheet)*-1);padding-bottom:var(--r-sheet);border-top:1px solid rgba(255,255,255,.14);
+  background:radial-gradient(70% 220% at 92% 50%,rgba(22,127,158,.34),rgba(22,127,158,0) 70%),#06152E}
 .brands{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:28px;padding-block:20px;color:#fff;font-size:.93rem;line-height:1.35}
 .brands>p{max-width:23ch}
 .marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
