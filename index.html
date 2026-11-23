@@ -83,10 +83,8 @@ p{text-wrap:pretty}
 .btn.gh{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,currentColor 34%,transparent)}
 @media (max-width:400px){.btn{white-space:normal;text-align:center;line-height:1.2;padding-block:10px}.hdr-cta .btn{white-space:nowrap}}
 .btn.gh::before{background:color-mix(in srgb,currentColor 11%,transparent)}
-.btn.my{gap:10px;padding:0 18px 0 5px;background:transparent;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.34)}
-.btn.my::before{background:rgba(255,255,255,.12)}
-.my .lock{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff}
-.my .lock .ic{width:15px;height:15px}
+.btn.my{background:var(--red)}
+.btn.my::before{background:#A32430}
 .btn.sm{min-height:42px;padding:0 18px;font-size:.93rem}
 .btn .ic{width:16px;height:16px}
 .go{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink);transition:transform .5s var(--ease),background .3s,box-shadow .3s,color .3s}
@@ -538,7 +536,7 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
     </nav>
     <div class="hdr-cta">
       <a class="btn sm gh" href="#get-in-touch">Contact us</a>
-      <a class="btn sm my" href="https://my.iccsolutions.com/" target="_blank" rel="noopener"><span class="lock"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>MyICC</a>
+      <a class="btn sm my" href="https://my.iccsolutions.com/" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>MyICC</a>
       <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
     </div>
   </div>

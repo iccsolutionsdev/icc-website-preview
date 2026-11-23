@@ -11,5 +11,5 @@ A preview of a proposed new ICC Solutions website (`index.html`), helpdesk (`hel
   the home page and the POS & ATM testing page.
 - On this link the website's animations start by themselves on every device, including one set to reduce motion. The Pause
   button in the hero stops them.
-- Built on 23 November 2026 from website v2.44.0, helpdesk v1.7.0, VIABLE helpdesk v1.5.0 and Try a test run v2.7.0.
+- Built on 23 November 2026 from website v2.45.0, helpdesk v1.7.0, VIABLE helpdesk v1.5.0 and Try a test run v2.7.0.
 - Earlier versions are kept, each in a folder named after it: `v2.20.0/`, `v2.28.0/`.
