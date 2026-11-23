@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-GB" class="motion-ok">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -575,7 +575,8 @@ a:hover>.go,a:focus-visible>.go{background:var(--cyan);box-shadow:none;color:var
 (()=>{
 'use strict';
 const D=document,R=D.documentElement,$=(s,r=D)=>r.querySelector(s),$$=(s,r=D)=>[...r.querySelectorAll(s)];
-let RM=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!RM)R.classList.add('motion-ok');
+const MOTION_ON=true;
+let RM=!MOTION_ON&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(!RM)R.classList.add('motion-ok');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const VT=s=>s.replace('VIABLE','<span class="vt">VIABLE</span>');
 
